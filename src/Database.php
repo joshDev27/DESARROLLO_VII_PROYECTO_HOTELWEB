@@ -1,4 +1,5 @@
 <?php
+
 class Database {
     // Instancia única de la clase (patrón Singleton)
     private static $instance = null;
@@ -7,13 +8,18 @@ class Database {
 
     // Constructor privado para prevenir la creación directa de objetos
     private function __construct() {
-        // Creamos la conexión PDO
-        $this->conn = new PDO(
-            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
-            DB_USER,
-            DB_PASS,
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-        );
+        try {
+            // Creamos la conexión PDO
+            $this->conn = new PDO(
+                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
+                DB_USER,
+                DB_PASS,
+                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+            );
+        } catch (PDOException $e) {
+            // Mostrar un mensaje de error si no se puede establecer la conexión
+            die("Error en la conexión: " . $e->getMessage());
+        }
     }
 
     // Método para obtener la instancia única de la clase
