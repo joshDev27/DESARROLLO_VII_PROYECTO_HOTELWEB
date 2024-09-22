@@ -1,0 +1,23 @@
+body {
+  font-family: $font-stack;
+  &::-webkit-scrollbar {
+    //ocultar el scrool bar
+    display: none;
+  }
+}
+h1 {
+  color: $color_red;
+}
+.item-table {
+  cursor: default;
+  &.modal-select {
+    cursor: pointer;
+  }
+}
+.btn-primary {
+  background-color: $color_pink;
+}
+.modal-content {
+  box-shadow: 1px 2px 18px 2px #443bff9e;
+  border: none !important;
+}

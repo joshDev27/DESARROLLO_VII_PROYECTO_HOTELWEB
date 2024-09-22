@@ -12,6 +12,9 @@ require_once BASE_PATH . 'config.php';
 
 // Include necessary files
 require_once BASE_PATH . 'src/Database.php';
+
+require BASE_PATH . 'views/layout.php';
+
 // require_once BASE_PATH . 'src/TaskManager.php';
 // require_once BASE_PATH . 'src/Task.php';
 

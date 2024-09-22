@@ -1,0 +1,39 @@
+@import "var";
+// @import "../lib/fontawesome/css/fontawesome.css";
+// @import "../lib/fontawesome/css/all.css";
+// @import "../lib/hamburgers/hamburgers.scss";
+@import "index";
+
+@import "template/home";
+@import "template/error_page_404";
+@import "template/contacto";
+@import "template/reservas";
+@import "components/header";
+@import "components/footer";
+@import "components/carousel";
+
+// administrator styles
+@import "admin/home";
+
+
+
+// // Source mixins
+
+// // No media query necessary for xs breakpoint as it's effectively `@media (min-width: 0) { ... }`
+// @include media-breakpoint-up(sm) { ... }
+// @include media-breakpoint-up(md) { ... }
+// @include media-breakpoint-up(lg) { ... }
+// @include media-breakpoint-up(xl) { ... }
+// @include media-breakpoint-up(xxl) { ... }
+
+// // Usage
+
+// // Example: Hide starting at `min-width: 0`, and then show at the `sm` breakpoint
+// .custom-class {
+//   display: none;
+// }
+// @include media-breakpoint-up(sm) {
+//   .custom-class {
+//     display: block;
+//   }
+// }
