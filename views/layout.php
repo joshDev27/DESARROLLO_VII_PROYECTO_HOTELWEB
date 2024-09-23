@@ -15,7 +15,7 @@
 <body>
     <?php
     require_once BASE_PATH . "src/function.php";
-    if (ADMINISTRATOR) {
+    if ($ADMINISTRATOR) {
         include BASE_PATH . "components/admin/navbar.php";
         include BASE_PATH . "views/body.php";
     } else {

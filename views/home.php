@@ -12,25 +12,30 @@
     </div>
     <div class="container-card-hotel-features">
         <h2>Ofrecemos</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4 features-card-home">
+    
+        <div class="row row-cols-1 row-cols-md-3 features-card-home">
             <?php foreach (caracteristicas_hoteles() as $info)
                 echo "  
-            <div class='col'>
-                <div class='card h-100'>
-                    <div class='container-card-title'>
-                        <img src=img/{$info['img']} class='card-img opacity-50 ' alt='{$info['title']}'> 
-                        <span class='card-img-overlay'>
+                <div class='col'>
+                    <div class='card w-100'>
+                        <img src='./public/img/{$info['img']}' class='card-img-top' alt='{$info['title']}'>
+                        <div class='card-body'>
                             <h5 class='card-title'>{$info['title']}</h5>
-                        </span>
-                    </div>
-                    <div class='card-body'>
-                        <p class='card-text '>{$info['title']}</p>
-                        <p class='card-text'>{$info['description']}</p>
+                            <p class='card-text'>{$info['description']}</p>
+                        </div>
                     </div>
                 </div>
-            </div>";
+            ";
             ?>
         </div>
     </div>
-    <?php include "components/habitaciones.php" ?>
+    <?php /// include "components/habitaciones.php" ?>
+    <div class="reserva-desc">
+        <span>
+            Para realizar una reserva, visita nuestro sitio web o contacta
+            a nuestro equipo de atención al cliente. Estamos aquí para
+            ayudarte a encontrar el espacio perfecto para tu estancia en
+            DevHub Retreat. ¡Esperamos darte la bienvenida pronto!
+        </span>
+    </div>
 </div>

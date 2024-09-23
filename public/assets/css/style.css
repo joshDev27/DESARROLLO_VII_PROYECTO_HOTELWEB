@@ -49,13 +49,18 @@ h1 {
 }
 #home .container-card-hotel-features .features-card-home {
   justify-content: center;
-  height: 40rem;
+}
+#home .container-card-hotel-features .features-card-home > .col {
+  max-height: 30rem;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
 }
 #home .container-card-hotel-features .features-card-home .card {
   position: relative;
   border: none;
   box-shadow: 0px 0px 6px 2px rgba(44, 62, 80, 0.21);
-  max-width: 35rem;
+  max-width: 25rem;
 }
 #home .container-card-hotel-features .features-card-home .card:hover .container-card-title {
   max-height: 0;
@@ -135,27 +140,20 @@ h1 {
   border-bottom-left-radius: 0.5rem;
   box-shadow: 0px 0px 6px 2px rgba(44, 62, 80, 0.21);
 }
-#home .container-accordion .reserva-desc {
+#home .reserva-desc {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-top: 4rem;
   margin-bottom: 2rem;
-  max-width: 60rem;
-  text-align: center;
 }
-#home .container-accordion .reserva-desc span {
+#home .reserva-desc span {
+  text-align: center;
   font-size: 1.3em;
-  max-width: 80%;
+  max-width: 60rem;
   width: 100%;
   padding: 1rem;
-}
-#home .container-cards-home-room {
-  justify-content: center;
-}
-#home .container-cards-home-room > .col {
-  margin: 0.5rem;
 }
 
 #page404 {

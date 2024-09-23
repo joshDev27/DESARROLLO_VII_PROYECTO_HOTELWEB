@@ -1,6 +1,6 @@
 <?php
 
-if (ADMINISTRATOR) {
+if ($ADMINISTRATOR) {
     $root_path = BASE_PATH."views/admin/";
     //devuelve true si el la pagina se encontro
     if (getTemplate("admin", $root_path)) {

@@ -26,7 +26,7 @@ function caracteristicas_hoteles()
         [
             "title" => "Zona de Recreación",
             "description" => "Relájate en nuestra sala de juegos. Disfruta de consolas de videojuegos y áreas de descanso.",
-            "img" => "recreacion.jpg",
+            "img" => "",
         ],
         [
             "title" => "Compromiso con la Seguridad",
