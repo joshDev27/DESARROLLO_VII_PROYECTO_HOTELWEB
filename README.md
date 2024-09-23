@@ -1,5 +1,6 @@
 ## En La Opción de proyectos 
 
+[link de proyectos control del proyecto](https://github.com/joshDev27/DESARROLLO_VII_PROYECTO_HOTELWEB/projects?query=is%3Aopen)
 ## Descripción
 
 Este proyecto es una aplicación sencilla de gestión de tareas que permite organizar y controlar el flujo de trabajo de un equipo. Utiliza estados como **Backlog**, **In Progress**, **Review**, y **Done** para gestionar el ciclo de vida de cada tarea, proporcionando una visión clara del estado actual del proyecto.
