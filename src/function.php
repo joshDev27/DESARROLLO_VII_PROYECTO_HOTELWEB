@@ -26,7 +26,7 @@ function caracteristicas_hoteles()
         [
             "title" => "Zona de Recreación",
             "description" => "Relájate en nuestra sala de juegos. Disfruta de consolas de videojuegos y áreas de descanso.",
-            "img" => "",
+            "img" => "seguridad.jpg",
         ],
         [
             "title" => "Compromiso con la Seguridad",
@@ -51,7 +51,8 @@ function getRoomInformation()
                 "Escritorio y espacio de almacenamiento",
                 "Superficie: 8 a 12 m²"
             ],
-            "precio" => "Desde 72$"
+            "img"=>"https://i.pinimg.com/736x/5e/ba/b1/5ebab151614e768e7ab94cedb4a0e0dd.jpg",
+            "precio" => "72$"
         ],
         [
             "tipo" => "Habitación Doble Estándar (Cama Doble)",
@@ -63,7 +64,8 @@ function getRoomInformation()
                 "Baño privado con bañera",
                 "Superficie: 10 a 11 m²"
             ],
-            "precio" => "Desde 107$"
+            "img"=>"https://i.pinimg.com/564x/60/05/bb/6005bbfc4f858db801090275b3e2e7c5.jpg",
+            "precio" => "107$"
         ],
         [
             "tipo" => "Habitación Doble Estándar (Dos Camas Separadas)",
@@ -75,7 +77,8 @@ function getRoomInformation()
                 "Baño privado con ducha",
                 "Superficie: 10 a 11 m²"
             ],
-            "precio" => "Desde 107$"
+            "img"=>"https://i.pinimg.com/564x/fe/3c/da/fe3cda5c1ff52dc1ad87ab2fb0959025.jpg",
+            "precio" => "107$"
         ],
         [
             "tipo" => "Habitación Doble Deluxe",
@@ -88,7 +91,8 @@ function getRoomInformation()
                 "Baño privado con bañera y amenities de lujo",
                 "Superficie: 15 a 20 m²"
             ],
-            "precio" => "Desde 150$"
+            "img"=>"https://i.pinimg.com/564x/ed/3d/06/ed3d06d62a07bb9160c62166fa1f4ea0.jpg",
+            "precio" => "150$"
         ],
         [
             "tipo" => "Estudio o Apartamento",
@@ -101,7 +105,8 @@ function getRoomInformation()
                 "Baño privado con ducha",
                 "Superficie: 25 a 30 m²"
             ],
-            "precio" => "Desde 200$"
+            "img"=>"https://i.pinimg.com/736x/8b/ee/d1/8beed1c977801ab622b2c68b177464ff.jpg",
+            "precio" => "200$"
         ]
     ];
 

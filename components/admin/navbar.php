@@ -3,7 +3,9 @@ $pages_array = [
     "home" => "Home",
     "users" => "Usuarios",
     "reservas" => "Reservas",
+    "habitacionesG" => "Habitaciones Gestion",
     "habitaciones" => "Habitaciones",
+    "informacion_gestion" => "Informacion Gestion",
 ]
 ?>
 

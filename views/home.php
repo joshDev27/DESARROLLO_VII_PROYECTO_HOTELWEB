@@ -12,7 +12,7 @@
     </div>
     <div class="container-card-hotel-features">
         <h2>Ofrecemos</h2>
-    
+
         <div class="row row-cols-1 row-cols-md-3 features-card-home">
             <?php foreach (caracteristicas_hoteles() as $info)
                 echo "  
@@ -29,7 +29,43 @@
             ?>
         </div>
     </div>
-    <?php /// include "components/habitaciones.php" ?>
+    <!-- Slider main container -->
+    <div class="swiper-container container-fluid">
+        <h2>Habitaciones</h2>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <?php foreach (getRoomInformation() as $index => $array) : ?>
+                    <div class="swiper-slide">
+                        <div class='card w-100'>
+                            <span class="img-container">
+                                <img src=<?php echo $array['img'] ?> class='card-img-top' alt=<?php echo $array['tipo'] ?>>
+                            </span>
+                            <div class='card-body justify-content-center'>
+                                <h5 class='card-title'> <?php echo $array['tipo'] ?></h5>
+                                <p class='card-text'>
+                                    <?php echo $array['descripcion'] ?>
+                                </p>
+                                <span>
+                                    <!-- <?php
+                                            foreach ($array['caracteristicas'] as $caracteristica) {
+                                                echo "<p>$caracteristica</p>";
+                                            }
+                                            ?> -->
+                                </span>
+                                <a href="http://localhost/DESARROLLO_VII_PROYECTO_HOTELWEB/index.php?page=reservas">
+                                    <button class="btn-primary btn"> Reservar </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <!-- <div class="swiper-pagination"></div> -->
+            <!-- <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div> -->
+        </div>
+    </div>
+
     <div class="reserva-desc">
         <span>
             Para realizar una reserva, visita nuestro sitio web o contacta
@@ -39,3 +75,39 @@
         </span>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 2,
+            speed: 500,
+            autoplay: {
+                delay: 5000,
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                },
+                480: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                },
+                640: {
+                    slidesPerView: 4,
+                    spaceBetween: 30
+                }
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    });
+</script>

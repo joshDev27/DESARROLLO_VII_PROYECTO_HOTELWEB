@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-contacto">
-                    <form action="enviar.php" method="post" class="form">
+                    <form action="contacto.php" method="post" class="form">
                         <div class="row row-cols-1 row-cols-md-2">
                             <div class="col">
                                 <div class="mb-3 form-floating ">

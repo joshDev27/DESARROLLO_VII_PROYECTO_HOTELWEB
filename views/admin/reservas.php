@@ -74,9 +74,10 @@ $reservas = [
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <?php foreach ($reservas as $index => $array): ?>
+
+                <li class="page-item <?php echo ($index == 0) ? 'active' : '' ?>"><a class="page-link" href="#"><?php echo ($index + 1) ?></a></li>
+            <?php endforeach; ?>
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
