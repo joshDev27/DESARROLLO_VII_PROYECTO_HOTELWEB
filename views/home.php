@@ -38,7 +38,7 @@
                     <div class="swiper-slide">
                         <div class='card w-100'>
                             <span class="img-container">
-                                <img src=<?php echo $array['img'] ?> class='card-img-top' alt=<?php echo $array['tipo'] ?>>
+                                <img src=<?php echo $array['img'] ?> class='img-fluid' alt=<?php echo $array['tipo'] ?>>
                             </span>
                             <div class='card-body justify-content-center'>
                                 <h5 class='card-title'> <?php echo $array['tipo'] ?></h5>

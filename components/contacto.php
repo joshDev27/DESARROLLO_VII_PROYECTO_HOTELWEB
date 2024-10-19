@@ -1,3 +1,5 @@
+
+
 <div class="modal fade" id="contacto_form" tabindex="-1" aria-labelledby="contactoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -7,17 +9,17 @@
             </div>
             <div class="modal-body">
                 <div class="container-contacto">
-                    <form action="contacto.php" method="post" class="form">
+                    <form action="./contactos.php" method="POST" class="form">
                         <div class="row row-cols-1 row-cols-md-2">
                             <div class="col">
                                 <div class="mb-3 form-floating ">
-                                    <input type="text" id="nombre" name="nombre_c" class="form-control" required>
+                                    <input type="text" id="nombre" name="nombre" class="form-control" required>
                                     <label for="nombre" class="form-label">Nombre</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3 form-floating ">
-                                    <input type="text" id="apellido" name="appellido_c" class="form-control" required>
+                                    <input type="text" id="apellido" name="appellido" class="form-control" required>
                                     <label for="nombre" class="form-label">Apellido</label>
                                 </div>
                             </div>
@@ -27,7 +29,7 @@
                             <label for="email" class="form-label">Correo electrónico</label>
                         </div>
                         <div class="mb-3 form-floating ">
-                            <textarea id="mensaje" name="mensaje_c" class="form-control" rows="4" required></textarea>
+                            <textarea id="mensaje" name="mensaje" class="form-control" rows="4" required></textarea>
                             <label for="mensaje" class="form-label">Mensaje</label>
                         </div>
                         <div class="row row-cols-1 row-cols-md-2">

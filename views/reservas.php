@@ -1,8 +1,32 @@
+<?php
+
+
+?>
+
 <div class="container-fluid " id="reservas">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img src="https://i.pinimg.com/564x/2f/f0/a6/2ff0a6dea9bf8329164b9aa8036cdccd.jpg" class="img-fluid">
+                <?php foreach (getRoomInformation() as $key => $array): ?>
+                    <?php if ($array['id'] === 1): ?>
+                        <span>
+                            <img src=<?php echo $array['img'] ?> class="img-fluid">
+                        </span>
+                        <span class="container-desc">
+                            <p><?php echo $array['descripcion'] ?></p>
+                            <span>
+                                <?php foreach ($array['caracteristicas'] as $data): ?>
+                                    <p><?php echo $data ?></p>
+                                <?php endforeach; ?>
+                                <?php if (isset($array['iconos'])): ?>
+                                    <?php foreach ($array['iconos'] as $icono): ?>
+                                        <span><?php echo $icono ?></span>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </span>
+                        </span>
+                    <?php endif; ?>
+                <?php endforeach ?>
             </div>
             <div class="col-md-6">
                 <h2 class="text-center">Reserva tu Habitación</h2>
@@ -46,7 +70,7 @@
                             <select class="form-control" id="room-type" required>
                                 <option value="">Seleccione una opción</option>
                                 <?php foreach (getRoomInformation() as $key => $array): ?>
-                                    <option value='<?php echo $key ?>'>
+                                    <option value='<?php echo $array['id'] ?>'>
                                         <?php echo $array['tipo'] ?>
                                     </option>
                                 <?php endforeach ?>
@@ -72,7 +96,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Reservar Habitación</button>
+                    <button type="submit" class="btn btn-primary btn-block">Cotizar Habitación</button>
                 </form>
             </div>
         </div>
