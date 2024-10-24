@@ -3,7 +3,7 @@ $pages_array = [
     "home" => "Home",
     "users" => "Usuarios",
     "reservas" => "Reservas",
-    "habitacionesG" => "Habitaciones Gestion",
+    "habitacionesG" => "Data Info Habitaciones",
     "habitaciones" => "Habitaciones",
     "informacion_gestion" => "Informacion Gestion",
 ]
@@ -30,6 +30,6 @@ $pages_array = [
 <script>
     const site = document.getElementById("return_site");
     site.addEventListener("click", (e) => {
-        alert("go to prinicpa page")
+        session_destroy();
     })
 </script>

@@ -1,6 +1,6 @@
+
 <?php
 session_start();
-include 'globals.php'; // Archivo de conexión a la base de datos
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("");
         } elseif ($rol == 2) {
             header("");
-        } 
+        }
     } else {
         echo "Credenciales incorrectas.";
     }

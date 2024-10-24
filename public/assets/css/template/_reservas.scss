@@ -10,8 +10,10 @@
       margin-top: 20px;
       .input-group {
         gap: 1rem;
+        justify-content: space-between;
         & > .form-group {
-          flex: 1 0 auto;
+          flex: 1;
+          //max-width: 10rem;
         }
       }
       .form-group {

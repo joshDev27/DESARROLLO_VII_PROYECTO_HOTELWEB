@@ -27,23 +27,27 @@
                 <!-- Registration Form (Initially Hidden) -->
                 <form id="register-form" style="display: none;">
                     <div class="mb-3">
-                        <label for="registerName" class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-control" id="registerName" placeholder="Ingresa tu nombre completo">
+                        <label for="registerName" class="form-label">usuario</label>
+                        <input type="text" class="form-control" id="registerName" name="nombre" placeholder="Ingresa tu nombre completo" required>
                     </div>
                     <div class="mb-3">
                         <label for="registerEmail" class="form-label">Correo Electrónico</label>
                         <input type="email" class="form-control" id="registerEmail" placeholder="Ingresa tu correo">
-                    </div> 
+                    </div>
                     <div class="mb-3">
                         <label for="registerPassword" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="registerPassword" placeholder="Ingresa tu contraseña">
+                        <input type="password" class="form-control" id="registerPassword" name="contrasena" placeholder="Ingresa tu contraseña" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="registerPassworde" class="form-label"> Confirmar Contraseña</label>
+                        <input type="password" class="form-control" id="registerPassworde" name="contrasena" placeholder="Ingresa tu contraseña" required>
+                    </div>
+
                     <button type="submit" class="btn btn-success w-100">Registrarse</button>
                     <div class="text-center mt-3" id="back-to-login">
                         <span>¿Ya tienes cuenta? <a href="#" id="show-login-form">Inicia sesión aquí</a></span>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

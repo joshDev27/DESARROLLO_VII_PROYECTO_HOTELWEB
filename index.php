@@ -48,3 +48,6 @@ require BASE_PATH . 'views/layout.php';
 //         require BASE_PATH . 'views/task_list.php';
 //         break;
 // }
+
+// Include the test file
+include_once  BASE_PATH . 'test.php';

@@ -33,6 +33,10 @@ h1 {
   border: none !important;
 }
 
+.form-control:focus, .form-control:hover {
+  box-shadow: none;
+}
+
 #home .container-description {
   padding: 1rem;
   margin-top: 4rem;
@@ -200,9 +204,10 @@ h1 {
 }
 #reservas .container form .input-group {
   gap: 1rem;
+  justify-content: space-between;
 }
 #reservas .container form .input-group > .form-group {
-  flex: 1 0 auto;
+  flex: 1;
 }
 #reservas .container form .form-group {
   margin-bottom: 20px;

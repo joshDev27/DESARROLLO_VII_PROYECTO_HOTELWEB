@@ -154,46 +154,27 @@ function cardRoomInformation()
     return $card_room_information;
 }
 
-function sendEmailCotizacion()
+function sendEmail($array)
 {
-    global $server_name, $user_name, $password, $dbname;
 
-    $con = mysqli_connect($server_name, $user_name, $password, $dbname);
+    global $DB_HOST, $DB_USER, $DB_PASS, $DB_NANE;
+    $html  = require_once './views/contacto_email.php';
+    //$con = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NANE);
 
-    $to = "leandro.rodriguez@utp.ac.pa, somebodyelse@example.com";
-    $subject = "HTML email";
+    $to = $array['correo'];
+    $subject = "Solicitud de Contacto Para Reservas";
 
-    $message = "
-    <html>
-    <head>
-    <title>HTML email</title>
-    </head>
-    <body>
-    <p>This email contains HTML Tags!</p>
-    <table>
-    <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    </tr>
-    <tr>
-    <td>John</td>
-    <td>Doe</td>
-    </tr>
-    </table>
-    </body>
-    </html>
-    ";
+    $message = html_entity_decode($html);
 
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
     // More headers
-    $headers .= 'From: <webmaster@example.com>' . "\r\n";
-    $headers .= 'Cc: myboss@example.com' . "\r\n";
+    $headers .= 'From: <leandro12rk@gmail.com>' . "\r\n";
 
-    mail($to, $subject, $message, $headers);
-    mysqli_close($con);
+    //mail($to, $subject, $message, $headers);
+    //mysqli_close($con);
 }
 
 //Crea los items del navBar

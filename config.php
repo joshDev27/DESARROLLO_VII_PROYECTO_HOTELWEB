@@ -39,7 +39,6 @@ define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASS', getenv('DB_PASS'));
 define('SITE_NAME', getenv('SITE_NAME'));
-//define('ADMINISTRATOR', getenv('ADMINISTRATOR'));
 // Derived constants
 define('PUBLIC_URL', BASE_URL . '/public');
 

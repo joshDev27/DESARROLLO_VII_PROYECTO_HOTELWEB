@@ -1,5 +1,5 @@
 <?php
-include_once "modals/sesion.php";
+include_once "modal_sesion.php";
 include_once "contacto.php";
 
 $pages_array = [
@@ -11,7 +11,7 @@ $pages_array = [
 <nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
         <a href="index.php">
-           <h3> <?php echo SITE_NAME ?></h3> 
+            <h3> <?php echo SITE_NAME ?></h3>
         </a>
         <button class=" navbar-toggler hamburger hamburger--collapse" id="toggler_btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="hamburger-box">
@@ -32,8 +32,8 @@ $pages_array = [
     </div>
 </nav>
 <script>
-    const btn_toggler=document.getElementById("toggler_btn");
-    btn_toggler.addEventListener("click",(event)=>{
+    const btn_toggler = document.getElementById("toggler_btn");
+    btn_toggler.addEventListener("click", (event) => {
         btn_toggler.classList.toggle("is-active");
     })
 </script>

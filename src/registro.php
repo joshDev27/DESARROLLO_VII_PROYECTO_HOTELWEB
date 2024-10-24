@@ -1,6 +1,5 @@
 
 <?php
-include 'globals.php'; // Archivo de conexión a la base de datos
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['nombre'];

@@ -1,25 +1,4 @@
-<?php
-$array_info_user_admin = [
-    [
-        'Id' => 0,
-        'Rol' => 'Administrador',
-        'Nombre' => 'Juan',
-        'Apellido' => 'Pérez',
-        'Email' => 'juan@example.com',
-        'Telefono' => '+1 555-123-4567',
-        'Direccion' => 'Calle Principal 123',
-    ],
-    [
-        'Id' => 1,
-        'Rol' => 'Administrador',
-        'Nombre' => 'María',
-        'Apellido' => 'Rodríguez',
-        'Email' => 'maria@example.com',
-        'Telefono' => '+1 555-987-6543',
-        'Direccion' => 'Avenida Central 456',
-    ],
-];
-?>
+<?php require_once './src/usuarios_admin.php'; ?>
 <div class="container-fluid justify-content-center ">
     <h2> Usuario Registrados</h2>
     <table class="table table-light table-hover">
@@ -35,21 +14,17 @@ $array_info_user_admin = [
             </tr>
         </thead>
         <tbody>
-            <?php
-            foreach ($array_info_user_admin as $user_info) {
-                echo "
+            <?php foreach ($array_info_user_admin as $user_info): ?>
                 <tr>
-                <th scope='row'>{$user_info['Id']}</th>
-                <td>{$user_info['Rol']}</td>
-                <td>{$user_info['Nombre']}</td>
-                <td>{$user_info['Apellido']}</td>
-                <td>{$user_info['Email']}</td>
-                <td>{$user_info['Telefono']}</td>
-                <td>@{$user_info['Direccion']}</td>
-            </tr>
-                ";
-            }
-            ?>
+                    <th scope='row'><?php echo $user_info['Id'] ?></th>
+                    <td><?php echo $user_info['Rol'] ?></td>
+                    <td><?php echo $user_info['Nombre'] ?></td>
+                    <td><?php echo $user_info['Apellido'] ?></td>
+                    <td><?php echo $user_info['Email'] ?></td>
+                    <td><?php echo $user_info['Telefono'] ?></td>
+                    <td><?php echo $user_info['Direccion'] ?></td>
+                </tr>
+            <?php endforeach ?>
 
         </tbody>
     </table>

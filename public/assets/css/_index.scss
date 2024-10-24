@@ -28,3 +28,10 @@ h1 {
   box-shadow: 1px 2px 18px 2px #443bff9e;
   border: none !important;
 }
+.form-control {
+  &:focus,
+  &:hover {
+    box-shadow: none;
+    
+  }
+}
