@@ -1,3 +1,8 @@
+<?php
+// require_once './src/sesion.php';
+?>
+
+
 <!-- Modal -->
 <div class="modal fade" id="sesion" tabindex="-1" aria-labelledby="sesionLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -8,14 +13,14 @@
             </div>
             <div class="modal-body">
                 <!-- Login Form -->
-                <form id="login-form">
+                <form id="login-form" method="POST" action="./src/sesion.php" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="loginEmail" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="loginEmail" placeholder="Ingresa tu correo">
+                        <label for="loginUser" class="form-label">Correo Electrónico</label>
+                        <input type="text" class="form-control" id="loginUser" name="userName" placeholder="Ingresa tu correo" required>
                     </div>
                     <div class="mb-3">
                         <label for="loginPassword" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="loginPassword" placeholder="Ingresa tu contraseña">
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Ingresa tu contraseña" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
                     <div class="text-center mt-3">
@@ -25,22 +30,22 @@
 
 
                 <!-- Registration Form (Initially Hidden) -->
-                <form id="register-form" style="display: none;">
+                <form id="register-form" style="display: none;" method="POST" action="./src/sesion.php" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="registerName" class="form-label">usuario</label>
-                        <input type="text" class="form-control" id="registerName" name="nombre" placeholder="Ingresa tu nombre completo" required>
+                        <label for="registerName" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="registerName" name="userName" placeholder="Ingresa tu nombre completo" required>
                     </div>
                     <div class="mb-3">
                         <label for="registerEmail" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="registerEmail" placeholder="Ingresa tu correo">
+                        <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Ingresa tu correo" required>
                     </div>
                     <div class="mb-3">
                         <label for="registerPassword" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="registerPassword" name="contrasena" placeholder="Ingresa tu contraseña" required>
+                        <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Ingresa tu contraseña" required>
                     </div>
                     <div class="mb-3">
-                        <label for="registerPassworde" class="form-label"> Confirmar Contraseña</label>
-                        <input type="password" class="form-control" id="registerPassworde" name="contrasena" placeholder="Ingresa tu contraseña" required>
+                        <label for="confirmPassword" class="form-label"> Confirmar Contraseña</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Ingresa tu contraseña" required>
                     </div>
 
                     <button type="submit" class="btn btn-success w-100">Registrarse</button>

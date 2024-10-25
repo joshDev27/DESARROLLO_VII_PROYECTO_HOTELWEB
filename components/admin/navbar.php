@@ -1,6 +1,6 @@
 <?php
 $pages_array = [
-    "home" => "Home",
+    "home_admin" => "Home",
     "users" => "Usuarios",
     "reservas" => "Reservas",
     "habitacionesG" => "Data Info Habitaciones",

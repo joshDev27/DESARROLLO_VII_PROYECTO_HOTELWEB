@@ -1,5 +1,5 @@
 <?php
-include_once "modal_sesion.php";
+include_once "sesion.php";
 include_once "contacto.php";
 
 $pages_array = [

@@ -16,13 +16,13 @@
 
 
 <body>
+
     <?php
-    require_once BASE_PATH . "src/function.php";
+    include BASE_PATH . "src/function.php";
     if ($ADMINISTRATOR) {
         include BASE_PATH . "components/admin/navbar.php";
         include BASE_PATH . "views/body.php";
     } else {
-
         include BASE_PATH . "components/header.php";
         include BASE_PATH . "views/body.php";
         include BASE_PATH . "components/footer.php";

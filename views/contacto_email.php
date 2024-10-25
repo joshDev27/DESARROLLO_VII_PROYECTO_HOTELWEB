@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="./public/assets/css/Email.css">
+    <link rel="stylesheet" href="../public/assets/css/Email.css">
     <title>Confirmación de Reserva</title>
 </head>
 
@@ -22,6 +22,6 @@
             <p>&copy; 2024 nombre hotel. Todos los derechos reservados.</p>
         </div>
     </div>
-</body>
+</body> 
 
 </html>

@@ -1,19 +1,19 @@
 <?php
 
-$array_img = [
-    [
-        "img" => "https://www.ultraimagehub.com/wallpapers/tr:flp-false,gx-0.2,gy-0.6,q-75,rh-3264,rw-5824,th-1080,tw-1920/1243204670218960906.jpeg",
-        "alt" => "room1_img"
-    ],
-    [
-        "img" => "https://eraseunhotel.com/wp-content/uploads/2017/12/6-grande.jpg",
-        "alt" => "room1_img"
-    ],
-    [
-        "img" => "https://ofistim.com.tr/wp-content/uploads/2022/04/Disenos-de-Habitaciones-de-Hotel.jpeg",
-        "alt" => "room1_img"
-    ],
-];
+$array_img = array();
+
+$con = mysqli_connect('localhost', 'root', '', 'hotel_hotoño');
+if ($con === false) {
+    die("ERROR: No se pudo conectar. " . mysqli_connect_error());
+}
+$sql = "SELECT * FROM imagenes_slider";
+$result = $con->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $array_img[] = array('alt' => $row['name'], 'img' => $row['img']);
+    }
+}
 
 ?>
 <div id="carouselHome" class="carousel slide" data-bs-ride="carousel">
