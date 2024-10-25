@@ -1,11 +1,12 @@
 <?php
 $pages_array = [
-    "home_admin" => "Home",
+    "home" => "Home",
     "users" => "Usuarios",
     "reservas" => "Reservas",
     "habitacionesG" => "Data Info Habitaciones",
     "habitaciones" => "Habitaciones",
     "informacion_gestion" => "Informacion Gestion",
+    "correos" => "Correos",
 ]
 ?>
 

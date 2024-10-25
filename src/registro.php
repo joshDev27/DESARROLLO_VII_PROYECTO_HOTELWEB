@@ -2,13 +2,24 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $telefono = $_POST['telefono'];
-    $contrasena = password_hash($_POST['contrasena'], PASSWORD_BCRYPT); // Encriptar la contraseña
-    $correo = $_POST['correo'];
-    $direccion = $_POST['direccion'];
-    $rol = $_POST['rol']; // Asegúrate de que el rol sea una opción válida
+
+    $datos = [];
+
+    // Procesar y validar cada campo
+    $campos = [
+        'userName',
+        'email',
+        'password',
+        'confirmPassword'
+    ];
+
+    foreach ($campos as $campo) {
+        if (isset($_POST[$campo])) {
+            $valor = $_POST[$campo];
+            $datos[$campo] = $valor;
+        }
+    }
+   // $contrasena = password_hash($_POST['contrasena'], PASSWORD_BCRYPT); // Encriptar la contraseña
 
     // Llamar al procedimiento almacenado para registrar al usuario
     $stmt = $mysqli->prepare("CALL Registro_Usuario(?, ?, ?, ?, ?, ?, ?, @o_retorno)");

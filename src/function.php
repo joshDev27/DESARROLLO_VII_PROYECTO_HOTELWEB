@@ -38,7 +38,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/736x/5e/ba/b1/5ebab151614e768e7ab94cedb4a0e0dd.jpg",
             "precio" => "72$",
-            "id" => 0001,
+ 
         ],
         [
             "tipo" => "Habitación Doble Estándar (Cama Doble)",
@@ -52,7 +52,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/564x/60/05/bb/6005bbfc4f858db801090275b3e2e7c5.jpg",
             "precio" => "107$",
-            "id" => 0002,
+     
         ],
         [
             "tipo" => "Habitación Doble Estándar (Dos Camas Separadas)",
@@ -66,7 +66,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/564x/fe/3c/da/fe3cda5c1ff52dc1ad87ab2fb0959025.jpg",
             "precio" => "107$",
-            "id" => 0003,
+ 
         ],
         [
             "tipo" => "Habitación Doble Deluxe",
@@ -81,7 +81,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/564x/ed/3d/06/ed3d06d62a07bb9160c62166fa1f4ea0.jpg",
             "precio" => "150$",
-            "id" => 0004,
+     
         ],
         [
             "tipo" => "Estudio o Apartamento",
@@ -96,7 +96,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/736x/8b/ee/d1/8beed1c977801ab622b2c68b177464ff.jpg",
             "precio" => "200$",
-            "id" => 0005,
+        
             "iconos" => [
                 "<i class='fa-solid fa-trash'></i>",
                 "<i class='fa-solid fa-trash'></i>",

@@ -1,5 +1,5 @@
 <?php
-require_once './src/home_admin.php';
+require_once './src/admin/home.php';
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>

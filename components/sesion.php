@@ -1,5 +1,6 @@
 <?php
-// require_once './src/sesion.php';
+require_once './src/login.php';
+require_once './src/registro.php';
 ?>
 
 
@@ -13,14 +14,14 @@
             </div>
             <div class="modal-body">
                 <!-- Login Form -->
-                <form id="login-form" method="POST" action="./src/sesion.php" enctype="multipart/form-data">
+                <form id="login-form" method="POST" action="./src/login.php" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="loginUser" class="form-label">Correo Electrónico</label>
                         <input type="text" class="form-control" id="loginUser" name="userName" placeholder="Ingresa tu correo" required>
                     </div>
                     <div class="mb-3">
                         <label for="loginPassword" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="loginPassword" placeholder="Ingresa tu contraseña" required>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Ingresa tu contraseña" name="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
                     <div class="text-center mt-3">
@@ -30,7 +31,7 @@
 
 
                 <!-- Registration Form (Initially Hidden) -->
-                <form id="register-form" style="display: none;" method="POST" action="./src/sesion.php" enctype="multipart/form-data">
+                <form id="register-form" style="display: none;" method="POST" action="./src/registro.php" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="registerName" class="form-label">Usuario</label>
                         <input type="text" class="form-control" id="registerName" name="userName" placeholder="Ingresa tu nombre completo" required>

@@ -26,7 +26,7 @@ function loadEnv($path)
     }
 }
 
-$ADMINISTRATOR = false;
+$ADMINISTRATOR = true;
 
 
 // Load environment variables
