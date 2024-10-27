@@ -1,35 +1,39 @@
-<div class="container-fluid justify-content-center ">
+<div class=" body container-fluid justify-content-center " id="container-habitaciones">
     <h2> Tipos de Habitaciones Habitaciones</h2>
-    <table class="table table-light table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Id de Tipo de Habitaciones</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Tipo de Habitación</th>>
-                <th scope="col">Precio</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach (getRoomInformation() as $index => $array) : ?>
- 
+
+    <div class="overflow-x-auto">
+        <table class="table table-light table-hover">
+            <thead>
                 <tr>
-                <th scope='row'><?echo $index?></th>
-                <td class='item-table'>{$data_reservas['Id Reservas']}</td>
-                <td onclick='$onClick' data-bs-toggle='modal' data-bs-target='#reservas_usuarios_admin' class='item-table modal-select'>{$data_reservas['Huesped']}</td>
-                <td class='item-table'>{$data_reservas['Check In']}</td>
-                <td class='item-table'>{$data_reservas['Check Out']}</td>
-                <td class='item-table'>{$data_reservas['Numero de Noches']}</td>
-                <td class='item-table'>{$data_reservas['Cantidad de Habitaciones']}</td>
-                <td class='item-table'>{$data_reservas['Tipo de Habitación']}</td>
-                <td class='item-table'>{$data_reservas['Correo']}</td>
-                <td class='item-table'>{$data_reservas['Estado']}</td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+                    <th scope="col">#</th>
+                    <th scope="col">numero de habitacion</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Cantidad de camas </th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Usuario Ocupado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php //foreach (getRoomInformation() as $index => $array) : 
+                ?>
+
+                <tr>
+                    <th scope='row'><? echo $index ?></th>
+                    <td class='item-table'>{$data_reservas['Id Reservas']}</td>
+                    <td onclick='$onClick' data-bs-toggle='modal' data-bs-target='#reservas_usuarios_admin' class='item-table modal-select'>{$data_reservas['Huesped']}</td>
+                    <td class='item-table'>{$data_reservas['Check In']}</td>
+                    <td class='item-table'>{$data_reservas['Check Out']}</td>
+                    <td class='item-table'>{$data_reservas['Numero de Noches']}</td>
+                    <td class='item-table'>{$data_reservas['Cantidad de Habitaciones']}</td>
+                    <td class='item-table'>{$data_reservas['Tipo de Habitación']}</td>
+                    <td class='item-table'>{$data_reservas['Correo']}</td>
+                    <td class='item-table'>{$data_reservas['Estado']}</td>
+                </tr>
+                <?php //endforeach; 
+                ?>
+            </tbody>
+        </table>
+    </div>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item">

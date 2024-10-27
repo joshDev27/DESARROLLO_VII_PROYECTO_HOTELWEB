@@ -1,7 +1,7 @@
 @import "var";
 @import "../../Lib/fontawesome/css/fontawesome.css";
 @import "../../Lib/fontawesome/css/all.css";
-// @import "../../Lib/hamburgers/hamburgers.scss";
+@import "./lib/hamburgers";
 @import "index";
 
 @import "template/home";
@@ -14,26 +14,26 @@
 
 // administrator styles
 @import "admin/home";
+@import "admin/header_admin";
 
 
 
-// // Source mixins
 
-// // No media query necessary for xs breakpoint as it's effectively `@media (min-width: 0) { ... }`
-// @include media-breakpoint-up(sm) { ... }
-// @include media-breakpoint-up(md) { ... }
-// @include media-breakpoint-up(lg) { ... }
-// @include media-breakpoint-up(xl) { ... }
-// @include media-breakpoint-up(xxl) { ... }
+/*
+Source mixins
+@media (min-width: 576px) {
+  // For small devices and up
+}
 
-// // Usage
+@media (min-width: 768px) {
+  // For medium devices and up
+}
 
-// // Example: Hide starting at `min-width: 0`, and then show at the `sm` breakpoint
-// .custom-class {
-//   display: none;
-// }
-// @include media-breakpoint-up(sm) {
-//   .custom-class {
-//     display: block;
-//   }
-// }
+@media (min-width: 992px) {
+  // For large devices and up
+}
+
+@media (min-width: 1200px) {
+  // For extra large devices and up
+}
+*/

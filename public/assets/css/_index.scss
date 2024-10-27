@@ -31,7 +31,24 @@ h1 {
 .form-control {
   &:focus,
   &:hover {
-    box-shadow: none;
-    
+    box-shadow: none !important;
+  }
+}
+
+.page-link {
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.container-admin {
+  height: 100vh;
+}
+.body {
+  overflow-y: auto;
+  scroll-behavior: smoth;
+  &::-webkit-scrollbar {
+    //ocultar el scrool bar
+    display: none;
   }
 }

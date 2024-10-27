@@ -160,7 +160,8 @@ function getTemplate($url_var, $root_path, $src_path)
         if (file_exists($file)) {
             include_once $file;
             if (file_exists($file_src)) {
-                include_once $file_src;
+                //die($file_src);
+                require_once $file_src;
             }
         } else {
             include BASE_PATH . 'views/error_page_404.php';

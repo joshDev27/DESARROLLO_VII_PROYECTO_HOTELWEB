@@ -34,35 +34,37 @@ require_once './src/admin/home.php';
     </div>
     <div class="charts">
         <div class="row">
-            <div class=" col-xl-8 col-sm-6 mb-xl-0 shadow p-3 mb-5 bg-body-tertiary rounded mt-3">
+            <div class=" col-xl-8 col-sm-6 mb-xl-0 shadow p-3 mb-5 bg-body-tertiary rounded mt-3 table-container">
                 <h3 class="text-center">Proximas Reservas</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Check In</th>
-                            <th scope="col">Ckeck Out</th>
-                            <th scope="col">Nombre Completo </th>
-                            <th scope="col">Cédula</th>
-                            <th scope="col">Número de Habitación</th>
-                            <th scope="col">Tipo de Habitación</th>
-                        </tr>
-                    </thead>
-                    <?php
-
-                    ?>
-                    <tbody>
-                        <?php foreach ($proxima_reservas as $reservas): ?>
+                <div class="overflow-x-auto">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <td scope='row'> <?php echo $reservas['check_in'] ?></td>
-                                <td><?php echo  $reservas['check_out'] ?></td>
-                                <td><?php echo  $reservas['nombre_completo'] ?></td>
-                                <td><?php echo  $reservas['cedula'] ?></td>
-                                <td><?php echo  $reservas['numero_habitacion'] ?></td>
-                                <td><?php echo  $reservas['tipo_habitacion'] ?></td>
+                                <th scope="col">Check In</th>
+                                <th scope="col">Ckeck Out</th>
+                                <th scope="col">Nombre Completo </th>
+                                <th scope="col">Cédula</th>
+                                <th scope="col">Número de Habitación</th>
+                                <th scope="col">Tipo de Habitación</th>
                             </tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <?php
+
+                        ?>
+                        <tbody>
+                            <?php foreach ($proxima_reservas as $reservas): ?>
+                                <tr>
+                                    <td scope='row'> <?php echo $reservas['check_in'] ?></td>
+                                    <td><?php echo  $reservas['check_out'] ?></td>
+                                    <td><?php echo  $reservas['nombre_completo'] ?></td>
+                                    <td><?php echo  $reservas['cedula'] ?></td>
+                                    <td><?php echo  $reservas['numero_habitacion'] ?></td>
+                                    <td><?php echo  $reservas['tipo_habitacion'] ?></td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="row">

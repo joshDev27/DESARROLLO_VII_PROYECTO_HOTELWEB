@@ -1,6 +1,10 @@
 #home_admin {
   .info-admin {
     gap: 1rem;
+    padding: 1rem;
+    @media (min-width: 992px) {
+      padding: 0;
+    }
     & > div {
       width: 25rem;
       margin-top: 1rem;
@@ -17,12 +21,11 @@
               color: #ddd;
             }
           }
-          .text{
-            p{
-              color: ligthen(#000,25%);
+          .text {
+            p {
+              color: ligthen(#000, 25%);
             }
           }
-
         }
         .card-footer {
           p {
@@ -35,6 +38,10 @@
     }
   }
   .charts {
+    padding: 1rem;
+    @media (min-width: 992px) {
+      padding: 0;
+    }
     & > .row {
       gap: 1rem;
       justify-content: center;

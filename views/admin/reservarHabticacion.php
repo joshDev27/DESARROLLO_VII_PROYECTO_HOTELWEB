@@ -1,8 +1,9 @@
 <?php
 require_once "./src/reservas.php";
+require_once "./src/admin/reservarHabitacion.php";
 ?>
 
-<div class="container-fluid container-reservas" id="reservas">
+<div class=" body container-fluid container-reservas" id="container-reservas-admin">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -80,30 +81,6 @@ require_once "./src/reservas.php";
                     <button type="submit" class="btn btn-primary btn-block">Cotizar Habitación</button>
                 </form>
             </div>
-            <div class="col-md-6">
-                <?php foreach (getRoomInformation() as $key => $array): ?>
-                    <?php if ($array['id'] === $tipo_habitacion_activo): ?>
-                        <span>
-                            <img src=<?php echo $array['img'] ?> class="img-fluid">
-                        </span>
-                        <span class="container-desc">
-                            <p><?php echo $array['descripcion'] ?></p>
-                            <span>
-                                <?php foreach ($array['caracteristicas'] as $data): ?>
-                                    <p><?php echo $data ?></p>
-                                <?php endforeach; ?>
-                                <?php if (isset($array['iconos'])): ?>
-                                    <?php foreach ($array['iconos'] as $icono): ?>
-                                        <span><?php echo $icono ?></span>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                                <p><?php echo $tipo_habitacion_activo ?></p>
-                            </span>
-                        </span>
-                    <?php endif; ?>
-                <?php endforeach ?>
-            </div>
-
         </div>
     </div>
 </div>
