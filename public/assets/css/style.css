@@ -1250,6 +1250,11 @@ h1 {
   justify-content: center;
   margin-top: 3rem;
 }
+@media (min-width: 768px) {
+  #home_admin .charts > .row .table-container {
+    min-width: 40rem !important;
+  }
+}
 
 .navbar {
   max-width: 10rem;

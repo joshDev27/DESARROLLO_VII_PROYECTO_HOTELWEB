@@ -2,7 +2,7 @@
   .info-admin {
     gap: 1rem;
     padding: 1rem;
-    @media (min-width: 992px) {
+    @media (min-width: $min-width-lg) {
       padding: 0;
     }
     & > div {
@@ -39,13 +39,18 @@
   }
   .charts {
     padding: 1rem;
-    @media (min-width: 992px) {
+    @media (min-width: $min-width-lg) {
       padding: 0;
     }
     & > .row {
       gap: 1rem;
       justify-content: center;
       margin-top: 3rem;
+      .table-container {
+        @media (min-width: $min-width-md) {
+          min-width: 40rem !important;
+        }
+      }
     }
   }
 }
