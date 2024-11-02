@@ -915,10 +915,46 @@ h1 {
 .body {
   overflow-y: auto;
   scroll-behavior: smooth;
+  padding: 0;
   padding-bottom: 2rem;
 }
 .body::-webkit-scrollbar {
   display: none;
+}
+
+.header-admin {
+  background-color: #212529;
+  padding: 1rem;
+}
+.header-admin h2 {
+  color: #ddd;
+}
+
+.btn,
+.form-check-input {
+  border: none;
+}
+.btn:focus, .btn:hover,
+.form-check-input:focus,
+.form-check-input:hover {
+  box-shadow: none !important;
+}
+
+@media (max-width: 767px) {
+  .offcanvas {
+    max-width: 90% !important;
+    background-color: #212529;
+  }
+  .offcanvas .offcanvas-header a {
+    flex: 1;
+  }
+  .offcanvas .offcanvas-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .offcanvas .offcanvas-body .navbar-nav {
+    flex: 1;
+  }
 }
 
 #home .container-description {
@@ -1256,7 +1292,7 @@ h1 {
   }
 }
 
-.navbar {
+.navbar.navbar-admin {
   max-width: 10rem;
   min-width: 10rem;
   width: 100%;
@@ -1264,27 +1300,34 @@ h1 {
   display: none;
 }
 @media (min-width: 992px) {
-  .navbar {
+  .navbar.navbar-admin {
     display: block;
   }
 }
-.navbar.active {
+.navbar.navbar-admin.active {
   max-width: 15em;
 }
-.navbar > div {
+.navbar.navbar-admin > div {
   flex-direction: column;
   height: 100%;
   justify-content: flex-start !important;
 }
-.navbar > div .hamburger .hamburger-box {
+.navbar.navbar-admin > div .hamburger .hamburger-box {
   width: auto;
 }
-.navbar > div .navbar-nav {
+.navbar.navbar-admin > div .navbar-nav {
   width: 100%;
   flex: 1;
 }
-.navbar > div .btn {
+.navbar.navbar-admin > div .btn {
   width: 100%;
+}
+.navbar.navbar-admin-mobile {
+  padding: 0.5rem;
+  padding-bottom: 0;
+}
+.navbar.navbar-admin-mobile .header-name {
+  flex: 1;
 }
 
 /*

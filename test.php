@@ -1,10 +1,10 @@
 <?php 
+die();
+include './src/function.php';
+include './src/correo.php'; 
 
-include_once './src/function.php';
-
-
-
-caracteristicas_hoteles();
+EnviarCorreo('leandro.rodriguez@utp.ac.pa', 'esto es una prueba del correo', '<p>prueba de correo</p>', true);
+//caracteristicas_hoteles();
 
 die();
 $con = mysqli_connect('localhost','root','','hotel_hotoño');

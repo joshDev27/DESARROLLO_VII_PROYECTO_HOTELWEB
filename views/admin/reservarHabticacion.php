@@ -7,7 +7,9 @@ require_once "./src/admin/reservarHabitacion.php";
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="text-center">Reserva tu Habitación</h2>
+                <div class="header-admin">
+                    <h2 class="text-center">Reserva tu Habitación</h2>
+                </div>
                 <form action="./src/reservas.php" method="POST" enctype="multipart/form-data">
                     <div class="input-group">
                         <div class="form-group">

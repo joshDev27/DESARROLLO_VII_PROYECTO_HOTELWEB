@@ -4,16 +4,21 @@ $array_btn_accciones = [
         'name' => 'Edit',
         'icon' => "fa-solid fa-pen-to-square",
         'action' => '',
+        'className' => 'btn-info',
     ],
     [
         'name' => 'Delete',
         'icon' => "fa-solid fa-trash",
         'action' => '',
+        'className' => 'btn-danger',
     ],
 ];
 ?>
 <div class=" body container-fluid justify-content-center " id="container-gestion-habitaciones">
-    <h2> Tipos de Habitaciones Habitaciones</h2>
+    <div class="header-admin">
+
+        <h2> Tipos de Habitaciones Habitaciones</h2>
+    </div>
     <div class="action-table">
         <button class="btn btn-primary">
             Añadir un nuevo tipo de habitación
@@ -50,8 +55,16 @@ $array_btn_accciones = [
                         <td class='item-table'><?php echo $array['precio'] ?></td>
                         <td class='item-table d-flex'>
                             <?php foreach ($array_btn_accciones as $key => $data): ?>
-                                <button class=" btn btn-success"><i class="<?php echo $data['icon'] ?>"></i></button>
+                                <button class=" btn <?php echo $data['className'] ?>"></button>
                             <?php endforeach; ?>
+                        </td>
+                        <td>
+                            <a href="edit.php?id=<?php echo $array['id']; ?>" class="btn btn-info">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a href="delete.php?id=<?php echo $array['id']; ?>" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                         </td>
 
                     </tr>

@@ -1,6 +1,8 @@
 <?php require_once './src/admin/correos.php'; ?>
 <div class=" body container-fluid justify-content-center " id="container-correos">
-    <h2> Estados de Correos</h2>
+    <div class="header-admin">
+        <h2> Estados de Correos</h2>
+    </div>
     <div class="overflow-x-auto">
         <table class="table table-light table-hover" id="table_correos">
             <thead>

@@ -42,7 +42,10 @@ $display_reservas = array_slice($reservas, $start_index, $rows_per_page);
 ?>
 
 <div class=" body container-fluid justify-content-center " id="container-info-reservas">
-    <h2> Reservas Registrados</h2>
+    <div class="header-admin">
+
+        <h2> Reservas Registrados</h2>
+    </div>
     <div class="overflow-x-auto">
         <table class="table table-light table-hover">
             <thead>

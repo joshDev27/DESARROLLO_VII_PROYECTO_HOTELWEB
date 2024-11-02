@@ -1,28 +1,5 @@
 
 <?php
-/*
-$array_info_user_admin = [
-    [
-        'Id' => 0,
-        'Rol' => 'Administrador',
-        'Nombre' => 'Juan',
-        'Apellido' => 'Pérez',
-        'Email' => 'juan@example.com',
-        'Telefono' => '+1 555-123-4567',
-        'Direccion' => 'Calle Principal 123',
-    ],
-    [
-        'Id' => 1,
-        'Rol' => 'Administrador',
-        'Nombre' => 'María',
-        'Apellido' => 'Rodríguez',
-        'Email' => 'maria@example.com',
-        'Telefono' => '+1 555-987-6543',
-        'Direccion' => 'Avenida Central 456',
-    ],
-];
-
-*/
 
 $array_info_user_admin  = array();
 
@@ -31,10 +8,13 @@ if ($con === false) {
     die("ERROR: No se pudo conectar. " . mysqli_connect_error());
 }
 
-$sql = "SELECT u.Nombre as nombre, u.Apellido as apellido,
+$sql = "SELECT u.Id_Usuario as id , u.Nombre as nombre, u.Apellido as apellido,
  u.Telefono as telefono, u.correo as correo, u.Direccion as direccion,r.Desc_Rol as rol
 FROM usuario_rol ur JOIN usuario u ON u.Id_Usuario = ur.Id_usuario
-JOIN rol r ON ur.Id_rol=r.Id_Rol;";
+JOIN rol r ON ur.Id_rol=r.Id_Rol WHERE u.Id_Usuario != 4 ";
+
+// var_dump($sql);
+// die();
 
 $result = $con->query($sql);
 
@@ -48,9 +28,12 @@ if ($result->num_rows > 0) {
             'direccion' => $row['direccion'],
             'telefono' => $row['telefono'],
             'rol' => $row['rol'],
+            'id' => $row['id'],
         );
     }
 }
+// print_r($array_info_user_admin);
+// die();
 //print_r($array_info_user_admin);
 $con->close();
 

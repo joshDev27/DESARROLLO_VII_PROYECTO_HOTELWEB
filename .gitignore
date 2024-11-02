@@ -4,3 +4,4 @@
 
 #Ignorar .vscode
 .vscode
+/vendor/

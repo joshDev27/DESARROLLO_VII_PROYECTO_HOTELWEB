@@ -1,10 +1,7 @@
 <?php
 
 
-
-
-function caracteristicas_hoteles()
-{
+function caracteristicas_hoteles(){
     $array = array();
 
     $con = mysqli_connect('localhost', 'root', '', 'hotel_hotoño');

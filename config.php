@@ -33,12 +33,19 @@ $ADMINISTRATOR = true;
 loadEnv(__DIR__ . '/.env');
 
 // Define constants using environment variables
+//VARIABLES DE LA BASE DE DATOS
 define('BASE_URL', getenv('BASE_URL'));
 define('DB_HOST', getenv('DB_HOST'));
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASS', getenv('DB_PASS'));
+// VARIABLES GLOBALES
 define('SITE_NAME', getenv('SITE_NAME'));
+//VARIABLES DEL CORREO
+define('EMAIL_PASS', getenv('EMAIL_PASS'));
+define('EMAIL_SENDER', getenv('EMAIL_SENDER'));
+define('EMAIL_HOST', getenv('EMAIL_HOST'));
+
 // Derived constants
 define('PUBLIC_URL', BASE_URL . '/public');
 

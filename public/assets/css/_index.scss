@@ -47,9 +47,43 @@ h1 {
 .body {
   overflow-y: auto;
   scroll-behavior: smooth;
+  padding: 0;
   padding-bottom: 2rem;
   &::-webkit-scrollbar {
     //ocultar el scrool bar
     display: none;
+  }
+}
+.header-admin {
+  background-color: $background-color;
+  padding: 1rem;
+  h2 {
+    color: #ddd;
+  }
+}
+.btn,
+.form-check-input {
+  border: none;
+  &:focus,
+  &:hover {
+    box-shadow: none !important;
+  }
+}
+.offcanvas {
+  @media (max-width: $max-width-md) {
+    max-width: 90% !important;
+    background-color: $background-color;
+    .offcanvas-header {
+      a {
+        flex: 1;
+      }
+    }
+    .offcanvas-body {
+      display: flex;
+      flex-direction: column;
+      .navbar-nav {
+        flex: 1;
+      }
+    }
   }
 }
