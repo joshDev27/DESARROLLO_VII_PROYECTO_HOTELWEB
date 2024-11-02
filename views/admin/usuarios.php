@@ -2,6 +2,25 @@
 require_once './src/admin/usuarios.php';
 require_once "components/admin/editUser.php";
 require_once "components/admin/addUser.php";
+
+
+
+
+// Configuración de la paginación
+$itemsPorPagina = 8;
+$totalItems = count($array_info_user_admin);
+$totalPaginas = ceil($totalItems / $itemsPorPagina);
+
+// Obtener el número de página actual desde la URL
+$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$paginaActual = max(1, min($totalPaginas, $paginaActual));
+
+// Obtener el subconjunto de datos para la página actual
+$inicio = ($paginaActual - 1) * $itemsPorPagina;
+$arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPagina);
+
+
+
 ?>
 <div class=" body container-fluid justify-content-center " id="container-usuarios">
     <div class="header-admin">
@@ -19,6 +38,7 @@ require_once "components/admin/addUser.php";
             <i class="fa-solid fa-plus"></i> Add New User
         </button>
     </div>
+    <!-- table  -->
     <div class="overflow-x-auto">
         <table class="table table-light table-hover">
             <thead>
@@ -35,10 +55,10 @@ require_once "components/admin/addUser.php";
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($array_info_user_admin as $user_info): ?>
+                <?php foreach ($arrayDatosPorPagina as $user_info): ?>
                     <tr>
                         <th scope='row'>
-                            <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id']?>">
+                            <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
                         </th>
                         <td>
                             <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
@@ -66,24 +86,37 @@ require_once "components/admin/addUser.php";
             </tbody>
         </table>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+    <!-- Paginación -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <?php if ($paginaActual > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="index.php?admin=usuarios&pagina=<?php echo $paginaActual - 1; ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+
+                <li class="page-item">
+                    <a class="page-link <?php echo  (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
+                        <?php echo $i; ?>
+                    </a>
+                </li>
+            <?php endfor; ?>
+
+            <?php if ($paginaActual < $totalPaginas): ?>
+                <li class="page-item">
+                    <a class="page-link " href="index.php?admin=usuarios&pagina=<?php echo $paginaActual + 1; ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
         </ul>
     </nav>
 </div>
+
+
 
 <script>
     const btnCheckAll = document.getElementById('btn-check_all');
@@ -100,25 +133,14 @@ require_once "components/admin/addUser.php";
 
 
     btnDeleteAllUser.addEventListener('click', (e) => {
-        let checkboxes = document.querySelectorAll('.form-check-input');
-        let selectedCount = 0;
 
-        checkboxes.forEach((checkbox) => {
-            if (checkbox.checked) {
-                selectedCount++;
-            }
-        });
-
-        if (selectedCount < 2) {
-            alert("debe de seleccionar minimo 2 usuarios para eliminar");
-        } else {
-            // Lógica para eliminar usuarios seleccionados
-        }
     });
 
 
     document.addEventListener('DOMContentLoaded', function() {
-        let checkboxes = document.querySelectorAll('.form-check-input');
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    
+    function updateButtonState() {
         let selectedCount = 0;
 
         checkboxes.forEach((checkbox) => {
@@ -127,9 +149,17 @@ require_once "components/admin/addUser.php";
             }
         });
 
-        if (selectedCount >= 2) {
-            btnDeleteAllUser.disabled = false;
-        }
+        // Habilita el botón si hay 2 o más checkboxes seleccionados
+        btnDeleteAllUser.disabled = selectedCount < 2;
+    }
 
+    // Llama a la función al cargar la página para establecer el estado inicial del botón
+    updateButtonState();
+
+    // Añade el evento 'change' a cada checkbox para actualizar el estado del botón en tiempo real
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', updateButtonState);
     });
+});
+
 </script>
