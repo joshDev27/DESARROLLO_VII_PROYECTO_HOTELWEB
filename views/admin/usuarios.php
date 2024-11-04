@@ -61,16 +61,18 @@ $arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPag
                             <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
                         </th>
                         <td>
+                            <!-- Edit button that opens the modal and passes the user ID -->
                             <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
-                                <input type="button" class="btn-check" value="<?php echo $user_info['id']; ?>" data-bs-target="#edit_admin_modal" id="btn_edit_user_<?php echo $user_info['id']; ?>" data-bs-toggle="modal">
+                                <input type="button" class="btn-check" data-user-id="<?php echo $user_info['id']; ?>" data-bs-target="#edit_admin_modal" id="btn_edit_user_<?php echo $user_info['id']; ?>" data-bs-toggle="modal">
                                 <label class="btn btn-primary" for="btn_edit_user_<?php echo $user_info['id']; ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </label>
                             </span>
 
-                            <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" type="submit" name="btn-delete" value="<?php echo $user_info['id']; ?>">
+                            <a href="index.php?admin=usuarios&pagina=<?php echo $paginaActual; ?>&action=delete&id=<?php echo $user_info['id']; ?>" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" type="submit" name="btn-delete" value="<?php echo $user_info['id']; ?>">
                                 <i class="fa fa-trash"></i>
-                            </button>
+                            </a>
+
                         </td>
                         <td><?php echo $user_info['rol'] ?></td>
                         <td><?php echo $user_info['nombre'] ?></td>
@@ -99,7 +101,7 @@ $arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPag
             <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
 
                 <li class="page-item">
-                    <a class="page-link <?php echo  (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
+                    <a class="page-link <?php echo (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
                         <?php echo $i; ?>
                     </a>
                 </li>
@@ -138,28 +140,27 @@ $arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPag
 
 
     document.addEventListener('DOMContentLoaded', function() {
-    const checkboxes = document.querySelectorAll('.form-check-input');
-    
-    function updateButtonState() {
-        let selectedCount = 0;
+        const checkboxes = document.querySelectorAll('.form-check-input');
 
+        function updateButtonState() {
+            let selectedCount = 0;
+
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedCount++;
+                }
+            });
+
+            // Habilita el botón si hay 2 o más checkboxes seleccionados
+            btnDeleteAllUser.disabled = selectedCount < 2;
+        }
+
+        // Llama a la función al cargar la págiNna para establecer el estado inicial del botón
+        updateButtonState();
+
+        // Añade el evento 'change' a cada checkbox para actualizar el estado del botón en tiempo real
         checkboxes.forEach((checkbox) => {
-            if (checkbox.checked) {
-                selectedCount++;
-            }
+            checkbox.addEventListener('change', updateButtonState);
         });
-
-        // Habilita el botón si hay 2 o más checkboxes seleccionados
-        btnDeleteAllUser.disabled = selectedCount < 2;
-    }
-
-    // Llama a la función al cargar la página para establecer el estado inicial del botón
-    updateButtonState();
-
-    // Añade el evento 'change' a cada checkbox para actualizar el estado del botón en tiempo real
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', updateButtonState);
     });
-});
-
 </script>

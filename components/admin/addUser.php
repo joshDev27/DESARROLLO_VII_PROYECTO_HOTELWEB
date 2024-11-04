@@ -1,3 +1,31 @@
+<?php
+
+$array_rol = array();
+
+$con = mysqli_connect('localhost', 'root', '', 'hotel_hotoño');
+if ($con === false) {
+  die("ERROR: No se pudo conectar. " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM rol";
+$result = $con->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while ($row = $result->fetch_assoc()) {
+
+    $array_rol[] = array(
+      'rol' => $row['Desc_Rol'],
+    );
+  }
+}
+
+$con->close();
+
+
+?>
+
+
 <div class="modal fade" id="add_admin_modal" tabindex="-1" aria-labelledby="reservas_usuarios_adminLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -5,11 +33,15 @@
         <h1 class="modal-title fs-5" id="reservas_usuarios_adminLabel">Añadir Nuevos Usuarios</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="POST" action="tu_archivo_de_proceso.php">
+      <form method="POST">
         <div class="modal-body">
           <div class="form-group">
             <label for="rol">Rol</label>
-            <input type="text" class="form-control" id="rol" name="rol" placeholder="Ingresa el rol" required>
+            <select class="form-select" aria-label="Default select example" requiere>
+              <?php foreach($array_rol as $rol): ?>
+              <option value="<?php echo $rol['rol']?>"><?php echo $rol['rol']?></option>
+              <?php endforeach;?>
+            </select>
           </div>
           <div class="form-group">
             <label for="nombre">Nombre</label>
@@ -39,3 +71,5 @@
     </div>
   </div>
 </div>
+
+

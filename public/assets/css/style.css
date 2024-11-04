@@ -900,7 +900,7 @@ h1 {
   border: none !important;
 }
 
-.form-control:focus, .form-control:hover {
+.form-control:focus, .form-control:hover, .form-select:focus, .form-select:hover {
   box-shadow: none !important;
 }
 

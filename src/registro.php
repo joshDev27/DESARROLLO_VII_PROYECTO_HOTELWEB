@@ -12,10 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'password',
         'confirmPassword'
     ];
-
+    //encriptar el password
+//   $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
     foreach ($campos as $campo) {
         if (isset($_POST[$campo])) {
             $valor = $_POST[$campo];
+        
             $datos[$campo] = $valor;
         }
     }

@@ -35,6 +35,29 @@ if ($result->num_rows > 0) {
 // print_r($array_info_user_admin);
 // die();
 //print_r($array_info_user_admin);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    
+}
+if (isset($_GET['pagina']) && $_GET['pagina'] == 'usuarios') {
+    if (isset($_GET['action']) && isset($_GET['id'])) {
+        $userId = (int)$_GET['id'];
+
+        if ($_GET['action'] === 'edit') {
+            // Code to load the edit modal or page for the user with $userId
+        } elseif ($_GET['action'] === 'delete') {
+            // Code to delete the user with $userId
+        }
+    }
+}
+
+
+
+
 $con->close();
+
+
+
 
 ?>

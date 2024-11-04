@@ -7,7 +7,7 @@ require_once "./src/reservas.php";
         <div class="row">
             <div class="col-md-6">
                 <h2 class="text-center">Reserva tu Habitación</h2>
-                <form action="./src/reservas.php" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data" id="reservas_home_form">
                     <div class="input-group">
                         <div class="form-group">
                             <label for="checkin">Fecha de Entrada</label>
@@ -103,7 +103,31 @@ require_once "./src/reservas.php";
                     <?php endif; ?>
                 <?php endforeach ?>
             </div>
-
+            <div id="respuesta"></div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('reservas_home_form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita el envío tradicional del formulario
+
+        // Crear un objeto FormData a partir del formulario
+        const formData = new FormData(this);
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST', './src/reservas.php', true);
+
+        // Manejador para la respuesta del servidor
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                document.getElementById('respuesta').innerHTML = xhr.responseText;
+            } else {
+                document.getElementById('respuesta').innerHTML = 'Error en la petición';
+            }
+        };
+
+        // Enviar los datos del formulario
+        xhr.send(formData);
+    });
+</script>

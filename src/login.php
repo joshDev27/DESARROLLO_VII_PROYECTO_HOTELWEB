@@ -19,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-
     // Llamar al procedimiento almacenado para autenticar al usuario
     $stmt = $mysqli->prepare("CALL Login_Usuario(?, ?, @o_retorno, @o_Id_Rol)");
     $stmt->bind_param("ss", $datos['userName'], $datos['password']);

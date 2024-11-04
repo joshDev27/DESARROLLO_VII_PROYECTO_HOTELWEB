@@ -1,7 +1,8 @@
 <?php
 
 
-function caracteristicas_hoteles(){
+function caracteristicas_hoteles()
+{
     $array = array();
 
     $con = mysqli_connect('localhost', 'root', '', 'hotel_hotoño');
@@ -35,7 +36,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/736x/5e/ba/b1/5ebab151614e768e7ab94cedb4a0e0dd.jpg",
             "precio" => "72$",
- 
+
         ],
         [
             "tipo" => "Habitación Doble Estándar (Cama Doble)",
@@ -49,7 +50,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/564x/60/05/bb/6005bbfc4f858db801090275b3e2e7c5.jpg",
             "precio" => "107$",
-     
+
         ],
         [
             "tipo" => "Habitación Doble Estándar (Dos Camas Separadas)",
@@ -63,7 +64,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/564x/fe/3c/da/fe3cda5c1ff52dc1ad87ab2fb0959025.jpg",
             "precio" => "107$",
- 
+
         ],
         [
             "tipo" => "Habitación Doble Deluxe",
@@ -78,7 +79,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/564x/ed/3d/06/ed3d06d62a07bb9160c62166fa1f4ea0.jpg",
             "precio" => "150$",
-     
+
         ],
         [
             "tipo" => "Estudio o Apartamento",
@@ -93,7 +94,7 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/736x/8b/ee/d1/8beed1c977801ab622b2c68b177464ff.jpg",
             "precio" => "200$",
-        
+
             "iconos" => [
                 "<i class='fa-solid fa-trash'></i>",
                 "<i class='fa-solid fa-trash'></i>",
@@ -139,7 +140,12 @@ function navbarItem($array, $url_var)
         if ($page_actual === $page) {
             $active_class = "active";
         }
-        echo "  <a class='nav-link $active_class' aria-current='page' href='index.php?$url_var=$page'>$title</a>";
+        if ($url_var == 'admin') {
+            echo "  <a class='nav-link $active_class' aria-current='page' href='index.php?$url_var=$page&pagina=1'>$title</a>";
+        } else {
+
+            echo "  <a class='nav-link $active_class' aria-current='page' href='index.php?$url_var=$page'>$title</a>";
+        }
     }
 }
 
