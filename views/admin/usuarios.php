@@ -1,25 +1,7 @@
 <?php
-require_once './src/admin/usuarios.php';
+require './src/admin/usuarios.php';
 require_once "components/admin/editUser.php";
 require_once "components/admin/addUser.php";
-
-
-
-
-// Configuración de la paginación
-$itemsPorPagina = 8;
-$totalItems = count($array_info_user_admin);
-$totalPaginas = ceil($totalItems / $itemsPorPagina);
-
-// Obtener el número de página actual desde la URL
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$paginaActual = max(1, min($totalPaginas, $paginaActual));
-
-// Obtener el subconjunto de datos para la página actual
-$inicio = ($paginaActual - 1) * $itemsPorPagina;
-$arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPagina);
-
-
 
 ?>
 <div class=" body container-fluid justify-content-center " id="container-usuarios">
@@ -45,7 +27,19 @@ $arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPag
                 <tr>
                     <th scope="col"></th>
                     <th scope="col">Acciones</th>
-                    <th scope="col">Rol</th>
+                    <th scope="col">
+                        Rol
+
+                        <!-- <select class="form-select" aria-label="Default select example" requiere>
+              <?php //foreach ($array_rol as $rol): 
+                ?>
+              <option value="<?php //echo $rol['rol'] 
+                                ?>"><?php // echo $rol['rol'] 
+                                    ?></option>
+              <?php //endforeach; 
+                ?> -->
+                        </select>
+                    </th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">E mail</th>
@@ -63,15 +57,22 @@ $arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPag
                         <td>
                             <!-- Edit button that opens the modal and passes the user ID -->
                             <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
-                                <input type="button" class="btn-check" data-user-id="<?php echo $user_info['id']; ?>" data-bs-target="#edit_admin_modal" id="btn_edit_user_<?php echo $user_info['id']; ?>" data-bs-toggle="modal">
-                                <label class="btn btn-primary" for="btn_edit_user_<?php echo $user_info['id']; ?>">
+                                <buttom class=" btn btn-primary " data-user-id="<?php echo $user_info['id']; ?>"
+                                    data-bs-target="#edit_admin_modal"
+                                    id="btn_edit_user"
+                                    data-bs-toggle="modal">
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                </label>
+                                </buttom>
                             </span>
 
-                            <a href="index.php?admin=usuarios&pagina=<?php echo $paginaActual; ?>&action=delete&id=<?php echo $user_info['id']; ?>" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" type="submit" name="btn-delete" value="<?php echo $user_info['id']; ?>">
+                            <button
+                                class="btn btn-danger" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Delete"
+                                id="btnDeleteUser"
+                                data-user-id="<?php echo $user_info['id']; ?>"
+                                class="btn btn-danger" data-bs-toggle="tooltip">
                                 <i class="fa fa-trash"></i>
-                            </a>
+                            </button>
 
                         </td>
                         <td><?php echo $user_info['rol'] ?></td>
@@ -123,6 +124,7 @@ $arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPag
 <script>
     const btnCheckAll = document.getElementById('btn-check_all');
     const btnDeleteAllUser = document.getElementById('btn_delete_all_user');
+    const btnDeleteUser = document.getElementById('btnDeleteUser');
     btnCheckAll.onclick = function() {
         var checkboxes = document.querySelectorAll('.form-check-input');
         for (var checkbox of checkboxes) {
@@ -132,10 +134,126 @@ $arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPag
         let status = btnCheckAll.checked ? false : true;
         btnDeleteAllUser.disabled = status;
     }
+    /*
+        document.getElementById('btn_edit_user').addEventListener('click', (e) => {
 
+            const userId = document.getElementById('btn_edit_user').getAttribute('data-user-id');
+            // Verifica que `userId` no esté vacío
+            if (!userId) {
+                console.error('Error: el ID de usuario no está definido.');
+                alert('Error: el ID de usuario no está definido.');
+                return;
+            }
+            // Crear un objeto FormData a partir del formulario
+            const formData = new FormData();
+            formData.append("action", "editUser"); // Agregar el campo 'action' con el valor 'addUser'
+            formData.append("userId", userId); // Agregar el campo 'action' con el valor 'addUser'
+
+            fetch('./src/admin/usuarios.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+
+                    document.getElementById('user_id').value = data.id;
+                    //document.getElementById('rol').value = data.rol;
+                    document.getElementById('nombre').value = data.nombre;
+                    document.getElementById('apellido').value = data.apellido;
+                    document.getElementById('email').value = data.correo;
+                    document.getElementById('telefono').value = data.telefono;
+                    document.getElementById('direccion').value = data.direccion;
+                })
+                .catch(error => console.error('Error:', error));
+        });*/
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnEditUser = document.querySelectorAll('#btn_edit_user'); // Cambia a querySelectorAll para manejar múltiples botones
+
+        btnEditUser.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const userId = button.getAttribute('data-user-id'); // Obtiene el `userId` del atributo `data-user-id`
+
+                // Verifica que `userId` no esté vacío
+                if (!userId) {
+                    console.error('Error: el ID de usuario no está definido.');
+                    alert('Error: el ID de usuario no está definido.');
+                    return;
+                }
+
+                // Crear un objeto FormData a partir del formulario
+                const formData = new FormData();
+                formData.append("action", "getDataUser"); // Agregar el campo 'action' con el valor 'editUser '
+                formData.append("userId", userId); // Agregar el campo 'userId'
+
+                fetch('./src/admin/usuarios.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json()) // Asegúrate de que el servidor devuelva un JSON
+                    .then(data => {
+                        // Aquí se asume que el servidor devuelve un objeto con los datos del usuario
+                        if (data) {
+                            // Actualiza los campos del formulario en el modal
+                            document.getElementById('user_id').value = data.id;
+                            document.getElementById('rol').value = data.rol;
+                            document.getElementById('nombre').value = data.nombre;
+                            document.getElementById('apellido').value = data.apellido;
+                            document.getElementById('email').value = data.correo;
+                            document.getElementById('telefono').value = data.telefono;
+                            document.getElementById('direccion').value = data.direccion;
+/*
+                            // Muestra el modal
+                            const modal = new bootstrap.Modal(document.getElementById('edit_admin_modal'));
+                            modal.show();*/
+
+                        } else {
+                            console.error('Error: no se recibieron datos del usuario.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+    btnDeleteUser.addEventListener('click', (e) => {
+        const userId = btnDeleteUser.getAttribute('data-user-id'); // Obtiene el `userId` del atributo `data-user-id`
+
+        // Verifica que `userId` no esté vacío
+        if (!userId) {
+            console.error('Error: el ID de usuario no está definido.');
+            alert('Error: el ID de usuario no está definido.');
+            return;
+        }
+        // Crear un objeto FormData a partir del formulario
+        const formData = new FormData();
+        formData.append("action", "deleteUser"); // Agregar el campo 'action' con el valor 'addUser'
+        formData.append("userId", userId); // Agregar el campo 'action' con el valor 'addUser'
+
+        fetch('./src/admin/usuarios.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => console.error('Error:', error));
+    });
 
     btnDeleteAllUser.addEventListener('click', (e) => {
+        // Crear un objeto FormData a partir del formulario
+        const formData = new FormData();
+        formData.append("action", "deleteAllUser"); // Agregar el campo 'action' con el valor 'addUser'
 
+        fetch('./src/admin/usuarios.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => console.error('Error:', error));
     });
 
 

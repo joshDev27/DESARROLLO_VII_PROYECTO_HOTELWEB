@@ -1,29 +1,5 @@
-<?php
+<?php require './src/admin/usuarios.php'; ?>
 
-$array_rol = array();
-
-$con = mysqli_connect('localhost', 'root', '', 'hotel_hotoño');
-if ($con === false) {
-  die("ERROR: No se pudo conectar. " . mysqli_connect_error());
-}
-
-$sql = "SELECT * FROM rol";
-$result = $con->query($sql);
-
-if ($result->num_rows > 0) {
-  // output data of each row
-  while ($row = $result->fetch_assoc()) {
-
-    $array_rol[] = array(
-      'rol' => $row['Desc_Rol'],
-    );
-  }
-}
-
-$con->close();
-
-
-?>
 
 
 <div class="modal fade" id="add_admin_modal" tabindex="-1" aria-labelledby="reservas_usuarios_adminLabel" aria-hidden="true">
@@ -33,14 +9,14 @@ $con->close();
         <h1 class="modal-title fs-5" id="reservas_usuarios_adminLabel">Añadir Nuevos Usuarios</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="POST">
+      <form id="formAddUser">
         <div class="modal-body">
           <div class="form-group">
             <label for="rol">Rol</label>
             <select class="form-select" aria-label="Default select example" requiere>
-              <?php foreach($array_rol as $rol): ?>
-              <option value="<?php echo $rol['rol']?>"><?php echo $rol['rol']?></option>
-              <?php endforeach;?>
+              <?php foreach ($array_rol as $rol): ?>
+                <option value="<?php echo $rol['rol'] ?>"><?php echo $rol['rol'] ?></option>
+              <?php endforeach; ?>
             </select>
           </div>
           <div class="form-group">
@@ -68,8 +44,34 @@ $con->close();
           <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
       </form>
+      <div id="respuesta"></div>
     </div>
   </div>
 </div>
 
 
+<script>
+document.getElementById('formAddUser').addEventListener('submit', function(event) {
+  event.preventDefault(); // Evita el envío tradicional del formulario
+
+  // Crear un objeto FormData a partir del formulario
+  const formData = new FormData(this);
+  formData.append("action", "addUser"); // Agregar el campo 'action' con el valor 'addUser'
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", './src/admin/usuarios.php', true);
+
+  // Manejador para la respuesta del servidor
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      document.getElementById("respuesta").innerHTML = xhr.responseText;
+    } else {
+      document.getElementById("respuesta").innerHTML = "Error en la petición";
+    }
+  };
+
+  // Enviar los datos del formulario
+  xhr.send(formData);
+});
+
+</script>
