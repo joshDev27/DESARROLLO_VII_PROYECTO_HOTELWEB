@@ -1,5 +1,5 @@
 <?php
-//include './config.php';
+require '../config.php';
 try {
 
     // $host = 'junction.proxy.rlwy.net';
