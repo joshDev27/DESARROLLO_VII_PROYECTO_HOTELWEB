@@ -18,8 +18,12 @@
 <body>
 
     <?php
-    include BASE_PATH . "src/function.php";
-    if ($SESION['sesion'] = true) {
+    session_start();
+    // echo ruebatest();
+    // die();
+    //include_once BASE_PATH . 'app/controller/user_controller/contoller.php';
+    // include BASE_PATH . "src/function.php";
+    if ($ADMINISTRATOR) {
         echo "<div class='d-lg-flex container-admin'>";
         include BASE_PATH . "components/admin/header.php";
         include BASE_PATH . "views/body.php";
@@ -39,6 +43,17 @@
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+
+        if (toastTrigger) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastTrigger.addEventListener('click', () => {
+                toastBootstrap.show()
+            })
+        }
     </script>
 
 </body>

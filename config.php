@@ -26,19 +26,33 @@ function loadEnv($path)
     }
 }
 
-$ADMINISTRATOR = true;
+
+$ADMINISTRATOR = false;
 
 
 // Load environment variables
 loadEnv(__DIR__ . '/.env');
 
 // Define constants using environment variables
-//VARIABLES DE LA BASE DE DATOS
+
 define('BASE_URL', getenv('BASE_URL'));
+define('ADMINISTRATOR',stringToBool(getenv('ADMINISTRATOR')));
+//VARIABLES DE LA BASE DE DATOS
 define('DB_HOST', getenv('DB_HOST'));
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASS', getenv('DB_PASS'));
+define('DB_PORT', (int)getenv('DB_PORT'));
+
+define('DB_HOST1', 'junction.proxy.rlwy.net');
+define('DB_NAME1', 'railway');
+define('DB_USER1', 'root');
+define('DB_PASS1', 'sZUdFDLzZhlOjOlIAbYlyrEYiVjFwkRF');
+define('DB_PORT1', 50528);
+
+
+
+
 // VARIABLES GLOBALES
 define('SITE_NAME', getenv('SITE_NAME'));
 //VARIABLES DEL CORREO

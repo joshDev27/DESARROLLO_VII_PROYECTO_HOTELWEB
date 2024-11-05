@@ -35,11 +35,12 @@ $arrayDatosPorPagina = array_slice($array_correos, $inicio, $itemsPorPagina);
         <table class="table table-light table-hover" id="table_correos">
             <thead>
                 <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                     <th scope="col">Estado</th>
                     <th scope="col">Asunto</th>
                     <th scope="col">Mensaje</th>
                     <th scope="col">Persona</th>
-                    <th scope="col"></th>
                     <th scope="col">E mail</th>
 
 
@@ -67,7 +68,6 @@ $arrayDatosPorPagina = array_slice($array_correos, $inicio, $itemsPorPagina);
                         <th scope='row'><?php echo '' ?></th>
                         <td><?php echo $correo_info['mensaje'] ?></td>
                         <td><?php echo $correo_info['nombre'] . ' , ' . $correo_info['apellido'] ?></td>
-                        <td><?php echo '' ?></td>
                         <td><?php echo $correo_info['correo'] ?></td>
                     </tr>
                 <?php endforeach ?>
@@ -75,8 +75,8 @@ $arrayDatosPorPagina = array_slice($array_correos, $inicio, $itemsPorPagina);
             </tbody>
         </table>
     </div>
- <!-- Paginación -->
- <nav aria-label="Page navigation">
+    <!-- Paginación -->
+    <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <?php if ($paginaActual > 1): ?>
                 <li class="page-item">
@@ -88,7 +88,7 @@ $arrayDatosPorPagina = array_slice($array_correos, $inicio, $itemsPorPagina);
             <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
 
                 <li class="page-item">
-                    <a class="page-link <?php echo  (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
+                    <a class="page-link <?php echo (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
                         <?php echo $i; ?>
                     </a>
                 </li>
@@ -125,28 +125,27 @@ $arrayDatosPorPagina = array_slice($array_correos, $inicio, $itemsPorPagina);
 
 
     document.addEventListener('DOMContentLoaded', function() {
-    const checkboxes = document.querySelectorAll('.form-check-input');
-    
-    function updateButtonState() {
-        let selectedCount = 0;
+        const checkboxes = document.querySelectorAll('.form-check-input');
 
+        function updateButtonState() {
+            let selectedCount = 0;
+
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedCount++;
+                }
+            });
+
+            // Habilita el botón si hay 2 o más checkboxes seleccionados
+            btnDeleteAllUser.disabled = selectedCount < 2;
+        }
+
+        // Llama a la función al cargar la págiNna para establecer el estado inicial del botón
+        updateButtonState();
+
+        // Añade el evento 'change' a cada checkbox para actualizar el estado del botón en tiempo real
         checkboxes.forEach((checkbox) => {
-            if (checkbox.checked) {
-                selectedCount++;
-            }
+            checkbox.addEventListener('change', updateButtonState);
         });
-
-        // Habilita el botón si hay 2 o más checkboxes seleccionados
-        btnDeleteAllUser.disabled = selectedCount < 2;
-    }
-
-    // Llama a la función al cargar la págiNna para establecer el estado inicial del botón
-    updateButtonState();
-
-    // Añade el evento 'change' a cada checkbox para actualizar el estado del botón en tiempo real
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', updateButtonState);
     });
-});
-
 </script>

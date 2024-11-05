@@ -15,7 +15,6 @@ $pages_array = [
     "habitaciones" => "Habitaciones",
     "informacionGestion" => "Informacion Gestion",
     "correos" => "Correos",
-    'reservarHabticacion' => 'Reservar Habitacion',
 ];
 
 $statusToggleButton = (isset($_COOKIE['navBarStatus']) && $_COOKIE['navBarStatus'] === 'true') ? 'is-active' : '';

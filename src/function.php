@@ -1,5 +1,8 @@
 <?php
-
+function stringToBool($string)
+{
+    return in_array(strtolower($string), ['true', '1', 'yes'], true);
+}
 
 function caracteristicas_hoteles()
 {

@@ -1,44 +1,39 @@
 
 <?php
-session_start();
+
+include  'C:/laragon/www/DESARROLLO_VII_PROYECTO_HOTELWEB/app/controller/user_controller/controller.php';
+//include '../app/controller/user_controller/controller.php';
+
+// print_r(iniciarSesion("jdoe", "password123"));
+// die();
+// Llamar a la función iniciarSesion
+// $result = iniciarSesion('jdoe', 'password123');
+// if ($result) {
+//     print_r($result); // Muestra el resultado si la función se ejecuta correctamente
+// } else {
+//     echo "Error al iniciar sesión.";
+// }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['userName']) && isset($_POST['password'])) {
 
-    $datos = [];
+        // iniciarSesion("jdoe", "password123");
+        $codigoRetorno = iniciarSesion($_POST['userName'], $_POST['password']);
+        print_r($codigoRetorno);
 
-    // Procesar y validar cada campo
-    $campos = [
-        'userName',
-        'password'
-    ];
 
-    foreach ($campos as $campo) {
-        if (isset($_POST[$campo])) {
-            $valor = $_POST[$campo];
-            $datos[$campo] = $valor;
+        die();
+
+        if ($codigoRetorno == 1503) {
+            $_SESSION['usuario'] = $correo;
+            $_SESSION['rol'] = $rol;
+
+            // Redirigir a la página correspondiente según el rol
+
+        } else {
+            echo "Credenciales incorrectas.";
         }
-    }
-
-    // Llamar al procedimiento almacenado para autenticar al usuario
-    $stmt = $mysqli->prepare("CALL Login_Usuario(?, ?, @o_retorno, @o_Id_Rol)");
-    $stmt->bind_param("ss", $datos['userName'], $datos['password']);
-    $stmt->execute();
-
-    $result = $mysqli->query("SELECT @o_retorno AS retorno, @o_Id_Rol AS rol");
-    $row = $result->fetch_assoc();
-
-    if ($codigoRetorno == 1503) {
-        $_SESSION['usuario'] = $correo;
-        $_SESSION['rol'] = $rol;
-
-        // Redirigir a la página correspondiente según el rol
-        if ($rol == 1) {
-            header("");
-        } elseif ($rol == 2) {
-            header("");
-        }
-    } else {
-        echo "Credenciales incorrectas.";
     }
 }
 ?>
