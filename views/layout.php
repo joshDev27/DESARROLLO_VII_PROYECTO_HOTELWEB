@@ -22,7 +22,7 @@
     // echo ruebatest();
     // die();
     //include_once BASE_PATH . 'app/controller/user_controller/contoller.php';
-    // include BASE_PATH . "src/function.php";
+   // $_SESSION['isAdmin'] = 0;
     if ($ADMINISTRATOR) {
         echo "<div class='d-lg-flex container-admin'>";
         include BASE_PATH . "components/admin/header.php";

@@ -1,11 +1,17 @@
 <?php
 
-include_once 'C:/laragon/www/DESARROLLO_VII_PROYECTO_HOTELWEB/database/conection/ConexionDba.php';
+//include_once 'C:/laragon/www/DESARROLLO_VII_PROYECTO_HOTELWEB/database/conection/ConexionDba.php';
 
 function iniciarSesion($usuario, $contrasena)
 {
     global $conn;
-
+    /*
+Fatal error: Uncaught Error: Call to a member function query() on null in
+ C:\laragon\www\DESARROLLO_VII_PROYECTO_HOTELWEB\app\controller
+ \user_controller\controller.php:10 Stack trace: #0 
+ C:\laragon\www\DESARROLLO_VII_PROYECTO_HOTELWEB\src\login.php(23): 
+ iniciarSesion('jdoe', 'UIHBOHIOJO') #1 {main} thrown in 
+ C:\laragon\www\DESARROLLO_VII_PROYECTO_HOTELWEB\app\controller\user_controller\controller.php on line 10*/
     // Definir cada variable de usuario en una línea separada
     $conn->query("SET @salida1 = '';");
     $conn->query("SET @salida2 = '';");
@@ -34,7 +40,7 @@ function iniciarSesion($usuario, $contrasena)
     return null;
 }
 
-function registroUsuario($us_id_Rol, $usuario, $nombre, $apellido, $telefono, $contrasena, $correo, $direccion)
+function registroUsuario($us_id_Rol=1, $usuario, $nombre, $apellido, $telefono, $contrasena, $correo, $direccion)
 {
     global $conn;
 

@@ -52,7 +52,6 @@ define('DB_PORT1', 50528);
 
 
 
-
 // VARIABLES GLOBALES
 define('SITE_NAME', getenv('SITE_NAME'));
 //VARIABLES DEL CORREO

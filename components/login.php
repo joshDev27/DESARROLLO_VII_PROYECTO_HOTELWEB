@@ -3,8 +3,8 @@
 
 <form id="login-form" method="POST" class="needs-validation" >
     <div class="mb-3">
-        <label for="loginUser" class="form-label">Correo Electrónico</label>
-        <input type="text" class="form-control" id="loginUser" name="userName" placeholder="Ingresa tu correo" required>
+        <label for="loginUser" class="form-label">Usuario</label>
+        <input type="text" class="form-control" id="loginUser" name="userName" placeholder="Ingrese su usuario" required>
     </div>
     <div class="mb-3">
         <label for="loginPassword" class="form-label">Contraseña</label>

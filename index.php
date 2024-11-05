@@ -11,11 +11,12 @@ define('BASE_PATH', __DIR__ . '/');
 require BASE_PATH . 'src/function.php';
 
 // Include the configuration file
+
 require_once BASE_PATH . 'config.php';
 
 // Include necessary files
 
-//require_once BASE_PATH . 'database/conection/ConexionDba.php';
+require_once BASE_PATH . 'database/conection/ConexionDba.php';
 //include BASE_PATH . 'database/conection/ConexionDba.php';
 
 require BASE_PATH . 'views/layout.php';

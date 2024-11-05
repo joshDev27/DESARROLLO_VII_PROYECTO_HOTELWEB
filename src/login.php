@@ -6,6 +6,7 @@ include  'C:/laragon/www/DESARROLLO_VII_PROYECTO_HOTELWEB/app/controller/user_co
 
 // print_r(iniciarSesion("jdoe", "password123"));
 // die();
+
 // Llamar a la función iniciarSesion
 // $result = iniciarSesion('jdoe', 'password123');
 // if ($result) {
@@ -21,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // iniciarSesion("jdoe", "password123");
         $codigoRetorno = iniciarSesion($_POST['userName'], $_POST['password']);
         print_r($codigoRetorno);
-
 
         die();
 
