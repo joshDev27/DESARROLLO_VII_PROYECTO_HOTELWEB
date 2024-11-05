@@ -13,11 +13,11 @@ require BASE_PATH . 'src/function.php';
 // Include the configuration file
 
 require_once BASE_PATH . 'config.php';
+include  'C:/laragon/www/DESARROLLO_VII_PROYECTO_HOTELWEB/app/controller/user_controller/controller.php';
 
 // Include necessary files
 
-require_once BASE_PATH . 'database/conection/ConexionDba.php';
-//include BASE_PATH . 'database/conection/ConexionDba.php';
+include BASE_PATH . 'database/conection/ConexionDba.php';
 
 require BASE_PATH . 'views/layout.php';
 

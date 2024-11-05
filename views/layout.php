@@ -19,11 +19,13 @@
 
     <?php
     session_start();
-    // echo ruebatest();
-    // die();
-    //include_once BASE_PATH . 'app/controller/user_controller/contoller.php';
-   // $_SESSION['isAdmin'] = 0;
-    if ($ADMINISTRATOR) {
+    // Inicializa 'isAdmin' si no existe en la sesión
+    if (!isset($_SESSION['isAdmin'])) {
+        $_SESSION['isAdmin'] = FALSE;
+    }
+    
+    if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+
         echo "<div class='d-lg-flex container-admin'>";
         include BASE_PATH . "components/admin/header.php";
         include BASE_PATH . "views/body.php";

@@ -1,7 +1,4 @@
-<?php require_once './src/login.php'; ?>
-
-
-<form id="login-form" method="POST" class="needs-validation" >
+<form id="login-form" method="POST" action="./src/login.php" class="needs-validation" >
     <div class="mb-3">
         <label for="loginUser" class="form-label">Usuario</label>
         <input type="text" class="form-control" id="loginUser" name="userName" placeholder="Ingrese su usuario" required>
@@ -18,6 +15,7 @@
 </form>
 
 <script>
+    /*
     document.getElementById('login-form').addEventListener('submit', function(event) {
         event.preventDefault(); // Evita el envío tradicional del formulario
 
@@ -41,6 +39,5 @@
         // Enviar los datos del formulario
         xhr.send(formData);
     });
-
-    
+*/
 </script>

@@ -1,7 +1,5 @@
 <?php
 
-//include_once 'C:/laragon/www/DESARROLLO_VII_PROYECTO_HOTELWEB/database/conection/ConexionDba.php';
-
 function iniciarSesion($usuario, $contrasena)
 {
     global $conn;
@@ -40,7 +38,7 @@ Fatal error: Uncaught Error: Call to a member function query() on null in
     return null;
 }
 
-function registroUsuario($us_id_Rol=1, $usuario, $nombre, $apellido, $telefono, $contrasena, $correo, $direccion)
+function registroUsuario($us_id_Rol, $usuario, $nombre, $apellido, $telefono, $contrasena, $correo, $direccion)
 {
     global $conn;
 

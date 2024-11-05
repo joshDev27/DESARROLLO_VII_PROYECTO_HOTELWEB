@@ -27,16 +27,13 @@ function loadEnv($path)
 }
 
 
-$ADMINISTRATOR = false;
 
 
 // Load environment variables
 loadEnv(__DIR__ . '/.env');
 
 // Define constants using environment variables
-
 define('BASE_URL', getenv('BASE_URL'));
-define('ADMINISTRATOR',stringToBool(getenv('ADMINISTRATOR')));
 //VARIABLES DE LA BASE DE DATOS
 define('DB_HOST', getenv('DB_HOST'));
 define('DB_NAME', getenv('DB_NAME'));

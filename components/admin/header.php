@@ -1,8 +1,5 @@
 <?php
 
-// Iniciar la sesión al principio
-session_start();
-
 // Verificar si la cookie ya existe y establecer el estado del navbar
 if (!isset($_COOKIE['navBarStatus'])) {
     setcookie("navBarStatus", false, time() + (86400 * 30), "/"); // 86400 = 1 día
@@ -16,6 +13,8 @@ $pages_array = [
     "informacionGestion" => "Informacion Gestion",
     "correos" => "Correos",
 ];
+
+$srcLogout = './src/logout.php';
 
 $statusToggleButton = (isset($_COOKIE['navBarStatus']) && $_COOKIE['navBarStatus'] === 'true') ? 'is-active' : '';
 $statusNavBar = (isset($_COOKIE['navBarStatus']) && $_COOKIE['navBarStatus'] === 'true') ? 'active' : '';
@@ -42,6 +41,9 @@ $statusToggleButtonMobile = (isset($_COOKIE['navBarStatus']) && $_COOKIE['navBar
             navbarItem($pages_array, "admin");
             ?>
         </div>
+        <form method="POST" id="formLogout" action=<?php echo $srcLogout ?>>
+            <button class="btn btn-primary shadow-sm" type="submit">Cerrar sesión</button>
+        </form>
         <a class="btn btn-info" href='#' id="return_site">Go to site </a>
 
     </div>
@@ -61,7 +63,7 @@ $statusToggleButtonMobile = (isset($_COOKIE['navBarStatus']) && $_COOKIE['navBar
             <a href="index.php">
                 <h3> Admin Control <?php echo SITE_NAME ?></h3>
             </a>
-            <button class="hamburger hamburger--slider is-active" id="toggle_button_mobile_close"  type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+            <button class="hamburger hamburger--slider is-active" id="toggle_button_mobile_close" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
                 <span class="hamburger-box">
                     <span class="hamburger-inner"></span>
                 </span>
@@ -73,15 +75,14 @@ $statusToggleButtonMobile = (isset($_COOKIE['navBarStatus']) && $_COOKIE['navBar
                 navbarItem($pages_array, "admin");
                 ?>
             </div>
+            <form method="POST" id="formLogout" action=<?php echo $srcLogout ?>>
+                <button class="btn btn-primary shadow-sm" type="submit">Cerrar sesión</button>
+            </form>
             <a class="btn btn-primary" href='#' id="return_site">Go to site </a>
         </div>
     </div>
 </div>
 <script>
-    const site = document.getElementById("return_site");
-    site.addEventListener("click", (e) => {
-        session_destroy();
-    });
 
     const toogleButton = document.getElementById("toggle_button");
     toogleButton.addEventListener("click", (e) => {

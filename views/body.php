@@ -1,6 +1,6 @@
 <?php
 
-if ($ADMINISTRATOR) {
+if ($_SESSION['isAdmin']) {
     $src_path = BASE_PATH . "src/admin/";
     $root_path = BASE_PATH . "views/admin/";
     //devuelve true si el la pagina se encontro
