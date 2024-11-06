@@ -26,7 +26,7 @@
     
     if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
 
-        echo "<div class='d-lg-flex container-admin'>";
+        echo "<div class='container-admin'>";
         include BASE_PATH . "components/admin/header.php";
         include BASE_PATH . "views/body.php";
         echo "</div>";

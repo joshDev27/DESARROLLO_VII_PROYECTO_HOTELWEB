@@ -75,10 +75,10 @@ $con->close();
                             <select class="form-control" id="room-type" required name="roomType">
                                 <option value="">Seleccione una opción</option>
                                 <?php foreach (getRoomInformation() as $key => $array): ?>
-                                    <option value='<?php echo $array['id'] ?>'>
+                                    <option value='<?php //echo $array['id'] ?>'>
                                         <?php
-                                        $tipo_habitacion_activo = $array['id'];
-                                        echo $array['tipo']
+                                        //$tipo_habitacion_activo = $array['id'];
+                                        //echo $array['tipo']
                                         ?>
                                     </option>
                                 <?php endforeach ?>

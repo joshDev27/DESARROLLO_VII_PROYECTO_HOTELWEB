@@ -5,7 +5,7 @@ function stringToBool($string)
 }
 
 
-function configurationPaginationTable($array, $pageVar,$itemsPorPagina=8)
+function configurationPaginationTable($array, $pageVar,$itemsPorPagina=6)
 {
     // Configuración de la paginación
     //$itemsPorPagina = 8;
