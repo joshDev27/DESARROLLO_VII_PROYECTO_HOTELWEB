@@ -1,5 +1,5 @@
 <?php
-require './src/admin/usuarios.php';
+require_once './src/admin/usuarios.php';
 require_once "components/admin/editUser.php";
 require_once "components/admin/addUser.php";
 
@@ -90,33 +90,7 @@ require_once "components/admin/addUser.php";
         </table>
     </div>
     <!-- Paginación -->
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <?php if ($paginaActual > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="index.php?admin=usuarios&pagina=<?php echo $paginaActual - 1; ?>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-
-                <li class="page-item">
-                    <a class="page-link <?php echo (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
-                        <?php echo $i; ?>
-                    </a>
-                </li>
-            <?php endfor; ?>
-
-            <?php if ($paginaActual < $totalPaginas): ?>
-                <li class="page-item">
-                    <a class="page-link " href="index.php?admin=usuarios&pagina=<?php echo $paginaActual + 1; ?>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
+    <?php include './components/pagination.php' ?>
 </div>
 
 
@@ -134,38 +108,7 @@ require_once "components/admin/addUser.php";
         let status = btnCheckAll.checked ? false : true;
         btnDeleteAllUser.disabled = status;
     }
-    /*
-        document.getElementById('btn_edit_user').addEventListener('click', (e) => {
 
-            const userId = document.getElementById('btn_edit_user').getAttribute('data-user-id');
-            // Verifica que `userId` no esté vacío
-            if (!userId) {
-                console.error('Error: el ID de usuario no está definido.');
-                alert('Error: el ID de usuario no está definido.');
-                return;
-            }
-            // Crear un objeto FormData a partir del formulario
-            const formData = new FormData();
-            formData.append("action", "editUser"); // Agregar el campo 'action' con el valor 'addUser'
-            formData.append("userId", userId); // Agregar el campo 'action' con el valor 'addUser'
-
-            fetch('./src/admin/usuarios.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-
-                    document.getElementById('user_id').value = data.id;
-                    //document.getElementById('rol').value = data.rol;
-                    document.getElementById('nombre').value = data.nombre;
-                    document.getElementById('apellido').value = data.apellido;
-                    document.getElementById('email').value = data.correo;
-                    document.getElementById('telefono').value = data.telefono;
-                    document.getElementById('direccion').value = data.direccion;
-                })
-                .catch(error => console.error('Error:', error));
-        });*/
 
     document.addEventListener('DOMContentLoaded', function() {
         const btnEditUser = document.querySelectorAll('#btn_edit_user'); // Cambia a querySelectorAll para manejar múltiples botones
@@ -202,10 +145,10 @@ require_once "components/admin/addUser.php";
                             document.getElementById('email').value = data.correo;
                             document.getElementById('telefono').value = data.telefono;
                             document.getElementById('direccion').value = data.direccion;
-/*
-                            // Muestra el modal
-                            const modal = new bootstrap.Modal(document.getElementById('edit_admin_modal'));
-                            modal.show();*/
+                            /*
+                                                        // Muestra el modal
+                                                        const modal = new bootstrap.Modal(document.getElementById('edit_admin_modal'));
+                                                        modal.show();*/
 
                         } else {
                             console.error('Error: no se recibieron datos del usuario.');

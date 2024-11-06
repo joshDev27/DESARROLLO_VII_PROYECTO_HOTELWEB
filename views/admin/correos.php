@@ -1,21 +1,4 @@
-<?php require_once './src/admin/correos.php';
-
-
-// Configuración de la paginación
-$itemsPorPagina = 8;
-$totalItems = count($array_correos);
-$totalPaginas = ceil($totalItems / $itemsPorPagina);
-
-// Obtener el número de página actual desde la URL
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$paginaActual = max(1, min($totalPaginas, $paginaActual));
-
-// Obtener el subconjunto de datos para la página actual
-$inicio = ($paginaActual - 1) * $itemsPorPagina;
-$arrayDatosPorPagina = array_slice($array_correos, $inicio, $itemsPorPagina);
-
-
-?>
+<?php require_once './src/admin/correos.php';?>
 <div class=" body container-fluid justify-content-center " id="container-correos">
     <div class="header-admin">
         <h2> Estados de Correos</h2>
@@ -76,33 +59,7 @@ $arrayDatosPorPagina = array_slice($array_correos, $inicio, $itemsPorPagina);
         </table>
     </div>
     <!-- Paginación -->
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <?php if ($paginaActual > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="index.php?admin=usuarios&pagina=<?php echo $paginaActual - 1; ?>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-
-                <li class="page-item">
-                    <a class="page-link <?php echo (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
-                        <?php echo $i; ?>
-                    </a>
-                </li>
-            <?php endfor; ?>
-
-            <?php if ($paginaActual < $totalPaginas): ?>
-                <li class="page-item">
-                    <a class="page-link " href="index.php?admin=usuarios&pagina=<?php echo $paginaActual + 1; ?>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
+    <?php include './components/pagination.php' ?>
 </div>
 
 <script>

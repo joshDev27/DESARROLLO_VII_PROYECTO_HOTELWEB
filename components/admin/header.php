@@ -4,15 +4,10 @@
 if (!isset($_COOKIE['navBarStatus'])) {
     setcookie("navBarStatus", false, time() + (86400 * 30), "/"); // 86400 = 1 día
 }
-$pages_array = [
-    "home" => "Home",
-    "usuarios" => "Usuarios",
-    "reservas" => "Reservas",
-    "habitacionesG" => "Data Info Habitaciones",
-    "habitaciones" => "Habitaciones",
-    "informacionGestion" => "Informacion Gestion",
-    "correos" => "Correos",
+$home_page = [
+    "home" => "Home"
 ];
+
 
 $srcLogout = './src/logout.php';
 
@@ -38,13 +33,14 @@ $statusToggleButtonMobile = (isset($_COOKIE['navBarStatus']) && $_COOKIE['navBar
 
         <div class="navbar-nav flex-column">
             <?php
-            navbarItem($pages_array, "admin");
+            navbarItem($home_page, "admin");
+            include 'navBarInfoSite.php';
             ?>
+
         </div>
         <form method="POST" id="formLogout" action=<?php echo $srcLogout ?>>
             <button class="btn btn-primary shadow-sm" type="submit">Cerrar sesión</button>
         </form>
-        <a class="btn btn-info" href='#' id="return_site">Go to site </a>
 
     </div>
 </nav>
@@ -72,13 +68,13 @@ $statusToggleButtonMobile = (isset($_COOKIE['navBarStatus']) && $_COOKIE['navBar
         <div class="offcanvas-body">
             <div class="navbar-nav flex-column">
                 <?php
-                navbarItem($pages_array, "admin");
+                navbarItem($home_page, "admin");
+                include 'navBarInfoSite.php';
                 ?>
             </div>
             <form method="POST" id="formLogout" action=<?php echo $srcLogout ?>>
                 <button class="btn btn-primary shadow-sm" type="submit">Cerrar sesión</button>
             </form>
-            <a class="btn btn-primary" href='#' id="return_site">Go to site </a>
         </div>
     </div>
 </div>

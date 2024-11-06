@@ -32,6 +32,11 @@
         width: 100%;
       }
     }
+    #formLogout{
+      button{
+        width: 100%;
+      }
+    }
   }
   &.navbar-admin-mobile {
     padding: 0.5rem;
@@ -39,5 +44,11 @@
     .header-name{
       flex: 1;
     }
+    #formLogout{
+      button{
+        width: 100%;
+      }
+    }
   }
+
 }

@@ -4,6 +4,32 @@ function stringToBool($string)
     return in_array(strtolower($string), ['true', '1', 'yes'], true);
 }
 
+
+function configurationPaginationTable($array, $pageVar,$itemsPorPagina=8)
+{
+    // Configuración de la paginación
+    //$itemsPorPagina = 8;
+    $totalItems = count($array);
+    $totalPaginas = ceil($totalItems / $itemsPorPagina);
+
+    // Obtener el número de página actual desde la URL
+    $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+    $paginaActual = max(1, min($totalPaginas, $paginaActual));
+
+    // Obtener el subconjunto de datos para la página actual
+    $inicio = ($paginaActual - 1) * $itemsPorPagina;
+    $arrayDatosPorPagina = array_slice($array, $inicio, $itemsPorPagina);
+
+    
+    $returnArray = [
+        'array' => $arrayDatosPorPagina,
+         'pageVar' => $pageVar,
+         'paginaActual'=>$paginaActual,
+         'totalPaginas'=>$totalPaginas
+        ];
+    return $returnArray;
+}
+
 function caracteristicas_hoteles()
 {
     $array = array();
@@ -108,23 +134,6 @@ function getRoomInformation()
 
     return $rooms;
 }
-
-/*
-function sendEmail($array, $plantilla){
-    $html = file_get_contents('../views/' . $plantilla);
-    $to = $array['email'];
-    $subject = "Solicitud de Contacto Para Reservas";
-    $message = html_entity_decode($html);
-    
-    // Always set content-type when sending HTML email
-    $headers = "MIME-Version: 1.0" . "\r\n";
-    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    
-    // More headers
-    $headers .= 'From: <leandro12rk@gmail.com>' . "\r\n";
-
-    return mail($to, $subject, $message, $headers);
-}*/
 
 
 //Crea los items del navBar

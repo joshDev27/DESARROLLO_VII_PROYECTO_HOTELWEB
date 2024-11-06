@@ -1,6 +1,31 @@
 <?php
+/*
+
+para la tabla de proxima reservas
+SELECT
+    r.Fecha_checkin AS "Check In",
+    r.Fecha_checkout AS "Check Out",
+   CONCAT( h.nombre ,' ',h.Apellido)AS "Nombre Completo",
+    h.cedula AS "Cédula",
+    r.cant_habitacion AS "Número de Habitación",
+    r.Estado AS "Tipo de Habitación"
+FROM reserva r
+JOIN huesped h ON r.Id_Reserva = h.Id_Reserva
+WHERE r.Fecha_checkin > CURRENT_DATE
+ORDER BY r.Fecha_checkin
+LIMIT 0, 25;
+*/
 
 
+/*
+para la parte de info de habitaciones 
+SELECT
+    (SELECT COUNT(*) FROM habitacion WHERE estado = 'ocupada') AS habitaciones_ocupadas,
+    (SELECT COUNT(*) FROM habitacion WHERE estado = 'disponible') AS habitaciones_disponibles,
+    (SELECT COUNT(*) FROM reserva WHERE estado = 'reservado') AS habitaciones_reservadas,
+    (SELECT COUNT(*) FROM habitacion WHERE estado IN ('ocupada', 'disponible', 'reservado')) AS habitaciones_totales;
+
+*/
 $info_habitaciones_ocuapdos = 20;
 $info_habitaciones_disponibles = 40;
 $info_habitaciones_reservados = 50;

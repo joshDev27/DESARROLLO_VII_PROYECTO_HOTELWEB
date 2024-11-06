@@ -26,7 +26,7 @@ h1 {
 }
 .modal-dialog {
   .modal-content {
-    box-shadow: 1px 2px 18px 2px rgba(.5,$background_color);
+    box-shadow: 1px 2px 18px 2px rgba(0.5, $background_color);
     border: none !important;
   }
 }
@@ -85,6 +85,20 @@ h1 {
     flex-direction: column;
     .navbar-nav {
       flex: 1;
+      gap: 1rem;
     }
+  }
+}
+
+.container-acciones {
+  display: flex;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.accordion {
+  .accordion-item {
+    border: none;
+    background-color: transparent;
   }
 }

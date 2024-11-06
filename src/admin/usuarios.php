@@ -40,20 +40,12 @@ if ($result->num_rows > 0) {
 }
 
 
-// Configuración de la paginación
-$itemsPorPagina = 8;
-$totalItems = count($array_info_user_admin);
-$totalPaginas = ceil($totalItems / $itemsPorPagina);
-
-// Obtener el número de página actual desde la URL
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$paginaActual = max(1, min($totalPaginas, $paginaActual));
-
-// Obtener el subconjunto de datos para la página actual
-$inicio = ($paginaActual - 1) * $itemsPorPagina;
-$arrayDatosPorPagina = array_slice($array_info_user_admin, $inicio, $itemsPorPagina);
-
-
+//configuraciones de la paginacion
+$arrayConf = configurationPaginationTable($array_info_user_admin, 'usuarios');
+$paginaActual = $arrayConf['paginaActual'];
+$arrayDatosPorPagina = $arrayConf['array'];
+$paginaUrlVar = $arrayConf['pageVar'];
+$totalPaginas=$arrayConf['totalPaginas'];
 
 $array_rol = array();
 $sql = "SELECT * FROM rol";

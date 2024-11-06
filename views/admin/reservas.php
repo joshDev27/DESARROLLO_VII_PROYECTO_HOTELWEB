@@ -1,49 +1,10 @@
 <?php
-require_once "components/admin/modal_reservas.php";
+require_once './src/admin/reservas.php';
+require_once "components/admin/infoUserReservas.php";
 require_once "components/admin/addReserva.php";
-?>
-<?php
-$reservas = [
-    [
-        'Id Reservas' => 1004,
-        'Huesped' => 'Juan Pérez',
-        'Id Usuarios' => 2,
-        'Check In' => '2024-09-15',
-        'Check Out' => '2024-09-18',
-        'Numero de Noches' => 3,
-        'Cantidad de Habitaciones' => 1,
-        'Tipo de Habitación' => 'Doble',
-        'Correo' => 'juan@example.com',
-        'Estado' => 'Confirmada',
-    ],
-    [
-        'Id Reservas' => 2434,
-        'Huesped' => 'María Rodríguez',
-        'Id Usuarios' => 1,
-        'Check In' => '2024-09-20',
-        'Check Out' => '2024-09-22',
-        'Numero de Noches' => 2,
-        'Cantidad de Habitaciones' => 2,
-        'Tipo de Habitación' => 'Suite',
-        'Correo' => 'maria@example.com',
-        'Estado' => 'Pendiente',
-    ],
+require_once "components/admin/editReserva.php";
 
-];
-?>
-<?php
-// Configuración de la paginación
-$itemsPorPagina = 8;
-$totalItems = count($reservas);
-$totalPaginas = ceil($totalItems / $itemsPorPagina);
-
-// Obtener el número de página actual desde la URL
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$paginaActual = max(1, min($totalPaginas, $paginaActual));
-
-// Obtener el subconjunto de datos para la página actual
-$inicio = ($paginaActual - 1) * $itemsPorPagina;
-$arrayDatosPorPagina = array_slice($reservas, $inicio, $itemsPorPagina);
+//$paginaUrlVar="reservas";
 
 ?>
 
@@ -53,13 +14,14 @@ $arrayDatosPorPagina = array_slice($reservas, $inicio, $itemsPorPagina);
     </div>
     <div class="eventos d-flex p-2 gap-3">
         <span>
-            <input type="checkbox" class="btn-check" id="btn-check_all" autocomplete="off">
-            <label class="btn btn-primary" for="btn-check_all">Select All</label>
+            <input type="checkbox" class="btn-check" id="btn-check_all_reservas" autocomplete="off">
+            <label class="btn btn-primary" for="btn-check_all_reservas">Select All</label>
         </span>
 
-        <button class="btn btn-danger" id="btn_delete_all_user" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
+        <button class="btn btn-danger" id="btn_delete_all_reserva" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
+
         <button class="btn btn-secondary" data-bs-target="#add_admin_reserva" data-bs-toggle="modal">
-            <i class="fa-solid fa-plus"></i> Add New User
+            <i class="fa-solid fa-plus"></i> Add New Reserva
         </button>
     </div>
     <div class="overflow-x-auto">
@@ -82,31 +44,47 @@ $arrayDatosPorPagina = array_slice($reservas, $inicio, $itemsPorPagina);
             </thead>
             <tbody>
 
-                <?php foreach ($arrayDatosPorPagina as $data => $data_reservas): ?>
+                <?php foreach ($arrayDatosPorPaginaReservas as $data => $data_reservas): ?>
                     <tr>
                         <th scope='row'>
-                            <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
+                            <input class="form-check-input" type="checkbox"
+                                value="<?php //echo $user_info['id'] ?>"
+                                id="checbox<?php //echo $user_info['id'] ?>">
                         </th>
-                        <td>
-                            <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
-                                <input type="button" class="btn-check" value="<?php echo $user_info['id']; ?>" data-bs-target="#edit_admin_modal" id="btn_edit_user_<?php echo $user_info['id']; ?>" data-bs-toggle="modal">
-                                <label class="btn btn-primary" for="btn_edit_user_<?php echo $user_info['id']; ?>">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </label>
-                            </span>
+                        <td class="container-acciones">
 
-                            <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" type="submit" name="btn-delete" value="<?php echo $user_info['id']; ?>">
+                            <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
+                                <buttom
+                                    class=" btn btn-primary "
+                                    data-reserva-id="<?php //echo $user_info['id'];?>"
+                                    data-bs-target="#edit_admin_modal_reservas"
+                                    id="btn_edit_reserva"
+                                    data-bs-toggle="modal">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </buttom>
+                            </span>
+                            <button
+                                class="btn btn-danger" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Delete"
+                                id="btnDeleteReserva"
+                                data-reserva-id="<?php //echo $user_info['id']; ?>"
+                                class="btn btn-danger" data-bs-toggle="tooltip">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
-
-                        <td class='item-table'><?php echo  $data_reservas['Id Reservas'] ?></td>
-                        <td onclick='$onClick' data-bs-toggle='modal' data-bs-target='#reservas_usuarios_admin' class='item-table modal-select'><?php echo  $data_reservas['Huesped'] ?></td>
-                        <td class='item-table'><?php echo  $data_reservas['Check In'] ?></td>
-                        <td class='item-table'><?php echo  $data_reservas['Check Out'] ?></td>
-                        <td class='item-table'><?php echo  $data_reservas['Numero de Noches'] ?></td>
-                        <td class='item-table'><?php echo  $data_reservas['Cantidad de Habitaciones'] ?></td>
-                        <td class='item-table'><?php echo  $data_reservas['Tipo de Habitación'] ?></td>
+                        <td class='item-table'><?php  ?></td>
+                        <td class='item-table'><?php echo  $data_reservas['IdReservas'] ?></td>
+                        <td id="infoReservaUser" onclick='onclickInfoUserReserva()' data-bs-toggle='modal'
+                            data-bs-target='#infoUserReservas'
+                            data-userReserva-id="<?php //echo $user_info['id'];
+                                                    ?>"
+                            class='item-table modal-select'>
+                            <?php echo  $data_reservas['Huesped'] ?></td>
+                        <td class='item-table'><?php echo  $data_reservas['CheckIn'] ?></td>
+                        <td class='item-table'><?php echo  $data_reservas['CheckOut'] ?></td>
+                        <td class='item-table'><?php echo  $data_reservas['NumerodeNoches'] ?></td>
+                        <td class='item-table'><?php echo  $data_reservas['CantidaddeHabitaciones'] ?></td>
+                        <td class='item-table'><?php echo  $data_reservas['TipodeHabitación'] ?></td>
                         <td class='item-table'><?php echo  $data_reservas['Correo'] ?></td>
                         <td class='item-table'><?php echo  $data_reservas['Estado'] ?></td>
                     </tr>
@@ -115,54 +93,145 @@ $arrayDatosPorPagina = array_slice($reservas, $inicio, $itemsPorPagina);
         </table>
     </div>
     <!-- Paginación -->
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <?php if ($paginaActual > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="index.php?admin=usuarios&pagina=<?php echo $paginaActual - 1; ?>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-
-                <li class="page-item">
-                    <a class="page-link <?php echo (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
-                        <?php echo $i; ?>
-                    </a>
-                </li>
-            <?php endfor; ?>
-
-            <?php if ($paginaActual < $totalPaginas): ?>
-                <li class="page-item">
-                    <a class="page-link " href="index.php?admin=usuarios&pagina=<?php echo $paginaActual + 1; ?>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-
+    <?php include './components/pagination.php' ?>
 </div>
 
 
-
 <script>
-    const btnCheckAll = document.getElementById('btn-check_all');
-    const btnDeleteAllUser = document.getElementById('btn_delete_all_user');
-    btnCheckAll.onclick = function() {
+    const btnCheckAllReserva = document.getElementById('btn-check_all_reservas');
+    const btnDeleteAllReserva = document.getElementById('btn_delete_all_reserva');
+    const btnDeleteReservas = document.getElementById('btnDeleteReserva');
+    btnCheckAllReserva.onclick = function() {
         var checkboxes = document.querySelectorAll('.form-check-input');
         for (var checkbox of checkboxes) {
             checkbox.checked = this.checked;
         }
         //valida el estado del boton de eliminar todos los usuario
-        let status = btnCheckAll.checked ? false : true;
-        btnDeleteAllUser.disabled = status;
+        let status = btnCheckAllReserva.checked ? false : true;
+        btnDeleteAllReserva.disabled = status;
     }
 
+    function onclickInfoUserReserva() {
+        const reservaId = document.getElementById('infoReservaUser').getAttribute('data-userReserva-id'); // Obtiene el `reservaId` del atributo `data-user-id`
 
-    btnDeleteAllUser.addEventListener('click', (e) => {
+        // Verifica que `reservaId` no esté vacío
+        if (!reservaId) {
+            console.error('Error: el ID de usuario no está definido.');
+            alert('Error: el ID de usuario no está definido.');
+            return;
+        }
 
+        // Crear un objeto FormData a partir del formulario
+        const formData = new FormData();
+        formData.append("action", "getDataReservaUserInfo"); // Agregar el campo 'action' con el valor 'editUser '
+        formData.append("reservaId", reservaId); // Agregar el campo 'reservaId'
+
+        fetch('./src/admin/usuarios.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json()) // Asegúrate de que el servidor devuelva un JSON
+            .then(data => {
+                // Aquí se asume que el servidor devuelve un objeto con los datos del usuario
+                if (data) {
+                    // Actualiza los campos del formulario en el modal
+
+                } else {
+                    console.error('Error: no se recibieron datos del usuario.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnEditReserva = document.querySelectorAll('#btn_edit_reserva'); // Cambia a querySelectorAll para manejar múltiples botones
+
+        btnEditReserva.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const reservaId = button.getAttribute('data-reserva-id'); // Obtiene el `reservaId` del atributo `data-user-id`
+
+                // Verifica que `reservaId` no esté vacío
+                if (!reservaId) {
+                    console.error('Error: el ID de usuario no está definido.');
+                    alert('Error: el ID de usuario no está definido.');
+                    return;
+                }
+
+                // Crear un objeto FormData a partir del formulario
+                const formData = new FormData();
+                formData.append("action", "getDataReservaEdit"); // Agregar el campo 'action' con el valor 'editUser '
+                formData.append("reservaId", reservaId); // Agregar el campo 'reservaId'
+
+                fetch('./src/admin/usuarios.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json()) // Asegúrate de que el servidor devuelva un JSON
+                    .then(data => {
+                        // Aquí se asume que el servidor devuelve un objeto con los datos del usuario
+                        if (data) {
+                            // Actualiza los campos del formulario en el modal
+                            /*
+                                                        document.getElementById('user_id').value = data.id;
+                                                        document.getElementById('rol').value = data.rol;
+                                                        document.getElementById('nombre').value = data.nombre;
+                                                        document.getElementById('apellido').value = data.apellido;
+                                                        document.getElementById('email').value = data.correo;
+                                                        document.getElementById('telefono').value = data.telefono;
+                                                        document.getElementById('direccion').value = data.direccion;
+                                                        */
+                            /*
+                                                        // Muestra el modal
+                                                        const modal = new bootstrap.Modal(document.getElementById('edit_admin_modal'));
+                                                        modal.show();*/
+
+                        } else {
+                            console.error('Error: no se recibieron datos del usuario.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+    btnDeleteReservas.addEventListener('click', (e) => {
+        const userId = btnDeleteReservas.getAttribute('data-user-id'); // Obtiene el `userId` del atributo `data-user-id`
+
+        // Verifica que `userId` no esté vacío
+        if (!userId) {
+            console.error('Error: el ID de usuario no está definido.');
+            alert('Error: el ID de usuario no está definido.');
+            return;
+        }
+        // Crear un objeto FormData a partir del formulario
+        const formData = new FormData();
+        formData.append("action", "deleteUser"); // Agregar el campo 'action' con el valor 'addUser'
+        formData.append("userId", userId); // Agregar el campo 'action' con el valor 'addUser'
+
+        fetch('./src/admin/usuarios.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    btnDeleteAllReserva.addEventListener('click', (e) => {
+        // Crear un objeto FormData a partir del formulario
+        const formData = new FormData();
+        formData.append("action", "deleteAllUser"); // Agregar el campo 'action' con el valor 'addUser'
+
+        fetch('./src/admin/usuarios.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => console.error('Error:', error));
     });
 
 
@@ -179,7 +248,7 @@ $arrayDatosPorPagina = array_slice($reservas, $inicio, $itemsPorPagina);
             });
 
             // Habilita el botón si hay 2 o más checkboxes seleccionados
-            btnDeleteAllUser.disabled = selectedCount < 2;
+            btnDeleteAllReserva.disabled = selectedCount < 2;
         }
 
         // Llama a la función al cargar la págiNna para establecer el estado inicial del botón

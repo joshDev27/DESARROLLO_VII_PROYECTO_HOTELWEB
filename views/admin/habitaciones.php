@@ -1,3 +1,5 @@
+<?php require './src/admin/habitaciones.php'; ?>
+
 <div class=" body container-fluid justify-content-center " id="container-habitaciones">
     <h2> Tipos de Habitaciones Habitaciones</h2>
 
@@ -14,42 +16,19 @@
                 </tr>
             </thead>
             <tbody>
-                <?php //foreach (getRoomInformation() as $index => $array) : 
-                ?>
+                <?php foreach ($arrayDatosPorPagina as $index => $array) : ?>
 
-                <tr>
-                    <th scope='row'><? echo $index ?></th>
-                    <td class='item-table'>{$data_reservas['Id Reservas']}</td>
-                    <td onclick='$onClick' data-bs-toggle='modal' data-bs-target='#reservas_usuarios_admin' class='item-table modal-select'>{$data_reservas['Huesped']}</td>
-                    <td class='item-table'>{$data_reservas['Check In']}</td>
-                    <td class='item-table'>{$data_reservas['Check Out']}</td>
-                    <td class='item-table'>{$data_reservas['Numero de Noches']}</td>
-                    <td class='item-table'>{$data_reservas['Cantidad de Habitaciones']}</td>
-                    <td class='item-table'>{$data_reservas['Tipo de Habitación']}</td>
-                    <td class='item-table'>{$data_reservas['Correo']}</td>
-                    <td class='item-table'>{$data_reservas['Estado']}</td>
-                </tr>
-                <?php //endforeach; 
-                ?>
+                    <tr>
+                        <th scope='row'><? echo $index ?></th>
+                        <td class='item-table'><?php echo $array['numeroDeHabitacion'] ?></td>
+                        <td class='item-table'><?php echo $array['tipo'] ?></td>
+                        <td class='item-table'><?php echo $array['cantiadDeCamas'] ?></td>
+                        <td class='item-table'><?php echo $array['estado'] ?></td>
+                        <td class='item-table'><?php echo $array['huesped'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <?php foreach ($reservas as $index => $array): ?>
-
-                <li class="page-item <?php echo ($index == 0) ? 'active' : '' ?>"><a class="page-link" href="#"><?php echo ($index + 1) ?></a></li>
-            <?php endforeach; ?>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <?php include './components/pagination.php' ?>
 </div>

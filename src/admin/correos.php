@@ -26,3 +26,9 @@ if ($result->num_rows > 0) {
 
 $con->close();
 
+//configuraciones de la paginacion
+$arrayConf = configurationPaginationTable($array_correos, 'correos');
+$paginaActual = $arrayConf['paginaActual'];
+$arrayDatosPorPagina = $arrayConf['array'];
+$paginaUrlVar = $arrayConf['pageVar'];
+$totalPaginas=$arrayConf['totalPaginas'];
