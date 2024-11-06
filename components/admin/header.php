@@ -6,7 +6,7 @@ $srcLogout = './src/logout.php';
 
 ?>
 
-<div class="navbar navbar-admin-mobile">
+<div class="navbar navbar-admin">
 
     <button class="hamburger hamburger--slider " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
         <span class="hamburger-box">

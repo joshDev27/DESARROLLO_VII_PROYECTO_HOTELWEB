@@ -26,7 +26,7 @@ h1 {
 }
 .modal-dialog {
   .modal-content {
-    box-shadow: 1px 2px 18px 2px rgba(0.5, $background_color);
+    //box-shadow: 1px 2px 18px 2px rgba(0.5, $background_color);
     border: none !important;
   }
 }
@@ -91,14 +91,26 @@ h1 {
 }
 
 .container-acciones {
-  display: flex;
-  padding: 1rem;
-  gap: 0.5rem;
+  @media (max-width: $max-width-md) {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+  }
 }
 
 .accordion {
   .accordion-item {
-    border: none;
-    background-color: transparent;
+    border: none !important;
+    background-color: transparent !important;
+    .accordion-header {
+      .accordion-button {
+        &:hover,
+        &:focus {
+          box-shadow: none;
+        }
+        &:not(.collapsed) {
+        }
+      }
+    }
   }
 }

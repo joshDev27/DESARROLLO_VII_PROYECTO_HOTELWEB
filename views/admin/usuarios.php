@@ -9,16 +9,36 @@ require_once "components/admin/addUser.php";
 
         <h2> Usuario Registrados</h2>
     </div>
-    <div class="eventos d-flex p-2 gap-3">
-        <span>
-            <input type="checkbox" class="btn-check" id="btn-check_all" autocomplete="off">
-            <label class="btn btn-primary" for="btn-check_all">Select All</label>
-        </span>
+    <div class="container-eventos d-flex">
 
-        <button class="btn btn-danger" id="btn_delete_all_user" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
-        <button class="btn btn-secondary" data-bs-target="#add_admin_modal" data-bs-toggle="modal">
-            <i class="fa-solid fa-plus"></i> Add New User
-        </button>
+        <div class="eventos d-flex p-2 gap-3">
+            <span>
+                <input type="checkbox" class="btn-check" id="btn-check_all" autocomplete="off">
+                <label class="btn btn-primary" for="btn-check_all">Select All</label>
+            </span>
+
+            <button class="btn btn-danger" id="btn_delete_all_user" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
+            <button class="btn btn-secondary" data-bs-target="#add_admin_modal" data-bs-toggle="modal">
+                <i class="fa-solid fa-plus"></i> Add New User
+            </button>
+        </div>
+        <div class="eventos-filtros d-flex p-2 gap-3">
+            <form class="form" action="">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <button class="btn btn-primary" type="submit"> <i class="fa-solid fa-filter"></i> Filter</button>
+            </form>
+        </div>
     </div>
     <!-- table  -->
     <div class="overflow-x-auto">
@@ -54,7 +74,7 @@ require_once "components/admin/addUser.php";
                         <th scope='row'>
                             <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
                         </th>
-                        <td>
+                        <td class="container-acciones">
                             <!-- Edit button that opens the modal and passes the user ID -->
                             <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
                                 <buttom class=" btn btn-primary " data-user-id="<?php echo $user_info['id']; ?>"

@@ -896,7 +896,6 @@ h1 {
 }
 
 .modal-dialog .modal-content {
-  box-shadow: 1px 2px 18px 2px rgba(68, 59, 255, 0.6196078431);
   border: none !important;
 }
 
@@ -955,8 +954,24 @@ h1 {
 }
 .offcanvas .offcanvas-body .navbar-nav {
   flex: 1;
+  gap: 1rem;
 }
 
+@media (max-width: 767px) {
+  .container-acciones {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+  }
+}
+
+.accordion .accordion-item {
+  border: none !important;
+  background-color: transparent !important;
+}
+.accordion .accordion-item .accordion-header .accordion-button:hover, .accordion .accordion-item .accordion-header .accordion-button:focus {
+  box-shadow: none;
+}
 #home .container-description {
   padding: 1rem;
   margin-top: 4rem;
@@ -1293,41 +1308,52 @@ h1 {
 }
 
 .navbar.navbar-admin {
-  max-width: 10rem;
-  min-width: 10rem;
-  width: 100%;
-  transition: 0.2s all;
-  display: none;
-}
-@media (min-width: 992px) {
-  .navbar.navbar-admin {
-    display: block;
-  }
-}
-.navbar.navbar-admin.active {
-  max-width: 15em;
-}
-.navbar.navbar-admin > div {
-  flex-direction: column;
-  height: 100%;
-  justify-content: flex-start !important;
-}
-.navbar.navbar-admin > div .hamburger .hamburger-box {
-  width: auto;
-}
-.navbar.navbar-admin > div .navbar-nav {
-  width: 100%;
-  flex: 1;
-}
-.navbar.navbar-admin > div .btn {
-  width: 100%;
-}
-.navbar.navbar-admin-mobile {
   padding: 0.5rem;
   padding-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
-.navbar.navbar-admin-mobile .header-name {
+.navbar.navbar-admin .header-name {
   flex: 1;
+}
+.navbar.navbar-admin #formLogout button {
+  width: 100%;
+}
+
+#add_admin_reserva .modal-body {
+  padding: 1rem;
+}
+#add_admin_reserva .modal-body form {
+  margin-top: 20px;
+}
+#add_admin_reserva .modal-body form .input-group {
+  gap: 1rem;
+  justify-content: space-between;
+}
+#add_admin_reserva .modal-body form .input-group > .form-group {
+  flex: 1;
+}
+#add_admin_reserva .modal-body form .form-group {
+  margin-bottom: 20px;
+}
+#add_admin_reserva .modal-body form .form-group label {
+  margin-bottom: 10px;
+  display: block;
+}
+#add_admin_reserva .modal-body form .form-group .form-control {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+}
+#add_admin_reserva .modal-body form .form-group .form-control:focus {
+  border-color: #2c3e50;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#add_admin_reserva .modal-body form .btn-primary {
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
 /*

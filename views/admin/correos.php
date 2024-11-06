@@ -1,4 +1,4 @@
-<?php require_once './src/admin/correos.php';?>
+<?php require_once './src/admin/correos.php'; ?>
 <div class=" body container-fluid justify-content-center " id="container-correos">
     <div class="header-admin">
         <h2> Estados de Correos</h2>
@@ -35,17 +35,18 @@
                         <th scope='row'>
                             <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
                         </th>
-                        <td>
+                        <td class="container-acciones">
                             <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
                                 <input type="button" class="btn-check" value="<?php echo $user_info['id']; ?>" data-bs-target="#edit_admin_modal" id="btn_edit_user_<?php echo $user_info['id']; ?>" data-bs-toggle="modal">
                                 <label class="btn btn-primary" for="btn_edit_user_<?php echo $user_info['id']; ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </label>
                             </span>
-
-                            <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" type="submit" name="btn-delete" value="<?php echo $user_info['id']; ?>">
-                                <i class="fa fa-trash"></i>
-                            </button>
+                            <form action="./src/admin/correos.php">
+                                <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" type="submit" name="btn-delete" value="<?php echo $user_info['id']; ?>">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
                         </td>
                         <th scope='row'><?php echo '' ?></th>
                         <th scope='row'><?php echo '' ?></th>
