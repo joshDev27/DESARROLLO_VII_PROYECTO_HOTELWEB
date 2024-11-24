@@ -1,5 +1,16 @@
 # 🌐 **Página Web de Hotel – Sistema de Reservas** 🏨
 
+
+## Integrantes del Proyecto 👥
+
+- **Nombre del Integrante 1**: [Leandro Rodríguez]]  
+  GitHub: [https://github.com/03gabriel12](https://github.com/03gabriel12)
+
+- **Nombre del Integrante 2**: [Jorshua Fray]  
+  GitHub: [https://github.com/03gabriel12](https://github.com/joshDev27)
+
+
+
 ## Descripción 📋
 
 El proyecto **Página Web de Hotel – Sistema de Reservas** es una **plataforma en línea eficiente y moderna** diseñada para **gestionar las reservas de un hotel** de manera rápida, segura y accesible. Desarrollado por un equipo de programadores, esta solución está pensada para mejorar la experiencia tanto del **usuario final** como de los **administradores** del hotel.
@@ -86,13 +97,4 @@ Este proyecto es ideal para aquellos interesados en crear aplicaciones web desde
 
    ```bash
    git clone https://github.com/tu_usuario/PROYECTO_HOTEL.git
-
-
-## Integrantes del Proyecto 👥
-
-- **Nombre del Integrante 1**: [Tu nombre]  
-  GitHub: [https://github.com/tu_usuario](https://github.com/tu_usuario)
-
-- **Nombre del Integrante 2**: [Nombre de tu compañero/a]  
-  GitHub: [https://github.com/compañero_usuario](https://github.com/compañero_usuario)
 
