@@ -1,27 +1,40 @@
 <?php
-include '../database/conection/ConexionDba.php';
-include  '../app/controller/user_controller/controller.php';
+include  '../app/controller/user_controller.php';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// $resultado = iniciarSesion("jdoe", "password123");
+// $resultado = iniciarSesion("asmith", "password456");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['userName']) && isset($_POST['password'])) {
+        $user = new UserController();
+        $resultado = $user->iniciarSesion($_POST['userName'], $_POST['password']);
 
-        $resultado = iniciarSesion($_POST['userName'], $_POST['password']);
+        //var_dump($resultado);
 
         if ($resultado['validacion'] == 1) {
             if ($resultado['rol'] == 1) {
+
                 $_SESSION['idUsuario'] = $resultado['idUsuario'];
                 $_SESSION['isAdmin'] = true;
+                $_SESSION['userRegistrado'] = false;
+ 
+            } else if ($resultado['rol'] == 2) {
 
-            }else{
-                echo 'rol de usuario'.$resultado['rol'];
-            }
-        }else{
-            echo'validacion de usuario'. $resultado['validacion'];
+                $_SESSION['idUsuario'] = $resultado['idUsuario'];
+                $_SESSION['userRegistrado'] = true;
+     
+            } 
+
+        } else {
+            echo 'validacion de usuario : ' . $resultado['validacion'];
         }
-        header("Location: http://localhost/DESARROLLO_VII_PROYECTO_HOTELWEB/index.php");
+         //die();
+
+        header("Location: ../index.php");
         exit();
     }
 }

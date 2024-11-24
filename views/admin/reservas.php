@@ -4,8 +4,6 @@ require_once "components/admin/infoUserReservas.php";
 require_once "components/admin/addReserva.php";
 require_once "components/admin/editReserva.php";
 
-//$paginaUrlVar="reservas";
-
 ?>
 
 <div class=" body container-fluid justify-content-center " id="container-info-reservas">
@@ -48,15 +46,15 @@ require_once "components/admin/editReserva.php";
                     <tr>
                         <th scope='row'>
                             <input class="form-check-input" type="checkbox"
-                                value="<?php //echo $user_info['id'] ?>"
-                                id="checbox<?php //echo $user_info['id'] ?>">
+                                value="<?php echo $user_info['re_id_Rserva'] ?>"
+                                id="checbox<?php echo $user_info['re_id_Rserva'] ?>">
                         </th>
                         <td class="container-acciones">
 
                             <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
                                 <buttom
                                     class=" btn btn-primary "
-                                    data-reserva-id="<?php //echo $user_info['id'];?>"
+                                    data-reserva-id="<?php echo $user_info['re_id_Rserva'];?>"
                                     data-bs-target="#edit_admin_modal_reservas"
                                     id="btn_edit_reserva"
                                     data-bs-toggle="modal">
@@ -67,7 +65,7 @@ require_once "components/admin/editReserva.php";
                                 class="btn btn-danger" data-bs-toggle="tooltip"
                                 data-bs-placement="right" data-bs-title="Delete"
                                 id="btnDeleteReserva"
-                                data-reserva-id="<?php //echo $user_info['id']; ?>"
+                                data-reserva-id="<?php echo $user_info['IdReserva']; ?>"
                                 class="btn btn-danger" data-bs-toggle="tooltip">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -76,7 +74,7 @@ require_once "components/admin/editReserva.php";
                         <td class='item-table'><?php echo  $data_reservas['IdReservas'] ?></td>
                         <td id="infoReservaUser" onclick='onclickInfoUserReserva()' data-bs-toggle='modal'
                             data-bs-target='#infoUserReservas'
-                            data-userReserva-id="<?php //echo $user_info['id'];
+                            data-userReserva-id="<?php echo $user_info['IdReservas'];
                                                     ?>"
                             class='item-table modal-select'>
                             <?php echo  $data_reservas['Huesped'] ?></td>
@@ -86,7 +84,7 @@ require_once "components/admin/editReserva.php";
                         <td class='item-table'><?php echo  $data_reservas['CantidaddeHabitaciones'] ?></td>
                         <td class='item-table'><?php echo  $data_reservas['TipodeHabitación'] ?></td>
                         <td class='item-table'><?php echo  $data_reservas['Correo'] ?></td>
-                        <td class='item-table'><?php echo  $data_reservas['Estado'] ?></td>
+                        <td class='item-table'><?php echo  $data_reservas['Estado'] ?></td>   
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -95,8 +93,6 @@ require_once "components/admin/editReserva.php";
     <!-- Paginación -->
     <?php include './components/pagination.php' ?>
 </div>
-
-
 <script>
     const btnCheckAllReserva = document.getElementById('btn-check_all_reservas');
     const btnDeleteAllReserva = document.getElementById('btn_delete_all_reserva');

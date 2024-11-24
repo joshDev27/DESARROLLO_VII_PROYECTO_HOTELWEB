@@ -1,41 +1,54 @@
-// Esperar a que el DOM esté completamente cargado
-document.addEventListener('DOMContentLoaded', function() {
-    // Seleccionar todos los botones de eliminar
-    var deleteButtons = document.querySelectorAll('.btn-delete');
-    
-    // Añadir un event listener a cada botón de eliminar
-    deleteButtons.forEach(function(button) {
-        button.addEventListener('click', function(e) {
-            // Prevenir el comportamiento predeterminado del enlace
-            e.preventDefault();
-            
-            // Mostrar un cuadro de diálogo de confirmación
-            if (confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
-                // Si el usuario confirma, redirigir a la URL de eliminación
-                window.location.href = this.href;
-            }
-        });
-    });
+{/* <script src=></script>
+<script src=></script>
+<script src= integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src= integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> */}
 
-    // Seleccionar todos los botones de alternar
-    var toggleButtons = document.querySelectorAll('.btn-toggle');
-    
-    // Añadir un event listener a cada botón de alternar
-    toggleButtons.forEach(function(button) {
-        button.addEventListener('click', function(e) {
-            // Prevenir el comportamiento predeterminado del enlace
-            e.preventDefault();
-            
-            // Enviar una solicitud AJAX para alternar el estado de la tarea
-            fetch(this.href)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Si la operación fue exitosa, alternar la clase 'completed' en el elemento li padre
-                        this.closest('li').classList.toggle('completed');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    });
-});
+
+
+import "https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js" ;
+import "https://code.jquery.com/jquery-3.6.0.min.js";
+import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js";
+import "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js";
+import "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+export default function initializeComponents() {
+    const lightbox = GLightbox({
+    selector: ".glightbox",
+    touchNavigation: true,
+    loop: true,
+    openEffect: "zoom",
+    closeEffect: "fade",
+    cssEfects: {
+      // This are some of the animations included, no need to overwrite
+      fade: {
+        in: "fadeIn",
+        out: "fadeOut",
+      },
+      zoom: {
+        in: "zoomIn",
+        out: "zoomOut",
+      },
+    },
+  });
+
+  const tooltipTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="tooltip"]'
+  );
+  const tooltipList = [...tooltipTriggerList].map(
+    (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+  );
+
+  const toastTrigger = document.querySelectorAll(
+    '[data-bs-toggle="toastTrigger"]'
+  );
+  const toastLiveExample = document.getElementById("liveToast");
+
+  toastTrigger.forEach((element) => {
+    if (element) {
+      const toastBootstrap =
+        bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+      element.addEventListener("click", () => {
+        toastBootstrap.show();
+      });
+    }
+  });
+}

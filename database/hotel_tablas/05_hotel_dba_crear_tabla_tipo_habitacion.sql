@@ -13,6 +13,7 @@ th_disponibles     int,
 th_camas           int,
 th_desc_camas      int,
 th_baños           int,
-th_link_imagen     varchar(500)
+th_link_imagen     varchar(500),
+th_total           int
 
 );

@@ -22,23 +22,6 @@ require_once "components/admin/addUser.php";
                 <i class="fa-solid fa-plus"></i> Add New User
             </button>
         </div>
-        <div class="eventos-filtros d-flex p-2 gap-3">
-            <form class="form" action="">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <button class="btn btn-primary" type="submit"> <i class="fa-solid fa-filter"></i> Filter</button>
-            </form>
-        </div>
     </div>
     <!-- table  -->
     <div class="overflow-x-auto">
@@ -72,12 +55,12 @@ require_once "components/admin/addUser.php";
                 <?php foreach ($arrayDatosPorPagina as $user_info): ?>
                     <tr>
                         <th scope='row'>
-                            <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
+                            <input class="form-check-input" type="checkbox" value="<?php echo $user_info['us_id_Usuario'] ?>" id="checbox<?php echo $user_info['us_id_Usuario'] ?>">
                         </th>
                         <td class="container-acciones">
                             <!-- Edit button that opens the modal and passes the user ID -->
                             <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
-                                <buttom class=" btn btn-primary " data-user-id="<?php echo $user_info['id']; ?>"
+                                <buttom class=" btn btn-primary " data-user-id="<?php echo $user_info['us_id_Usuario']; ?>"
                                     data-bs-target="#edit_admin_modal"
                                     id="btn_edit_user"
                                     data-bs-toggle="modal">
@@ -89,20 +72,18 @@ require_once "components/admin/addUser.php";
                                 class="btn btn-danger" data-bs-toggle="tooltip"
                                 data-bs-placement="right" data-bs-title="Delete"
                                 id="btnDeleteUser"
-                                data-user-id="<?php echo $user_info['id']; ?>"
+                                data-user-id="<?php echo $user_info['us_id_Usuario']; ?>"
                                 class="btn btn-danger" data-bs-toggle="tooltip">
                                 <i class="fa fa-trash"></i>
                             </button>
 
                         </td>
-                        <td><?php echo $user_info['rol'] ?></td>
-                        <td><?php echo $user_info['nombre'] ?></td>
-                        <td><?php echo $user_info['apellido'] ?></td>
-                        <td><?php echo $user_info['correo'] ?></td>
-                        <td><?php echo $user_info['telefono'] ?></td>
-                        <td><?php echo $user_info['direccion'] ?></td>
-
-
+                        <td><?php echo $user_info['us_id_Rol'] ?></td>
+                        <td><?php echo $user_info['us_nombre'] ?></td>
+                        <td><?php echo $user_info['us_apellido'] ?></td>
+                        <td><?php echo $user_info['us_correo'] ?></td>
+                        <td><?php echo $user_info['us_telefono'] ?></td>
+                        <td><?php echo $user_info['us_direccion'] ?></td>
                     </tr>
                 <?php endforeach ?>
 
@@ -178,29 +159,39 @@ require_once "components/admin/addUser.php";
             });
         });
     });
-    btnDeleteUser.addEventListener('click', (e) => {
-        const userId = btnDeleteUser.getAttribute('data-user-id'); // Obtiene el `userId` del atributo `data-user-id`
 
-        // Verifica que `userId` no esté vacío
-        if (!userId) {
-            console.error('Error: el ID de usuario no está definido.');
-            alert('Error: el ID de usuario no está definido.');
-            return;
-        }
-        // Crear un objeto FormData a partir del formulario
-        const formData = new FormData();
-        formData.append("action", "deleteUser"); // Agregar el campo 'action' con el valor 'addUser'
-        formData.append("userId", userId); // Agregar el campo 'action' con el valor 'addUser'
+    
+    document.addEventListener('DOMContentLoaded', function() {
 
-        fetch('./src/admin/usuarios.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-            })
-            .catch(error => console.error('Error:', error));
+        document.querySelectorAll('#btnDeleteUser').forEach(button => {
+
+            button.addEventListener('click', (e) => {
+                const userId = button.getAttribute('data-user-id'); // Obtiene el `userId` del atributo `data-user-id`
+
+                // Verifica que `userId` no esté vacío
+                if (!userId) {
+                    console.error('Error: el ID de usuario no está definido.');
+                    alert('Error: el ID de usuario no está definido.');
+                    return;
+                }
+                // Crear un objeto FormData a partir del formulario
+                const formData = new FormData();
+                formData.append("action", "deleteUser"); // Agregar el campo 'action' con el valor 'addUser'
+                formData.append("userId", userId); // Agregar el campo 'action' con el valor 'addUser'
+
+                fetch('./src/admin/usuarios.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        // Recargar la página después del llamado
+                        //window.location.reload();
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        })
     });
 
     btnDeleteAllUser.addEventListener('click', (e) => {
@@ -215,6 +206,8 @@ require_once "components/admin/addUser.php";
             .then(response => response.text())
             .then(data => {
                 alert(data);
+                // Recargar la página después del llamado
+                //window.location.reload();
             })
             .catch(error => console.error('Error:', error));
     });

@@ -1,31 +1,3 @@
-<?php
-
-$array_rol = array();
-
-$con = mysqli_connect('localhost', 'root', '', 'hotel_hotoño');
-if ($con === false) {
-    die("ERROR: No se pudo conectar. " . mysqli_connect_error());
-}
-
-$sql = "SELECT * FROM rol";
-$result = $con->query($sql);
-
-if ($result->num_rows > 0) {
-    // output data of each row
-    while ($row = $result->fetch_assoc()) {
-
-        $array_rol[] = array(
-            'rol' => $row['Desc_Rol'],
-        );
-    }
-}
-
-$con->close();
-
-
-?>
-
-
 <div class="modal fade" id="add_admin_reserva" tabindex="-1" aria-labelledby="reservas_usuarios_adminLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

@@ -4,27 +4,25 @@
         <h2> Estados de Correos</h2>
     </div>
     <div class="eventos d-flex p-2 gap-3">
-        <span>
+        <!-- <span>
             <input type="checkbox" class="btn-check" id="btn-check_all" autocomplete="off">
             <label class="btn btn-primary" for="btn-check_all">Select All</label>
         </span>
 
-        <button class="btn btn-danger" id="btn_delete_all_user" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
-        <button class="btn btn-secondary" data-bs-target="#add_admin_modal" data-bs-toggle="modal">
-            <i class="fa-solid fa-plus"></i> Add New User
-        </button>
+        <button class="btn btn-danger" id="btn_delete_all_correo" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
+     -->
     </div>
     <div class="overflow-x-auto">
         <table class="table table-light table-hover" id="table_correos">
             <thead>
                 <tr>
+                    <!-- <th scope="col"></th> -->
                     <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">Estado</th>
                     <th scope="col">Asunto</th>
                     <th scope="col">Mensaje</th>
                     <th scope="col">Persona</th>
                     <th scope="col">E mail</th>
+                    <th scope="col">Date</th>
 
 
                 </tr>
@@ -32,30 +30,26 @@
             <tbody>
                 <?php foreach ($arrayDatosPorPagina as $correo_info): ?>
                     <tr>
-                        <th scope='row'>
-                            <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
-                        </th>
+                        <!-- <th scope='row'>
+                            <input class="form-check-input" type="checkbox" value="<?php echo $correo_info['id'] ?>" id="checbox<?php echo $correo_info['id'] ?>">
+                        </th> -->
                         <td class="container-acciones">
-                            <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
-                                <input type="button" class="btn-check" value="<?php echo $user_info['id']; ?>" data-bs-target="#edit_admin_modal" id="btn_edit_user_<?php echo $user_info['id']; ?>" data-bs-toggle="modal">
-                                <label class="btn btn-primary" for="btn_edit_user_<?php echo $user_info['id']; ?>">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </label>
-                            </span>
-                            <form action="./src/admin/correos.php">
-                                <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" type="submit" name="btn-delete" value="<?php echo $user_info['id']; ?>">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
+                            <button
+                                class="btn btn-danger" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Delete"
+                                id="btnDeleteCorreo"
+                                data-user-id="<?php echo $correo_info['id']; ?>"
+                                class="btn btn-danger" data-bs-toggle="tooltip">
+                                <i class="fa fa-trash"></i>
+                            </button>
                         </td>
-                        <th scope='row'><?php echo '' ?></th>
-                        <th scope='row'><?php echo '' ?></th>
+                        <th scope='row'><?php echo $correo_info['asunto'] ?></th>
                         <td><?php echo $correo_info['mensaje'] ?></td>
                         <td><?php echo $correo_info['nombre'] . ' , ' . $correo_info['apellido'] ?></td>
                         <td><?php echo $correo_info['correo'] ?></td>
+                        <td><?php echo $correo_info['date'] ?></td>
                     </tr>
                 <?php endforeach ?>
-
             </tbody>
         </table>
     </div>
@@ -65,7 +59,7 @@
 
 <script>
     const btnCheckAll = document.getElementById('btn-check_all');
-    const btnDeleteAllUser = document.getElementById('btn_delete_all_user');
+    const btnDeleteAllCorreo = document.getElementById('btn_delete_all_correo');
     btnCheckAll.onclick = function() {
         var checkboxes = document.querySelectorAll('.form-check-input');
         for (var checkbox of checkboxes) {
@@ -73,14 +67,59 @@
         }
         //valida el estado del boton de eliminar todos los usuario
         let status = btnCheckAll.checked ? false : true;
-        btnDeleteAllUser.disabled = status;
+        btnDeleteAllCorreo.disabled = status;
     }
 
 
-    btnDeleteAllUser.addEventListener('click', (e) => {
+    document.addEventListener('DOMContentLoaded', function() {
 
+        document.querySelectorAll('#btnDeleteCorreo').forEach(button => {
+
+            button.addEventListener('click', (e) => {
+                const correoId = button.getAttribute('data-user-id'); // Obtiene el `correoId` del atributo `data-user-id`
+
+                // Verifica que `correoId` no esté vacío
+                if (!correoId) {
+                    console.error('Error: el ID de usuario no está definido.');
+                    alert('Error: el ID de usuario no está definido.');
+                    return;
+                }
+                // Crear un objeto FormData a partir del formulario
+                const formData = new FormData();
+                formData.append("action", "deleteCorreo"); // Agregar el campo 'action' con el valor 'addUser'
+                formData.append("correoId", correoId); // Agregar el campo 'action' con el valor 'addUser'
+
+                fetch('./src/admin/correos.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        //console.log(data);
+                        // Recargar la página después del llamado
+                        window.location.reload();
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        })
     });
 
+    btnDeleteAllCorreo.addEventListener('click', (e) => {
+        // Crear un objeto FormData a partir del formulario
+        const formData = new FormData();
+        formData.append("action", "deleteAllUser"); // Agregar el campo 'action' con el valor 'addUser'
+
+        fetch('./src/admin/correos.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Recargar la página después del llamado
+                window.location.reload();
+            })
+            .catch(error => console.error('Error:', error));
+    });
 
     document.addEventListener('DOMContentLoaded', function() {
         const checkboxes = document.querySelectorAll('.form-check-input');
@@ -95,7 +134,7 @@
             });
 
             // Habilita el botón si hay 2 o más checkboxes seleccionados
-            btnDeleteAllUser.disabled = selectedCount < 2;
+            btnDeleteAllCorreo.disabled = selectedCount < 2;
         }
 
         // Llama a la función al cargar la págiNna para establecer el estado inicial del botón

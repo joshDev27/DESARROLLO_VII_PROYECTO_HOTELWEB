@@ -15,6 +15,10 @@ body {
 h1 {
   color: $color_red;
 }
+
+a{
+  text-decoration:none;
+}
 .item-table {
   cursor: default;
   &.modal-select {
@@ -28,6 +32,7 @@ h1 {
   .modal-content {
     //box-shadow: 1px 2px 18px 2px rgba(0.5, $background_color);
     border: none !important;
+    margin-top: 1.5rem!important;
   }
 }
 .form-control,
@@ -107,8 +112,6 @@ h1 {
         &:hover,
         &:focus {
           box-shadow: none;
-        }
-        &:not(.collapsed) {
         }
       }
     }

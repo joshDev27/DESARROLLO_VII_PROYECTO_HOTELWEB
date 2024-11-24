@@ -1,5 +1,7 @@
 <?php
-//#	numero de habitacion	Tipo	Cantidad de camas	Estado	Usuario Ocupado
+
+require_once dirname(__DIR__, 2) .'/app/controller/admin_controller.php';
+include_once dirname(__DIR__, 2).'/src/function.php';
 
 $infoHabitacion = [
     [
@@ -76,7 +78,7 @@ $infoHabitacion = [
 
 
 //configuraciones de la paginacion
-$arrayConf = configurationPaginationTable($infoHabitacion, 'habitaciones');
+$arrayConf = configurationPaginationTable($infoHabitacion, 'admin=habitaciones');
 $paginaActual = $arrayConf['paginaActual'];
 $arrayDatosPorPagina = $arrayConf['array'];
 $paginaUrlVar = $arrayConf['pageVar'];

@@ -11,11 +11,11 @@ if ($_SESSION['isAdmin']) {
     }
 
 } else {
-    $root_path = BASE_PATH . "views/";
-    $src_path = BASE_PATH . "src/";
+    $root_path = BASE_PATH . "views/user/";
+    $src_path = BASE_PATH . "src/user/";
     //devuelve true si el la pagina se encontro
     if (getTemplate("page", $root_path, $src_path)) {
     } else {
-        include BASE_PATH . "views/home.php"; // Página por defecto
+        include BASE_PATH . "views/user/home.php"; // Página por defecto
     }
 }

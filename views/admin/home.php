@@ -52,14 +52,15 @@ require_once './src/admin/home.php';
 
                         ?>
                         <tbody>
-                            <?php foreach ($proxima_reservas as $reservas): ?>
+                            <?php foreach ($proxima_reservas  as $reserva): ?>
                                 <tr>
-                                    <td scope='row'> <?php echo $reservas['check_in'] ?></td>
-                                    <td><?php echo  $reservas['check_out'] ?></td>
-                                    <td><?php echo  $reservas['nombre_completo'] ?></td>
-                                    <td><?php echo  $reservas['cedula'] ?></td>
-                                    <td><?php echo  $reservas['numero_habitacion'] ?></td>
-                                    <td><?php echo  $reservas['tipo_habitacion'] ?></td>
+
+                                    <td scope='row'> <?php echo $reserva['re_fecha_checkin'] ?></td>
+                                    <td><?php echo  $reserva['re_fecha_checkout'] ?></td>
+                                    <td><?php //echo  $reserva['us_nombre'] ?></td>
+                                    <td><?php //echo  $reserva['us_cedula'] ?></td>
+                                    <td><?php //echo  $reserva['ha'] ?></td>
+                                    <td><?php //echo  $reserva['tipo_habitacion'] ?></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>

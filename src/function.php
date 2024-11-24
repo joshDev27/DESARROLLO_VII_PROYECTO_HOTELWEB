@@ -5,7 +5,33 @@ function stringToBool($string)
 }
 
 
-function configurationPaginationTable($array, $pageVar,$itemsPorPagina=6)
+function calcularNumNoches($checkin, $checkout)
+{
+    // Crear objetos DateTime a partir de las fechas
+    $fechaCheckin = new DateTime($checkin);
+    $fechaCheckout = new DateTime($checkout);
+
+    // Calcular la diferencia
+    $diferencia = $fechaCheckin->diff($fechaCheckout);
+
+    // Obtener el número de noches
+    return $diferencia->days; // La propiedad 'days' contiene el número total de días
+
+}
+
+
+function getDayToday()
+{
+    return date("d/m/Y");
+}
+
+function getTodayTime()
+{
+    return date("h:i:sa");
+}
+
+
+function configurationPaginationTable($array, $pageVar, $itemsPorPagina = 6)
 {
     // Configuración de la paginación
     //$itemsPorPagina = 8;
@@ -20,33 +46,14 @@ function configurationPaginationTable($array, $pageVar,$itemsPorPagina=6)
     $inicio = ($paginaActual - 1) * $itemsPorPagina;
     $arrayDatosPorPagina = array_slice($array, $inicio, $itemsPorPagina);
 
-    
+
     $returnArray = [
         'array' => $arrayDatosPorPagina,
-         'pageVar' => $pageVar,
-         'paginaActual'=>$paginaActual,
-         'totalPaginas'=>$totalPaginas
-        ];
+        'pageVar' => $pageVar,
+        'paginaActual' => $paginaActual,
+        'totalPaginas' => $totalPaginas
+    ];
     return $returnArray;
-}
-
-function caracteristicas_hoteles()
-{
-    $array = array();
-
-    $con = mysqli_connect('localhost', 'root', '', 'hotel_hotoño');
-    if ($con === false) {
-        die("ERROR: No se pudo conectar. " . mysqli_connect_error());
-    }
-    $sql = "SELECT * FROM caracteristicas_hoteles";
-    $result = $con->query($sql);
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $array[] = array('title' => $row['title'], 'description' => $row['description'], 'img' => $row['img']);
-        }
-    }
-    return $array;
 }
 
 function getRoomInformation()
@@ -123,12 +130,6 @@ function getRoomInformation()
             ],
             "img" => "https://i.pinimg.com/736x/8b/ee/d1/8beed1c977801ab622b2c68b177464ff.jpg",
             "precio" => "200$",
-
-            "iconos" => [
-                "<i class='fa-solid fa-trash'></i>",
-                "<i class='fa-solid fa-trash'></i>",
-                "<i class='fa-solid fa-trash'></i>"
-            ]
         ]
     ];
 

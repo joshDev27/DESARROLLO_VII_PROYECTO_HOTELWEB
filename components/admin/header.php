@@ -2,8 +2,6 @@
 
 $home_page = ["home" => "Home"];
 
-$srcLogout = './src/logout.php';
-
 ?>
 
 <div class="navbar navbar-admin">
@@ -13,9 +11,6 @@ $srcLogout = './src/logout.php';
             <span class="hamburger-inner"></span>
         </span>
     </button>
-    <a href="index.php" class="header-name">
-        <h3> Admin Control <?php echo SITE_NAME ?></h3>
-    </a>
 
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
         <div class="offcanvas-header">
@@ -35,7 +30,7 @@ $srcLogout = './src/logout.php';
                 include 'navBarInfoSite.php';
                 ?>
             </div>
-            <form method="POST" id="formLogout" action=<?php echo $srcLogout ?>>
+            <form method="POST" action='./src/logout.php'>
                 <button class="btn btn-primary w-100 shadow-sm" type="submit">Cerrar sesión</button>
             </form>
         </div>

@@ -1,20 +1,4 @@
-<?php
-
-
-// Configuración de la paginación
-$itemsPorPagina = 3;
-$totalItems = count(getRoomInformation());
-$totalPaginas = ceil($totalItems / $itemsPorPagina);
-
-// Obtener el número de página actual desde la URL
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$paginaActual = max(1, min($totalPaginas, $paginaActual));
-
-// Obtener el subconjunto de datos para la página actual
-$inicio = ($paginaActual - 1) * $itemsPorPagina;
-$arrayDatosPorPagina = array_slice(getRoomInformation(), $inicio, $itemsPorPagina);
-
-?>
+<?php require './src/admin/habitacionesG.php'; ?>
 <div class=" body container-fluid justify-content-center " id="container-gestion-habitaciones">
     <div class="header-admin">
 
@@ -28,20 +12,19 @@ $arrayDatosPorPagina = array_slice(getRoomInformation(), $inicio, $itemsPorPagin
 
         <button class="btn btn-danger" id="btn_delete_all_user" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
         <button class="btn btn-secondary" data-bs-target="#add_admin_modal" data-bs-toggle="modal">
-            <i class="fa-solid fa-plus"></i> Add New User
+            <i class="fa-solid fa-plus"></i> Add Tipo Habitacíon
         </button>
     </div>
     <div class="overflow-x-auto">
         <table class="table table-light table-hover">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Id de Tipo de Habitaciones</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                     <th scope="col">Tipo de Habitación</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Caracteristicas</th>
                     <th scope="col">Precio</th>
-                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,7 +34,7 @@ $arrayDatosPorPagina = array_slice(getRoomInformation(), $inicio, $itemsPorPagin
                         <th scope='row'>
                             <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
                         </th>
-                        <td class="container-acciones">
+                        <td>
                             <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
                                 <input type="button" class="btn-check" value="<?php echo $user_info['id']; ?>" data-bs-target="#edit_admin_modal" id="btn_edit_user_<?php echo $user_info['id']; ?>" data-bs-toggle="modal">
                                 <label class="btn btn-primary" for="btn_edit_user_<?php echo $user_info['id']; ?>">
@@ -63,8 +46,6 @@ $arrayDatosPorPagina = array_slice(getRoomInformation(), $inicio, $itemsPorPagin
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
-                        <th scope='row'><? echo $index ?></th>
-                        <td class='item-table'> ID de tipo de Habitacion </td>
                         <td class='item-table'><?php echo $array['tipo'] ?></td>
                         <td class='item-table'><?php echo $array['descripcion'] ?></td>
                         <td class='item-table'>
@@ -80,33 +61,7 @@ $arrayDatosPorPagina = array_slice(getRoomInformation(), $inicio, $itemsPorPagin
         </table>
     </div>
     <!-- Paginación -->
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <?php if ($paginaActual > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="index.php?admin=usuarios&pagina=<?php echo $paginaActual - 1; ?>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-            <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-
-                <li class="page-item">
-                    <a class="page-link <?php echo (isset($_GET['pagina']) && $_GET['pagina'] == $i) ? "active" : ""  ?>" href="index.php?admin=usuarios&pagina=<?php echo $i; ?>">
-                        <?php echo $i; ?>
-                    </a>
-                </li>
-            <?php endfor; ?>
-
-            <?php if ($paginaActual < $totalPaginas): ?>
-                <li class="page-item">
-                    <a class="page-link " href="index.php?admin=usuarios&pagina=<?php echo $paginaActual + 1; ?>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
+    <?php include './components/pagination.php' ?>
 </div>
 
 

@@ -1,6 +1,5 @@
 <?php
 $array_info_nav = [
-    "informacionGestion" => "Informacion Del Site",
     "habitacionesG" => "Data Info Habitaciones",
 ];
 

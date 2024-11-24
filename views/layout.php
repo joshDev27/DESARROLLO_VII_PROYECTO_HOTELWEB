@@ -10,7 +10,8 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./public/assets/css/Style.css">
-    <title><?php echo SITE_NAME ?></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <title><?php echo 'Hotel' ?></title>
 </head>
 
 
@@ -23,7 +24,7 @@
     if (!isset($_SESSION['isAdmin'])) {
         $_SESSION['isAdmin'] = FALSE;
     }
-    
+
     if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
 
         echo "<div class='container-admin'>";
@@ -31,31 +32,61 @@
         include BASE_PATH . "views/body.php";
         echo "</div>";
     } else {
-        include BASE_PATH . "components/header.php";
+
+        include BASE_PATH . "components/user/header.php";
         include BASE_PATH . "views/body.php";
         include BASE_PATH . "components/footer.php";
     }
     ?>
 
+
+
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
+         
+        /* Date Picker */
+
+        /* inicializaciones de boostrap */
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-
-        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastTrigger = document.querySelectorAll('[data-bs-toggle="toastTrigger"]')
         const toastLiveExample = document.getElementById('liveToast')
 
-        if (toastTrigger) {
-            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-            toastTrigger.addEventListener('click', () => {
-                toastBootstrap.show()
-            })
-        }
+        toastTrigger.forEach(element => {
+
+            if (element) {
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                element.addEventListener('click', () => {
+                    toastBootstrap.show()
+                })
+            }
+        });
+
+        /* Galerias de imagenes  */
+        const lightbox = GLightbox({
+            selector: ".glightbox",
+            touchNavigation: true,
+            loop: true,
+            openEffect: "zoom",
+            closeEffect: "fade",
+            cssEfects: {
+                // This are some of the animations included, no need to overwrite
+                fade: {
+                    in: "fadeIn",
+                    out: "fadeOut",
+                },
+                zoom: {
+                    in: "zoomIn",
+                    out: "zoomOut",
+                },
+            },
+        });
     </script>
 
 </body>

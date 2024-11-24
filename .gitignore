@@ -1,7 +1,4 @@
-# Ignorar .env file
-#.env
-
-
-#Ignorar .vscode
-.vscode
+/.vscode/
 /vendor/
+.env
+/node_modules/

@@ -1,20 +1,11 @@
-<footer class="text-center py-3  footer">
+<footer class="text-center py-4 footer bg-dark text-light">
     <div class="container">
-        <p>© 2024 Hotel Serenidad del Trópico. Todos los derechos reservados.</p>
-        <p>
-            <a href="https://www.facebook.com" class="me-3" target="_blank" data-bs-toggle="tooltip" data-bs-title="Facebook">
-                <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://www.twitter.com" class="me-3" target="_blank" data-bs-toggle="tooltip" data-bs-title="X">
-                <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com" target="_blank" data-bs-toggle="tooltip" data-bs-title="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
+        <p>© <?php echo date('Y'); ?>. Todos los derechos reservados.</p>
+        <p>Hotel Sol y Mar</p>
+        <p>Av. Principal, Juan D. Arosemena, Panamá Oeste, Panamá</p>
+        <p>Teléfono: +507 1234-5678 | Correo: info@hotelsolymar.com</p>
+        <p class="mt-3">
+            ¡Gracias por elegirnos para su estancia! Nos esforzamos por brindar la mejor experiencia posible.
         </p>
-        <!-- <p>
-            <a href="/privacy-policy" class="me-3">Política de Privacidad</a>
-            <a href="/terms-of-service">Términos de Servicio</a>
-        </p> -->
     </div>
 </footer>

@@ -1,4 +1,4 @@
-<?php require './src/admin/usuarios.php';?>
+<?php require './src/admin/usuarios.php'; ?>
 
 <div class="modal fade" id="add_admin_modal" tabindex="-1" aria-labelledby="reservas_usuarios_adminLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -49,27 +49,27 @@
 
 
 <script>
-document.getElementById('formAddUser').addEventListener('submit', function(event) {
-  event.preventDefault(); // Evita el envío tradicional del formulario
+  document.getElementById('formAddUser').addEventListener('submit', function(event) {
+    // event.preventDefault(); // Evita el envío tradicional del formulario
 
-  // Crear un objeto FormData a partir del formulario
-  const formData = new FormData(this);
-  formData.append("action", "addUser"); // Agregar el campo 'action' con el valor 'addUser'
+    // Crear un objeto FormData a partir del formulario
+    const formData = new FormData(this);
+    formData.append("action", "addUser"); // Agregar el campo 'action' con el valor 'addUser'
 
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", './src/admin/usuarios.php', true);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", './src/admin/usuarios.php', true);
 
-  // Manejador para la respuesta del servidor
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      document.getElementById("respuesta").innerHTML = xhr.responseText;
-    } else {
-      document.getElementById("respuesta").innerHTML = "Error en la petición";
-    }
-  };
+    // Manejador para la respuesta del servidor
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        document.getElementById("respuesta").innerHTML = xhr.responseText;
 
-  // Enviar los datos del formulario
-  xhr.send(formData);
-});
+      } else {
+        document.getElementById("respuesta").innerHTML = "Error en la petición";
+      }
+    };
 
+    // Enviar los datos del formulario
+    xhr.send(formData);
+  });
 </script>
