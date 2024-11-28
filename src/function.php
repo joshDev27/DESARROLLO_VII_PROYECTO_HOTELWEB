@@ -20,6 +20,21 @@ function calcularNumNoches($checkin, $checkout)
 }
 
 
+function generarTokenAleatorio($longitud = 50)
+{
+    // Conjunto de caracteres permitidos
+    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $token = '';
+    $maxIndex = strlen($caracteres) - 1;
+
+    // Generar un token aleatorio de la longitud solicitada
+    for ($i = 0; $i < $longitud; $i++) {
+        $token .= $caracteres[random_int(0, $maxIndex)];
+    }
+
+    return $token;
+}
+
 function getDayToday()
 {
     return date("d/m/Y");

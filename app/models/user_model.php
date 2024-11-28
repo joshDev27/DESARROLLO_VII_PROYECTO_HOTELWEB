@@ -142,9 +142,94 @@ class UserModel
         return null;
     }
 
+    public function actualizarPass($id, $newPass)
+    {
 
+        $stmt = $this->db->prepare("CALL 12_hotel_dba_sp_actualizar_contra(?,?)");
+        if ($stmt) {
+            // Enlazar parámetros
+            $stmt->bind_param("is", $id, $newPass);
+            $stmt->execute();
+            $stmt->close();
+            return true; // Retorna true si todo fue exitoso
+        } else {
+            echo "Error al preparar la consulta: " . $this->db->error;
+            return false;
+        }
+    }
+    public function confirmarReserva($id_reserva)
+    {
 
+        $stmt = $this->db->prepare("CALL 13_hotel_dba_sp_conf_reserva(?)");
+        if ($stmt) {
+            // Enlazar parámetros
+            $stmt->bind_param("i", $id_reserva);
+            $stmt->execute();
+            $stmt->close();
+            return true; // Retorna true si todo fue exitoso
+        } else {
+            echo "Error al preparar la consulta: " . $this->db->error;
+            return false;
+        }
+    }
+    public function cancelarReserva($id_reserva)
+    {
 
+        $stmt = $this->db->prepare("CALL 14_hotel_dba_sp_canc_reserva(?)");
+        if ($stmt) {
+            // Enlazar parámetros
+            $stmt->bind_param("i", $id_reserva);
+            $stmt->execute();
+            $stmt->close();
+            return true; // Retorna true si todo fue exitoso
+        } else {
+            echo "Error al preparar la consulta: " . $this->db->error;
+            return false;
+        }
+    }
+    public function eliminar($id, $operacion)
+    {
+        $this->db->query("SET @sesion = 0;");
+
+        $stmt = $this->db->prepare("CALL 10_hotel_dba_sp_eliminar(?, ?)");
+        if ($stmt) {
+            $stmt->bind_param("ii", $id, $operacion);
+            $stmt->execute();
+            $stmt->close();
+
+            $result = $this->db->query("SELECT @sesion AS sesion");
+            if ($result) {
+                return $result->fetch_assoc();
+            } else {
+                echo "Error al obtener los resultados de salida.<br>";
+            }
+        } else {
+            echo "Error al preparar la consulta: " . $this->db->error;
+        }
+        return null;
+    }
+
+    public function editarUsuario($id,$usuario,$nombre,$apellido,$telefono,$contasena,$correo,$direccion)
+    {
+        $this->db->query("SET @sesion = 0;");
+
+        $stmt = $this->db->prepare("CALL 04_hotel_dba_sp_editar_usuario(?, ?,?, ?,?, ?,?, ?)");
+        if ($stmt) {
+            $stmt->bind_param("isssssss", $id,$usuario,$nombre,$apellido,$telefono,$contasena,$correo,$direccion);
+            $stmt->execute();
+            $stmt->close();
+
+            $result = $this->db->query("SELECT @sesion AS sesion");
+            if ($result) {
+                return $result->fetch_assoc();
+            } else {
+                echo "Error al obtener los resultados de salida.<br>";
+            }
+        } else {
+            echo "Error al preparar la consulta: " . $this->db->error;
+        }
+        return null;
+    }
     //Registrar correo enviados a la base de datos 
 
 

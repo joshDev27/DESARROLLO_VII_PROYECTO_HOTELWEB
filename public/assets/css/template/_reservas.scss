@@ -8,13 +8,13 @@
     form {
       margin-top: 20px;
       .input-group {
-        gap: .3rem;
+        gap: 0.3rem;
         justify-content: space-between;
         & > .form-group {
           flex: 1;
         }
         & > .icon-date {
-          margin-top: .8rem;
+          margin-top: 0.8rem;
         }
       }
       .form-group {
@@ -43,6 +43,19 @@
             td {
               border: none;
             }
+          }
+        }
+      }
+      .header-resumen-reservas {
+        h2 {
+          flex: 1;
+        }
+
+        .btnUpdateReserva {
+          cursor: pointer;
+          transition: transform 0.2s; /* Animación suave */
+          &:focus,&:active {
+            transform: translateY(-5px); /* Desplazamiento hacia arriba */
           }
         }
       }

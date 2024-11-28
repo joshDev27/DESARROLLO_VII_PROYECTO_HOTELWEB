@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "../../Lib/fontawesome/css/fontawesome.css";
 @import "../../Lib/fontawesome/css/all.css";
 .hamburger.hamburger--arrowalt {
@@ -910,8 +911,20 @@ a {
   box-shadow: none !important;
 }
 
+.form-floating label::after {
+  background-color: transparent !important;
+}
+
+textarea {
+  min-height: 10rem !important;
+}
+
 .page-link:focus {
   box-shadow: none !important;
+}
+
+.img-container-admin .img-fluid {
+  height: 15rem !important;
 }
 
 .container-admin {
@@ -1212,6 +1225,16 @@ a {
 }
 .container-reservas .container form .table-reserva tfoot tr td {
   border: none;
+}
+.container-reservas .container form .header-resumen-reservas h2 {
+  flex: 1;
+}
+.container-reservas .container form .header-resumen-reservas .btnUpdateReserva {
+  cursor: pointer;
+  transition: transform 0.2s; /* Animación suave */
+}
+.container-reservas .container form .header-resumen-reservas .btnUpdateReserva:focus, .container-reservas .container form .header-resumen-reservas .btnUpdateReserva:active {
+  transform: translateY(-5px); /* Desplazamiento hacia arriba */
 }
 .container-reservas .container form .btn-primary {
   padding: 10px 20px;

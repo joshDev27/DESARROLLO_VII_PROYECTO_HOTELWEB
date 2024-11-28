@@ -70,32 +70,34 @@ BEGIN
         SELECT * 
         FROM USUARIO, ROL
         WHERE us_id_usuario = rl_id_rol
-          AND ud_id_Usuario = id_us;
+          AND us_id_Usuario = id_us;
     END IF;
 
     -- Operación 6: Detalles de usuarios
     IF operacion = 6 THEN
         SELECT * 
         FROM USUARIO
-        WHERE ud_id_Usuario = id_us;
+        WHERE us_id_Usuario = id_us;
     END IF;
 
     -- Operación 7: Reservas y usuarios relacionados
     IF operacion = 7 THEN
         SELECT * 
-        FROM RESERVA, USUARIO
+        FROM RESERVA, USUARIO 
         WHERE us_id_usuario = re_id_usuario
-          AND ud_id_Usuario = id_us;
+          AND us_id_Usuario = id_us;
     END IF;
 
     -- Operación 8: Reservas, usuarios y habitaciones relacionadas
     IF operacion = 8 THEN
         SELECT * 
-        FROM RESERVA, USUARIO, HABITACION,HUESPED
+        FROM RESERVA, USUARIO, HABITACION,HUESPED,TIPO_HABITACION
         WHERE us_id_usuario = re_id_usuario
           AND hu_id_reserva = re_id_reserva
           AND ha_id_reserva = re_id_reserva
-          AND us_id_usuario = 2;
+          AND us_id_usuario = id_us
+          AND th_id_tipo    = ha_tipo;
+          ORDER BY re_fecha_reserva DESC
     END IF;
 
     -- Operación 9: Reservas en las últimas 24 horas
@@ -103,8 +105,11 @@ BEGIN
         SET intervalo_inf = DATE_ADD(CURDATE(), INTERVAL -1 DAY);
         SET intervalo_sup = CURDATE();
         SELECT * 
-        FROM RESERVA
-        WHERE re_fecha_reserva BETWEEN intervalo_inf AND intervalo_sup;
+        FROM RESERVA , USUARIO , HABITACION,TIPO_HABITACION
+        WHERE re_id_Usuario = us_id_Usuario
+        AND re_id_Reserva = ha_id_reserva
+        AND ha_tipo       = th_id_tipo
+        AND re_fecha_reserva BETWEEN intervalo_inf AND intervalo_sup;
     END IF;
     
     
@@ -117,8 +122,22 @@ BEGIN
         SELECT * 
         FROM RESERVA;
     END IF;
+    
+	IF operacion = 12 THEN
+        SELECT * 
+        FROM CONSULTA;
+    END IF;
 
+        -- Operación 8: Reservas, usuarios y habitaciones relacionadas
+    IF operacion = 13 THEN
+        SELECT * 
+        FROM RESERVA, USUARIO, HABITACION,HUESPED,TIPO_HABITACION
+        WHERE us_id_usuario = re_id_usuario
+          AND hu_id_reserva = re_id_reserva
+          AND ha_id_reserva = re_id_reserva
+          AND th_id_tipo    = ha_tipo;
+          ORDER BY re_fecha_reserva DESC
+    END IF;
 END //
 
 DELIMITER ;
-

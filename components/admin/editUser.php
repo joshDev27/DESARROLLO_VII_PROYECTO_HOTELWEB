@@ -9,34 +9,34 @@
       </div>
       <form id="formEditUser">
         <div class="modal-body">
-          <input type="hidden" id="user_id" name="user_id">
+          <input type="hidden" id="edit_user_id" name="user_id">
           <div class="form-group">
             <label for="rol">Rol</label>
-            <select class="form-select" id="rol" name="rol" required>
+            <select class="form-select" name="rol" required>
               <?php foreach ($array_rol as $rol): ?>
-                <option value="<?php echo $rol['rol'] ?>"><?php echo $rol['rol'] ?></option>
+                <option id="edit_rol"   value="<?php echo $rol['rl_desc_Rol'] ?>"><?php echo $rol['rl_desc_Rol'] ?></option>
               <?php endforeach; ?>
             </select>
           </div>
           <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre" value="<?php echo $array_edit_user['nombre'] ?>" name="nombre" placeholder="Ingresa el nombre" required>
+            <input type="text" class="form-control" id="edit_nombre" value="" name="nombre" placeholder="Ingresa el nombre" required>
           </div>
           <div class="form-group">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingresa el apellido" required>
+            <input type="text" class="form-control" id="edit_apellido" name="apellido" placeholder="Ingresa el apellido" required>
           </div>
           <div class="form-group">
             <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa el e-mail" required>
+            <input type="email" class="form-control" id="edit_email" name="email" placeholder="Ingresa el e-mail" required>
           </div>
           <div class="form-group">
             <label for="telefono">Teléfono</label>
-            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingresa el teléfono" required>
+            <input type="text" class="form-control" id="edit_telefono" name="telefono" placeholder="Ingresa el teléfono" required>
           </div>
           <div class="form-group">
             <label for="direccion">Dirección</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa la dirección" required>
+            <input type="text" class="form-control" id="edit_direccion" name="direccion" placeholder="Ingresa la dirección" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -64,9 +64,6 @@
       .then(response => response.text())
       .then(data => {
         document.getElementById("respuesta").innerHTML = data;
-        // Cerrar el modal después de guardar los cambios
-        // var modal = bootstrap.Modal.getInstance(document.getElementById('edit_admin_modal'));
-        // modal.hide();
       })
       .catch(error => console.error('Error:', error));
   });

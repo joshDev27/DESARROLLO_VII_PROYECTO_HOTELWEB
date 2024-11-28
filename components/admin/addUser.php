@@ -13,7 +13,7 @@
             <label for="rol">Rol</label>
             <select class="form-select" aria-label="Default select example" requiere>
               <?php foreach ($array_rol as $rol): ?>
-                <option value="<?php echo $rol['rol'] ?>"><?php echo $rol['rol'] ?></option>
+                <option value="<?php echo $rol['rl_desc_Rol'] ?>"><?php echo $rol['rl_desc_Rol'] ?></option>
               <?php endforeach; ?>
             </select>
           </div>

@@ -47,16 +47,24 @@ require_once BASE_PATH . "/src/user/usuariosReservas.php";
                                 </span>
                             </p>
                             <span class="container-button row">
-                                <?php if ($data_reservas['Estado'] == 'PEND'): ?>
-                                    <button class="btn btn-info bg-gradient  col-lg-5" id="btn_confirmar_reserva_usuario"><i class="fa-solid fa-check"></i> Confirmar Reserva</button>
-                                    <button class="btn btn-danger bg-gradient col-lg-5" id="btn_delete_reserva_usuario"> <i class="fa-solid fa-trash"></i> Cancelar Reserva</button>
+                                <?php if ($data_reservas['Estado'] == 'Pendiente'): ?>
+                                    <button class="btn btn-info bg-gradient  col-lg-5 btn_confirmar_reserva_usuario"
+                                        data-id-reserva-user=<?php echo $data_reservas['Id Reservas'] ?> id="btn_confirmar_reserva_usuario">
+                                        <i class="fa-solid fa-check"></i> Confirmar Reserva</button>
+                                    <?php if ($data_reservas['Estado'] != 'Cancelado'): ?>
+                                        <button class="btn btn-danger bg-gradient col-lg-5 btn_cancelar_reserva_usuario"
+                                            data-id-reserva-user=<?php echo $data_reservas['Id Reservas'] ?> id="btn_cancelar_reserva_usuario">
+                                            <i class="fa-solid fa-ban"></i> Cancelar Reserva</button>
+                                    <?php endif; ?>
                                 <?php endif; ?>
 
-                                <?php if ($data_reservas['Estado'] != 'PEND'): ?>
-                                    <button class="btn btn-danger bg-gradient col-lg-5" id="btn_delete_reserva_usuario"> <i class="fa-solid fa-trash"></i> Eliminar Reserva de Historial</button>
+                                <?php if ($data_reservas['Estado'] != 'Pendiente' || $data_reservas['Estado'] != 'Cancelado' ): ?>
+                                    <button class="btn btn-danger bg-gradient col-lg-5 btn_delete_reserva_usuario"
+                                        data-id-reserva-user=<?php echo $data_reservas['Id Reservas'] ?> id="btn_delete_reserva_usuario">
+                                        <i class="fa-solid fa-trash"></i> Eliminar Reserva de Historial</button>
                                 <?php endif; ?>
+
                             </span>
-
                         </div>
                     </div>
                 </div>
@@ -67,3 +75,101 @@ require_once BASE_PATH . "/src/user/usuariosReservas.php";
     <?php include './components/pagination.php' ?>
 
 </div>
+
+
+<script>
+    function windowReload() {
+        window.location.reload();
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Evento para eliminar un reserva
+        document.querySelectorAll('.btn_delete_reserva_usuario').forEach(button => {
+            button.addEventListener('click', function() {
+
+                const reserva_user_id = this.getAttribute('data-id-reserva-user');
+
+                if (!reserva_user_id) {
+                    console.error('Error: el ID de la reserva no está definido.');
+                    alert('Error: el ID de la reserva no está definido.');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('action', 'deleteReservaUsuario');
+                formData.append('reserva_user_id', reserva_user_id);
+
+                fetch('./src/user/usuariosReservas.php', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        // Recargar la página tras la acción
+                        console.log(data);
+                        windowReload();
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+        // Evento para cancelar  reserva
+        document.querySelectorAll('.btn_cancelar_reserva_usuario').forEach(button => {
+            button.addEventListener('click', function() {
+
+                const reserva_user_id = this.getAttribute('data-id-reserva-user');
+
+                if (!reserva_user_id) {
+                    console.error('Error: el ID de la reserva no está definido.');
+                    alert('Error: el ID de la reserva no está definido.');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('action', 'cancelarReservaUsuario');
+                formData.append('reserva_user_id', reserva_user_id);
+
+                fetch('./src/user/usuariosReservas.php', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        // Recargar la página tras la acción
+                        console.log(data);
+                        windowReload();
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+        // Evento para confirmar reserva
+        document.querySelectorAll('.btn_confirmar_reserva_usuario').forEach(button => {
+            button.addEventListener('click', function() {
+                const reserva_user_id = this.getAttribute('data-id-reserva-user');
+
+                if (!reserva_user_id) {
+                    console.error('Error: el ID de la reserva no está definido.');
+                    alert('Error: el ID de la reserva no está definido.');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('action', 'confirmarReservaUsuario');
+                formData.append('reserva_user_id', reserva_user_id);
+
+                fetch('./src/user/usuariosReservas.php', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        // Recargar la página tras la acción
+                        console.log(data);
+                        windowReload();
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+
+
+    });
+</script>

@@ -16,8 +16,8 @@ h1 {
   color: $color_red;
 }
 
-a{
-  text-decoration:none;
+a {
+  text-decoration: none;
 }
 .item-table {
   cursor: default;
@@ -32,7 +32,7 @@ a{
   .modal-content {
     //box-shadow: 1px 2px 18px 2px rgba(0.5, $background_color);
     border: none !important;
-    margin-top: 1.5rem!important;
+    margin-top: 1.5rem !important;
   }
 }
 .form-control,
@@ -43,12 +43,26 @@ a{
   }
 }
 
+.form-floating {
+  label {
+    &::after {
+      background-color: transparent !important;
+    }
+  }
+}
+textarea {
+  min-height: 10rem !important;
+}
 .page-link {
   &:focus {
     box-shadow: none !important;
   }
 }
-
+.img-container-admin {
+  .img-fluid {
+    height: 15rem !important;
+  }
+}
 .container-admin {
   height: 100vh;
 }

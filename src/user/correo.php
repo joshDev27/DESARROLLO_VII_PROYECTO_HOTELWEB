@@ -6,12 +6,6 @@ use PHPMailer\PHPMailer\Exception;
 require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 require_once dirname(__DIR__, 2) . '/config.php';
 
-/*
-EMAIL_PASS=fqwx xnkx aexl hxss
-EMAIL_SENDER=e3761144@gmail.com
-EMAIL_HOST=smtp.gmail.com
-*/
-
 
 function EnviarCorreo($para, $asunto, $html, $test = false)
 {
@@ -23,17 +17,18 @@ function EnviarCorreo($para, $asunto, $html, $test = false)
     }
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = getenv('EMAIL_HOST');
         $mail->SMTPAuth = true;
-        $mail->Username = 'e3761144@gmail.com';
-        $mail->Password = 'fqwx xnkx aexl hxss'; // Usa una contraseña de aplicación
+        $mail->Username = getenv('EMAIL_SENDER');
+        $mail->Password = getenv('EMAIL_PASS'); // Usa una contraseña de aplicación
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587; // Puerto TCP para SSL
 
-        $mail->setFrom('e3761144@gmail.com', 'Sistema de Reservas  no-replay');
+        $mail->setFrom(getenv('EMAIL_SENDER'), 'Sistema de Reservas  no-replay');
         $mail->addAddress($para);
 
         $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8'; // Establece el charset a UTF-8
         $mail->Subject = $asunto;
         $mail->Body = $html;
 

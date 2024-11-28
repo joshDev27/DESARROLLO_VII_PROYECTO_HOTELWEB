@@ -13,8 +13,6 @@ if (getUserSesion()) {
     $pages_array["reservas"] = "Reservar Habitacíon";
 }
 
-// echo $_SESSION['idUsuario'];
-// die();
 ?>
 
 <nav class="navbar navbar-expand-lg ">
@@ -49,7 +47,7 @@ if (getUserSesion()) {
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end ">
                             <li>
-                                <button class="dropdown-item" data-user-id="<?php echo ''; ?>"
+                                <button class="dropdown-item btnPerfilUser"
                                     data-bs-target="#perfilUser"
                                     id="btnPerfilUser"
                                     data-bs-toggle="modal">
@@ -57,7 +55,7 @@ if (getUserSesion()) {
                                 </button>
                             </li>
                             <li>
-                                <button class="dropdown-item" data-user-id="<?php echo ''; ?>"
+                                <button class="dropdown-item btnEditPerfilUser"
                                     data-bs-target="#perfilEdithUser"
                                     id="btnEditPerfilUser"
                                     data-bs-toggle="modal">
@@ -65,7 +63,7 @@ if (getUserSesion()) {
                                 </button>
                             </li>
                             <li>
-                                <button class="dropdown-item" data-user-id="<?php echo ''; ?>"
+                                <button class="dropdown-item"
                                     data-bs-target="#changePasswordUser"
                                     id="btnChangePassword"
                                     data-bs-toggle="modal">
@@ -86,13 +84,13 @@ if (getUserSesion()) {
                         </span>
                         <div class="collapse" id="collapseExample">
                             <div class="card card-body bg-transparent border-dark">
-                                <span class="text-light mt-3"
+                                <span class="text-light mt-3 btnPerfilUser"
                                     data-bs-target="#perfilUser"
                                     id="btnPerfilUser"
                                     data-bs-toggle="modal">
                                     Perfil
                                 </span>
-                                <span class="text-light mt-3"
+                                <span class="text-light mt-3 btnEditPerfilUser"
                                     data-bs-target="#perfilEdithUser"
                                     id="btnEditPerfilUser"
                                     data-bs-toggle="modal">
@@ -124,13 +122,13 @@ if (getUserSesion()) {
 
     document.addEventListener('DOMContentLoaded', function() {
         // Seleccionamos todos los botones con el id btnPerfilUser 
-        const btnEditUser = document.querySelectorAll('#btnPerfilUser');
+        const btnEditUser = document.querySelectorAll('.btnPerfilUser');
         btnEditUser.forEach(button => {
             button.addEventListener('click', (e) => {
 
                 // Crear un objeto FormData para enviar la solicitud POST al servidor
                 const formData = new FormData();
-                formData.append("action", "getPerfilUser "); // El nombre de la acción
+                formData.append("action", "getPerfilUser"); // El nombre de la acción
 
                 // Realizar la solicitud fetch
                 fetch('./src/user/usuario.php', {
@@ -148,15 +146,15 @@ if (getUserSesion()) {
                 .then(data => {
                     // Verificar si recibimos datos del servidor
 
+                    console.log(data);
                     if (data) {
-                        console.log(data);
                         // Actualizar los campos del perfil con los datos recibidos
-                        document.getElementById('nombre_perfil').textContent = data.nombre;
+                        document.getElementById('nombre_perfil').textContent = data.us_nombre;
                         document.getElementById('apellido_perfil').textContent = data.apellido;
-                        document.getElementById('email_perfil').textContent = data.correo;
-                        document.getElementById('telefono_perfil').textContent = data.telefono;
-                        document.getElementById('direccion_perfil').textContent = data.direccion;
-                        document.getElementById('user_id_perfil').textContent = data.id;
+                        document.getElementById('email_perfil').textContent = data.us_correo;
+                        document.getElementById('telefono_perfil').textContent = data.us_telefono;
+                        document.getElementById('direccion_perfil').textContent = data.us_direccion;
+                        document.getElementById('user_id_perfil').textContent = data.us_id_Usuario;
                     } else {
                         console.error('Error: no se recibieron datos del usuario.');
                     }
@@ -170,7 +168,7 @@ if (getUserSesion()) {
 
     document.addEventListener('DOMContentLoaded', function() {
         // Seleccionamos todos los botones con el id btnEditPerfilUser
-        const btnEditUser = document.querySelectorAll('#btnEditPerfilUser');
+        const btnEditUser = document.querySelectorAll('.btnEditPerfilUser');
         btnEditUser.forEach(button => {
             button.addEventListener('click', (e) => {
                 // Obtener el ID de usuario de la sesión PHP
@@ -196,13 +194,12 @@ if (getUserSesion()) {
                         if (data) {
                             console.log(data);
                             // Actualizar los campos del perfil con los datos recibidos
-                            document.getElementById('id_perfil_edit').value = data.id;
-                            document.getElementById('nombre_perfil_edit').value = data.nombre;
-                            document.getElementById('apellido_perfil_edit').value = data.apellido;
-                            document.getElementById('email_perfil_edit').value = data.correo;
-                            document.getElementById('telefono_perfil_edit').value = data.telefono;
-                            document.getElementById('direccion_perfil_edit').value = data.direccion;
-                            document.getElementById('user_id_perfil_edit').value = data.id;
+                            document.getElementById('nombre_perfil_edit').value = data.us_nombre;
+                            document.getElementById('apellido_perfil_edit').value = data.us_apellido;
+                            document.getElementById('email_perfil_edit').value = data.us_correo;
+                            document.getElementById('telefono_perfil_edit').value = data.us_telefono;
+                            document.getElementById('direccion_perfil_edit').value = data.us_direccion;
+                            document.getElementById('user_id_perfil_edit').value = data.us_id_usuario;
                         } else {
                             console.error('Error: no se recibieron datos del usuario.');
                         }

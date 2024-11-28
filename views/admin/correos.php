@@ -1,49 +1,34 @@
 <?php require_once './src/admin/correos.php'; ?>
-<div class=" body container-fluid justify-content-center " id="container-correos">
+<div class="body container-fluid justify-content-center" id="container-correos">
     <div class="header-admin">
         <h2> Estados de Correos</h2>
     </div>
-    <div class="eventos d-flex p-2 gap-3">
-        <!-- <span>
-            <input type="checkbox" class="btn-check" id="btn-check_all" autocomplete="off">
-            <label class="btn btn-primary" for="btn-check_all">Select All</label>
-        </span>
-
-        <button class="btn btn-danger" id="btn_delete_all_correo" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
-     -->
-    </div>
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto mt-5">
         <table class="table table-light table-hover" id="table_correos">
             <thead>
                 <tr>
-                    <!-- <th scope="col"></th> -->
                     <th scope="col"></th>
                     <th scope="col">Asunto</th>
                     <th scope="col">Mensaje</th>
                     <th scope="col">Persona</th>
-                    <th scope="col">E mail</th>
+                    <th scope="col">E-mail</th>
                     <th scope="col">Date</th>
-
-
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($arrayDatosPorPagina as $correo_info): ?>
                     <tr>
-                        <!-- <th scope='row'>
-                            <input class="form-check-input" type="checkbox" value="<?php echo $correo_info['id'] ?>" id="checbox<?php echo $correo_info['id'] ?>">
-                        </th> -->
                         <td class="container-acciones">
                             <button
-                                class="btn btn-danger" data-bs-toggle="tooltip"
-                                data-bs-placement="right" data-bs-title="Delete"
-                                id="btnDeleteCorreo"
-                                data-user-id="<?php echo $correo_info['id']; ?>"
-                                class="btn btn-danger" data-bs-toggle="tooltip">
+                                class="btn btn-danger btnDeleteCorreo"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="right"
+                                data-bs-title="Delete"
+                                data-user-id="<?php echo $correo_info['id']; ?>">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
-                        <th scope='row'><?php echo $correo_info['asunto'] ?></th>
+                        <td><?php echo $correo_info['asunto'] ?></td>
                         <td><?php echo $correo_info['mensaje'] ?></td>
                         <td><?php echo $correo_info['nombre'] . ' , ' . $correo_info['apellido'] ?></td>
                         <td><?php echo $correo_info['correo'] ?></td>
@@ -56,93 +41,91 @@
     <!-- Paginación -->
     <?php include './components/pagination.php' ?>
 </div>
-
 <script>
+document.addEventListener('DOMContentLoaded', function () {
     const btnCheckAll = document.getElementById('btn-check_all');
     const btnDeleteAllCorreo = document.getElementById('btn_delete_all_correo');
-    btnCheckAll.onclick = function() {
-        var checkboxes = document.querySelectorAll('.form-check-input');
-        for (var checkbox of checkboxes) {
-            checkbox.checked = this.checked;
-        }
-        //valida el estado del boton de eliminar todos los usuario
-        let status = btnCheckAll.checked ? false : true;
-        btnDeleteAllCorreo.disabled = status;
+
+    // Evento para seleccionar/deseleccionar todos los checkboxes
+    if (btnCheckAll && btnDeleteAllCorreo) {
+        btnCheckAll.addEventListener('click', function () {
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = btnCheckAll.checked;
+            });
+            btnDeleteAllCorreo.disabled = !btnCheckAll.checked;
+        });
     }
 
+    // Evento para eliminar un correo
+    document.querySelectorAll('.btnDeleteCorreo').forEach(button => {
+        button.addEventListener('click', function () {
+            const correoId = this.getAttribute('data-user-id');
 
-    document.addEventListener('DOMContentLoaded', function() {
+            if (!correoId) {
+                console.error('Error: el ID del correo no está definido.');
+                alert('Error: el ID del correo no está definido.');
+                return;
+            }
 
-        document.querySelectorAll('#btnDeleteCorreo').forEach(button => {
+            const formData = new FormData();
+            formData.append('action', 'deleteCorreo');
+            formData.append('correoId', correoId);
 
-            button.addEventListener('click', (e) => {
-                const correoId = button.getAttribute('data-user-id'); // Obtiene el `correoId` del atributo `data-user-id`
-
-                // Verifica que `correoId` no esté vacío
-                if (!correoId) {
-                    console.error('Error: el ID de usuario no está definido.');
-                    alert('Error: el ID de usuario no está definido.');
-                    return;
-                }
-                // Crear un objeto FormData a partir del formulario
-                const formData = new FormData();
-                formData.append("action", "deleteCorreo"); // Agregar el campo 'action' con el valor 'addUser'
-                formData.append("correoId", correoId); // Agregar el campo 'action' con el valor 'addUser'
-
-                fetch('./src/admin/correos.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        //console.log(data);
-                        // Recargar la página después del llamado
-                        window.location.reload();
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
-        })
-    });
-
-    btnDeleteAllCorreo.addEventListener('click', (e) => {
-        // Crear un objeto FormData a partir del formulario
-        const formData = new FormData();
-        formData.append("action", "deleteAllUser"); // Agregar el campo 'action' con el valor 'addUser'
-
-        fetch('./src/admin/correos.php', {
+            fetch('./src/admin/correos.php', {
                 method: 'POST',
-                body: formData
+                body: formData,
             })
-            .then(response => response.text())
-            .then(data => {
-                // Recargar la página después del llamado
-                window.location.reload();
-            })
-            .catch(error => console.error('Error:', error));
+                .then(response => response.text())
+                .then(data => {
+                    // Recargar la página tras la acción
+                    window.location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+        });
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const checkboxes = document.querySelectorAll('.form-check-input');
+    // Evento para eliminar todos los correos seleccionados
+    if (btnDeleteAllCorreo) {
+        btnDeleteAllCorreo.addEventListener('click', function () {
+            const formData = new FormData();
+            formData.append('action', 'deleteAllUser');
 
-        function updateButtonState() {
+            fetch('./src/admin/correos.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.text())
+                .then(data => {
+                    // Recargar la página tras la acción
+                    window.location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    }
+
+    // Manejo de habilitación del botón de eliminar todos
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    if (checkboxes.length > 0) {
+        const updateButtonState = () => {
             let selectedCount = 0;
 
-            checkboxes.forEach((checkbox) => {
+            checkboxes.forEach(checkbox => {
                 if (checkbox.checked) {
                     selectedCount++;
                 }
             });
 
-            // Habilita el botón si hay 2 o más checkboxes seleccionados
             btnDeleteAllCorreo.disabled = selectedCount < 2;
-        }
+        };
 
-        // Llama a la función al cargar la págiNna para establecer el estado inicial del botón
+        // Inicializa el estado del botón
         updateButtonState();
 
-        // Añade el evento 'change' a cada checkbox para actualizar el estado del botón en tiempo real
-        checkboxes.forEach((checkbox) => {
+        // Actualiza el estado al cambiar los checkboxes
+        checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', updateButtonState);
         });
-    });
+    }
+});
 </script>

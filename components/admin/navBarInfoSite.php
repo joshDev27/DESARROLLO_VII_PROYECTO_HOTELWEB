@@ -7,7 +7,6 @@ $pages_array = [
     "usuarios" => "Usuarios",
     "reservas" => "Reservas",
     "correos" => "Correos",
-    "habitaciones" => "Habitaciones",
 ];
 
 

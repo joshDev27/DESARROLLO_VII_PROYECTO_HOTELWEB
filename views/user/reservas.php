@@ -36,8 +36,13 @@ require_once "./components/user/addReservaUser.php";
                 </div>
                 <div class="col-md-6">
                     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+                        <div class="d-flex header-resumen-reservas">
+                            <h2 class="mb-4 text-center">Resumen de Reserva</h2>
+                            <span class="btnUpdateReserva" id="updateResumenReserva">
+                                <i class="fa-solid fa-rotate-right"></i>
+                            </span>
 
-                        <h2 class="mb-4 text-center">Resumen de Reserva</h2>
+                        </div>
                         <table class="table table-light table-reserva">
                             <thead>
                                 <tr>
@@ -48,32 +53,31 @@ require_once "./components/user/addReservaUser.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($arrayResumenReserva as $value):?>
-                                <tr>
-                                    <td scope="row"><?php echo $value['descHabtiacion']?></td>
-                                    <td><?php echo '$ '.$value['precio']?></td>
-                                    <td><?php echo '$ '.$value['costoPorNoche']?></td>
-                                    <td><?php echo $value['cantidad_huéspedes']?></td>
-                                </tr>
-                                <?php endforeach;?>
+                                <?php foreach ($_SESSION['resumenReserva'] as $value): ?>
+                                    <tr>
+                                        <td scope="row"><?php echo $value['descHabtiacion'] ?></td>
+                                        <td><?php echo '$ ' . $value['precio'] ?></td>
+                                        <td><?php echo '$ ' . $value['costoPorNoche'] ?></td>
+                                        <td><?php echo $value['cantidad_huéspedes'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="3" class="text-end">Impuesto (7%)</td>
-                                    <td>$ <?php echo $impuesto?></td>
+                                    <td>$ <?php echo $_SESSION['impuesto']; ?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="text-end">Subtotal</td>
-                                    <td>$ <?php echo $subtotal?></td>
+                                    <td>$ <?php echo $_SESSION['subtotal']; ?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="text-end">Total</td>
-                                    <td>$ <?php echo $total?></td>
+                                    <td>$ <?php echo $_SESSION['total']; ?></td>
                                 </tr>
                             </tfoot>
                         </table>
                         <button type="submit" class="btn btn-primary btn-block">Reservar Habitación</button>
-                        
                     </div>
                 </div>
             </form>
@@ -82,6 +86,25 @@ require_once "./components/user/addReservaUser.php";
 </div>
 
 <script>
+    document.getElementById('updateResumenReserva').addEventListener('click', function(event) {
+        //event.preventDefault(); // Evita el envío tradicional del formulario
+
+        const formData = new FormData();
+        formData.append("action", "actualizarResumenReservas");
+
+        // Enviar los datos usando fetch
+        fetch('./src/user/reservas.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                window.location.reload();
+                console.log('Respuesta:', data); // Procesa la respuesta si es necesario
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
     document.getElementById('reservas_home_form_user').addEventListener('submit', function(event) {
         event.preventDefault(); // Evita el envío tradicional del formulario
 

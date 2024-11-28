@@ -40,11 +40,12 @@ require_once './src/admin/home.php';
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th scope="col">Id Reserva</th>
+                                <th scope="col">Habitación</th>
+                                <th scope="col">Fecha de Resv.</th>
                                 <th scope="col">Check In</th>
                                 <th scope="col">Ckeck Out</th>
                                 <th scope="col">Nombre Completo </th>
-                                <th scope="col">Cédula</th>
-                                <th scope="col">Número de Habitación</th>
                                 <th scope="col">Tipo de Habitación</th>
                             </tr>
                         </thead>
@@ -53,14 +54,14 @@ require_once './src/admin/home.php';
                         ?>
                         <tbody>
                             <?php foreach ($proxima_reservas  as $reserva): ?>
-                                <tr>
-
-                                    <td scope='row'> <?php echo $reserva['re_fecha_checkin'] ?></td>
+                                <tr> 
+                                    <td scope='row'> <?php echo $reserva['re_id_Reserva']?></td>
+                                    <td><?php echo  $reserva['ha_id_habitacion'] ?></td>
+                                    <td><?php echo  $reserva['re_fecha_reserva'] ?></td>
+                                    <td scope='row'> <?php echo $reserva['re_fecha_checkin']?></td>
                                     <td><?php echo  $reserva['re_fecha_checkout'] ?></td>
-                                    <td><?php //echo  $reserva['us_nombre'] ?></td>
-                                    <td><?php //echo  $reserva['us_cedula'] ?></td>
-                                    <td><?php //echo  $reserva['ha'] ?></td>
-                                    <td><?php //echo  $reserva['tipo_habitacion'] ?></td>
+                                    <td><?php echo  $reserva['us_nombre']. ' ' .  $reserva['us_apellido']?></td>
+                                    <td><?php echo  $reserva['th_esc_habitacion'] ?></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -94,7 +95,7 @@ require_once './src/admin/home.php';
     var yValues = [
         <?php echo (int) $info_habitaciones_disponibles ?>,
         <?php echo (int) $info_habitaciones_reservados ?>,
-        <?php echo (int) $info_habitaciones_ocuapdos ?>
+        <?php echo (int) $info_habitaciones_totales ?>
     ];
     new Chart("estado_habitaciones", {
         type: "pie",

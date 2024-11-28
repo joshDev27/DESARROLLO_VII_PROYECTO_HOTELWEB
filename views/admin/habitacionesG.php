@@ -5,12 +5,6 @@
         <h2> Tipos de Habitaciones Habitaciones</h2>
     </div>
     <div class="eventos d-flex p-2 gap-3">
-        <span>
-            <input type="checkbox" class="btn-check" id="btn-check_all" autocomplete="off">
-            <label class="btn btn-primary" for="btn-check_all">Select All</label>
-        </span>
-
-        <button class="btn btn-danger" id="btn_delete_all_user" disabled> <i class="fa-solid fa-trash"></i> Delete All</button>
         <button class="btn btn-secondary" data-bs-target="#add_admin_modal" data-bs-toggle="modal">
             <i class="fa-solid fa-plus"></i> Add Tipo Habitacíon
         </button>
@@ -22,38 +16,57 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col">Tipo de Habitación</th>
-                    <th scope="col">Descripción</th>
+                    <th scope="col">Descripcion</th>
                     <th scope="col">Caracteristicas</th>
                     <th scope="col">Precio</th>
+                    <th scope="col">disponibles</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Imgaen</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                <?php foreach (getRoomInformation() as $index => $array) : ?>
+                <?php foreach ($arrayDatosPorPagina as $index => $array) : ?>
 
                     <tr>
                         <th scope='row'>
-                            <input class="form-check-input" type="checkbox" value="<?php echo $user_info['id'] ?>" id="checbox<?php echo $user_info['id'] ?>">
                         </th>
                         <td>
-                            <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit">
-                                <input type="button" class="btn-check" value="<?php echo $user_info['id']; ?>" data-bs-target="#edit_admin_modal" id="btn_edit_user_<?php echo $user_info['id']; ?>" data-bs-toggle="modal">
-                                <label class="btn btn-primary" for="btn_edit_user_<?php echo $user_info['id']; ?>">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </label>
+                            <buttom class=" btn btn-primary btnEdittipoHabitacion"
+                                data-habitacion-tipo-id="<?php echo $array['id']; ?>"
+                                data-bs-target="#edit_admin_modal"
+                                id="btn_edit_user"
+                                data-bs-toggle="modal">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </buttom>
                             </span>
 
-                            <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" type="submit" name="btn-delete" value="<?php echo $user_info['id']; ?>">
+                            <button
+                                class="btn btn-danger" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Delete"
+                                id="btnDeletetipoHabitacion"
+                                data-habitacion-tipo-id="<?php echo $array['id']; ?>"
+                                class="btn btn-danger btnDeletetipoHabitacion" data-bs-toggle="tooltip">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
                         <td class='item-table'><?php echo $array['tipo'] ?></td>
-                        <td class='item-table'><?php echo $array['descripcion'] ?></td>
-                        <td class='item-table'>
-                            <?php foreach ($array['caracteristicas'] as $value): ?>
-                                <p><?php echo $value ?></p>
-                            <?php endforeach; ?>
-                        </td>
+                        <td class='item-table'><?php echo $array['description'] ?></td>
+                        <td class='item-table'><?php 
+                        foreach($array['caracteristicas'] as $data){ 
+                            foreach($data as $valor){ echo $valor.'<br>';} 
+                            }  ?></td>
                         <td class='item-table'><?php echo $array['precio'] ?></td>
+                        <td class='item-table'><?php echo $array['disponibles'] ?></td>
+                        <td class='item-table'><?php echo $array['total'] ?></td>
+                        <td class='item-table'>
+                            <span class="img-container-admin">
+                                <a href="<?php echo $array['imgLink'] ?>" class="glightbox" data-gallery="gallery1">
+                                    <img class="img-fluid" src="<?php echo $array['imgLink'] ?>" alt="Example 1" />
+                                </a>
+                            </span>
+                        </td>
+        
 
                     </tr>
                 <?php endforeach; ?>
@@ -67,46 +80,63 @@
 
 
 <script>
-    const btnCheckAll = document.getElementById('btn-check_all');
-    const btnDeleteAllUser = document.getElementById('btn_delete_all_user');
-    btnCheckAll.onclick = function() {
-        var checkboxes = document.querySelectorAll('.form-check-input');
-        for (var checkbox of checkboxes) {
-            checkbox.checked = this.checked;
-        }
-        //valida el estado del boton de eliminar todos los usuario
-        let status = btnCheckAll.checked ? false : true;
-        btnDeleteAllUser.disabled = status;
-    }
-
-
-    btnDeleteAllUser.addEventListener('click', (e) => {
-
-    });
-
-
     document.addEventListener('DOMContentLoaded', function() {
-        const checkboxes = document.querySelectorAll('.form-check-input');
 
-        function updateButtonState() {
-            let selectedCount = 0;
+        document.querySelectorAll('.btnDeletetipoHabitacion').forEach(button => {
 
-            checkboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    selectedCount++;
+            button.addEventListener('click', (e) => {
+                const tipoIdHabitacion = button.getAttribute('data-habitacion-tipo-id'); // Obtiene el `tipoIdHabitacion` del atributo `data-habitacion-tipo-id`
+
+                // Verifica que `tipoIdHabitacion` no esté vacío
+                if (!tipoIdHabitacion) {
+                    console.error('Error: el ID de usuario no está definido.');
+                    alert('Error: el ID de usuario no está definido.');
+                    return;
                 }
+                // Crear un objeto FormData a partir del formulario
+                const formData = new FormData();
+                formData.append("action", "deleteTipoHabitacion"); // Agregar el campo 'action' con el valor 'addUser'
+                formData.append("tipoIdHabitacion", tipoIdHabitacion); // Agregar el campo 'action' con el valor 'addUser'
+
+                fetch('./src/admin/habitaciones.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        // Recargar la página después del llamado
+                        window.location.reload();
+                    })
+                    .catch(error => console.error('Error:', error));
             });
+        });
+        document.querySelectorAll('.btnEdittipoHabitacion').forEach(button => {
 
-            // Habilita el botón si hay 2 o más checkboxes seleccionados
-            btnDeleteAllUser.disabled = selectedCount < 2;
-        }
+            button.addEventListener('click', (e) => {
+                const tipoIdHabitacion = button.getAttribute('data-habitacion-tipo-id'); // Obtiene el `tipoIdHabitacion` del atributo `data-habitacion-tipo-id`
 
-        // Llama a la función al cargar la págiNna para establecer el estado inicial del botón
-        updateButtonState();
+                // Verifica que `tipoIdHabitacion` no esté vacío
+                if (!tipoIdHabitacion) {
+                    console.error('Error: el ID de usuario no está definido.');
+                    alert('Error: el ID de usuario no está definido.');
+                    return;
+                }
+                // Crear un objeto FormData a partir del formulario
+                const formData = new FormData();
+                formData.append("action", "editTipoHabitacion"); // Agregar el campo 'action' con el valor 'addUser'
+                formData.append("tipoIdHabitacion", tipoIdHabitacion); // Agregar el campo 'action' con el valor 'addUser'
 
-        // Añade el evento 'change' a cada checkbox para actualizar el estado del botón en tiempo real
-        checkboxes.forEach((checkbox) => {
-            checkbox.addEventListener('change', updateButtonState);
+                fetch('./src/admin/habitaciones.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        // Recargar la página después del llamado
+                        window.location.reload();
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
         });
     });
 </script>

@@ -29,9 +29,9 @@ class UserController
     }
 
     // Función para registrar un nuevo usuario
-    public function registrarUsuario($us_id_Rol, $usuario,$nombreUsuario,$apellido,$telefono, $contrasena,$correo,$direcion)
+    public function registrarUsuario($us_id_Rol, $usuario, $nombreUsuario, $apellido, $telefono, $contrasena, $correo, $direcion)
     {
-        $resultado = $this->userModel->registroUsuario($us_id_Rol, $usuario,$nombreUsuario,$apellido,$telefono, $contrasena,$correo,$direcion);
+        $resultado = $this->userModel->registroUsuario($us_id_Rol, $usuario, $nombreUsuario, $apellido, $telefono, $contrasena, $correo, $direcion);
         if ($resultado) {
             return $resultado;
         } else {
@@ -39,10 +39,11 @@ class UserController
         }
     }
 
+
     public function registrarReserva($id_usuario, $num_noches,  $checkout, $checkin, $huespedes)
     {
 
-        $resultado = $this->userModel->registrarReserva($id_usuario, $num_noches,  $checkout, $checkin,$huespedes);
+        $resultado = $this->userModel->registrarReserva($id_usuario, $num_noches,  $checkout, $checkin, $huespedes);
         if ($resultado) {
             return $resultado;
         } else {
@@ -60,10 +61,37 @@ class UserController
         }
     }
 
-
     public function obtenerTotales($id, $operacion)
     {
         $resultado = $this->userModel->obtenerTotales($id, $operacion);
+        return $resultado;
+    }
+
+    public function actualizarPass($id, $newPass)
+    {
+        $resultado = $this->userModel->actualizarPass($id, $newPass);
+        return $resultado;
+    }
+
+    public function confirmarReserva($id_reserva)
+    {
+        $resultado = $this->userModel->confirmarReserva($id_reserva);
+        return $resultado;
+    }
+    public function cancelarReserva($id_reserva)
+    {
+        $resultado = $this->userModel->cancelarReserva($id_reserva);
+        return $resultado;
+    }
+
+    public function eliminar($id, $operacion)
+    {
+        $resultado = $this->userModel->eliminar($id, $operacion);
+        return $resultado;
+    }
+    public function editarUsuario($id, $usuario, $nombre, $apellido, $telefono, $contasena, $correo, $direccion)
+    {
+        $resultado = $this->userModel->editarUsuario($id, $usuario, $nombre, $apellido, $telefono, $contasena, $correo, $direccion);
         return $resultado;
     }
 }

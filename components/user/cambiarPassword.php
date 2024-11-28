@@ -13,16 +13,16 @@
             <input type="hidden" id="id_perfil_change">
           </div>
           <div class="form-group">
-            <label for="telefono">New Password</label>
-            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingresa el teléfono" required>
+            <label for="newPassword">New Password</label>
+            <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Ingresa la nueva Contraseña" required>
           </div>
           <div class="form-group">
-            <label for="direccion">Confirm Password</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa la dirección" required>
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirme la contraseñan ingresada" required>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Cambiar</button>
+          <button type="submit" class="btn btn-primary">Actualizar</button>
         </div>
       </form>
       <div id="respuesta"></div>
@@ -33,25 +33,47 @@
 
 <script>
   document.getElementById('formChangePass').addEventListener('submit', function(event) {
-    // event.preventDefault(); // Evita el envío tradicional del formulario
+    // Evita el envío tradicional del formulario
+    event.preventDefault();
+
+    // Obtener los valores de las contraseñas
+    const newPassword = document.getElementById('newPassword').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+    // Validar que los campos no estén vacíos
+    if (newPassword === "" || confirmPassword === "") {
+      document.getElementById("respuesta").innerHTML = "Por favor, completa todos los campos.";
+      return; // Detener el envío si hay campos vacíos
+    }
+
+    // Validar que ambas contraseñas sean iguales
+    if (newPassword !== confirmPassword) {
+      document.getElementById("respuesta").innerHTML = "Las contraseñas no coinciden.";
+      return; // Detener el envío si las contraseñas no coinciden
+    }
 
     // Crear un objeto FormData a partir del formulario
     const formData = new FormData(this);
-    formData.append("action", "changePerfilUser"); // Agregar el campo 'action' con el valor 'addUser'
+    formData.append("action", "changeUserPassword"); // Agregar el campo 'action' con el valor 'changeUser Password'
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", './src/user/usuarios.php', true);
+    xhr.open("POST", './src/user/usuario.php', true);
 
     // Manejador para la respuesta del servidor
     xhr.onload = function() {
       if (xhr.status === 200) {
         document.getElementById("respuesta").innerHTML = xhr.responseText;
-
+        newPassword.value = '';
+        confirmPassword.value = '';
       } else {
         document.getElementById("respuesta").innerHTML = "Error en la petición";
+        newPassword.value = '';
+        confirmPassword.value = '';
       }
     };
+
     // Enviar los datos del formulario
     xhr.send(formData);
+
   });
 </script>

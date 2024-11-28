@@ -9,7 +9,7 @@ CREATE PROCEDURE 12_hotel_dba_sp_actualizar_contra(
 BEGIN
     UPDATE USUARIO
     SET us_contrasena = SHA2(contrasena, 256)
-    WHERE ud_id_Usuario = us_id;
+    WHERE us_id_Usuario = us_id;
 END //
 
 DELIMITER ;

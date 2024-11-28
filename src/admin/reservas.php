@@ -8,20 +8,21 @@ $adminController = new  AdminController();
 // print_r($array);
 
 $array_reservas = array();
-$resultado = $adminController->obtenerTotales(null,8);
-
-//var_dump($resultado);
-//die();
+$resultado = $adminController->obtenerTotales(null,13);
+// echo'<pre>';
+// print_r($resultado);
+// echo'</pre>';
+// die();
 foreach ($resultado as $reservas) {
     $array_reservas[] = [
         'IdReservas' => $reservas['re_id_Reserva'],
-        'Huesped' => '',
+        'Huesped' => $reservas['hu_nombre'] .' '.$reservas['hu_apellido'],
         'IdUsuarios' => $reservas['re_id_Usuario'],
         'CheckIn' => $reservas['re_fecha_checkin'],
         'CheckOut' => $reservas['re_fecha_checkout'],
         'NumerodeNoches' => $reservas['re_num_noches'],
         'CantidaddeHabitaciones' => '',
-        'TipodeHabitación' => '',
+        'TipodeHabitación' => $reservas['th_esc_habitacion'],
         'Correo' =>  $reservas['us_correo'],
         'Estado' => $reservas['re_stado'],
     ];

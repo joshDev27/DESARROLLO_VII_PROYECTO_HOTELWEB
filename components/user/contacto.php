@@ -12,6 +12,7 @@
             <div class="modal-body">
                 <div class="container-contacto">
                     <form method="POST" action="./src/user/contacto.php" enctype="multipart/form-data" class="form">
+                    <?php if (!getUserSesion()):?>   
                         <div class="row row-cols-1 row-cols-md-2">
                             <div class="col">
                                 <div class="mb-3 form-floating ">
@@ -26,10 +27,12 @@
                                 </div>
                             </div>
                         </div>
+                         
                         <div class="mb-3 form-floating ">
                             <input type="email" id="email" class="form-control" name="email" required>
                             <label for="email" class="form-label">Correo electrónico</label>
                         </div>
+                        <?php endif;?> 
                         <div class="mb-3 form-floating ">
                             <textarea id="mensaje" name="mensaje" class="form-control" rows="4" required></textarea>
                             <label for="mensaje" class="form-label">Mensaje</label>
@@ -56,7 +59,7 @@
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <p class="me-auto"> <i class="fa-solid fa-info"></i>  Info </p>
+            <p class="me-auto"> <i class="fa-solid fa-info"></i> Info </p>
             <button type="button" class="btn-close btn " data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
