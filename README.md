@@ -3,11 +3,13 @@
 
 ## Integrantes del Proyecto 👥
 
-- **Nombre del Integrante 1**: [Leandro Rodriguez]  
+- **Nombre del Integrante 1**: [Leandro Rodríguez]]  
   GitHub: [https://github.com/03gabriel12](https://github.com/03gabriel12)
 
 - **Nombre del Integrante 2**: [Jorshua Fray]  
-  GitHub: [https://github.com/joshDev27](https://github.com/joshDev27)
+  GitHub: [https://github.com/03gabriel12](https://github.com/joshDev27)
+
+
 
 ## Descripción 📋
 
@@ -95,7 +97,4 @@ Este proyecto es ideal para aquellos interesados en crear aplicaciones web desde
 
    ```bash
    git clone https://github.com/tu_usuario/PROYECTO_HOTEL.git
-
-
-
 
